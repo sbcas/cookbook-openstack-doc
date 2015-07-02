@@ -1,0 +1,13 @@
+# Site settings
+title: Cookbook OpenStack Documentation
+email: vanderwl@us.ibm.com
+description: >
+  Documentation for OpenStack cookbooks generated from the source ReadMe and
+  attribute files.
+aseurl: ""
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: MarkRVanderwiel
+github_username:  kramvan1
+
+# Build settings
+markdown: kramdown
