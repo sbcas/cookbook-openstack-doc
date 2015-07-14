@@ -6,13 +6,8 @@ layout: default
 
   <h1 class="page-heading">Attribute Information</h1>
 
-  {% for page in site.pages %}
-      <li>
-        <h2>
-          <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+  <div markdown="1">
+    {% include attribute.md %}
+  </div>
 
 </div>
