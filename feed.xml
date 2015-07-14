@@ -4,10 +4,10 @@
     <title>Cookbook OpenStack Documentation</title>
     <description>Documentation for OpenStack cookbooks generated from the source ReadMe and attribute files.
 </description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 02 Jul 2015 21:07:49 +0000</pubDate>
-    <lastBuildDate>Thu, 02 Jul 2015 21:07:49 +0000</lastBuildDate>
+    <link>http://www.openstack.orghttp://kramvan1.github.io//</link>
+    <atom:link href="http://www.openstack.orghttp://kramvan1.github.io//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 14 Jul 2015 14:06:24 +0000</pubDate>
+    <lastBuildDate>Tue, 14 Jul 2015 14:06:24 +0000</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
   </channel>
