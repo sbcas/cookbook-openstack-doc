@@ -6,8 +6,9 @@ layout: default
 
   <h1 class="page-heading">Attribute Information</h1>
 
-  <div markdown="1">
-    {% include attribute.md %}
+  <div class="page">
+    {% capture sidebar %}{% include attribute.md %}{% endcapture %}
+    {{ sidebar | markdownify }}    
   </div>
 
 </div>
