@@ -11,3 +11,7 @@ github_username:  kramvan1
 
 # Build settings
 markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: coderay
