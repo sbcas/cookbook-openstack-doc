@@ -91,8 +91,11 @@ def get_content(dir)
   header << content
 end
 
-Dir.mktmpdir('cookbooks') do |tmpdir|
-  get_cookbooks(tmpdir)
-  content = get_content(tmpdir)
-  File.write('./_includes/attribute.md', content)
+def get_attr_info
+  Dir.mktmpdir('cookbooks') do |tmpdir|
+    get_cookbooks(tmpdir)
+    content = get_content(tmpdir)
+    File.write('./_includes/attribute.md', content)
+  end
 end
+
