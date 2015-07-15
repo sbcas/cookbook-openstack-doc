@@ -85,7 +85,7 @@ def get_content(dir)
     puts "## processing: #{filename}"
     page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '_')
     header << "- [#{page_name}](##{filename[/cookbook-.*/].chomp('.rb').gsub!('/', '')})\n"
-    content << "\n## #{page_name}\n\n[back to top](#contents)\n\n"
+    content << "\n***\n## #{page_name}\n\n[back to top](#contents)\n\n"
     content << convert_attr_to_md(filename)
   end
   header << content
