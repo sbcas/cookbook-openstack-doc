@@ -84,8 +84,8 @@ def get_content(dir)
   Dir.glob("#{dir}/**/attributes/*.rb").each do |filename|
     puts "## processing: #{filename}"
     page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '_')
-    header << "- [#{page_name}](##{page_name})\n"
-    content << "\n## #{page_name}\n\n** [back to top](#contents) **\n\n"
+    header << "- [#{page_name}](##{filename[/cookbook-.*/].chomp('.rb').gsub!('/', '')})\n"
+    content << "\n## #{page_name}\n\n-> [back to top](#contents) <-\n\n"
     content << convert_attr_to_md(filename)
   end
   header << content
