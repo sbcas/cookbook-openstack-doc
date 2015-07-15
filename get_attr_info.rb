@@ -62,7 +62,7 @@ def convert_attr_to_md(filename)
       end
 
       if code_block
-        output << line << "    \n"
+        output << line << "\n"
       else
         output << line.strip.gsub!(/^#+[[:blank:]]*/, '') << "\n"
       end
@@ -71,7 +71,7 @@ def convert_attr_to_md(filename)
         output << "\n~~~ ruby\n"
         code_block = true
       end
-      output << line << "    \n"
+      output << line << "\n"
     end
   end
   output << "~~~\n\n" if code_block
