@@ -21,7 +21,7 @@ def get_cookbooks(dir)
   Dir.chdir(dir) do
     cookbooks.each do |cookbook|
       puts "Cloning #{cookbook} under #{dir}"
-      `git clone --depth 1 git@github.com:openstack/cookbook-openstack-#{cookbook}.git`
+      `git clone --depth 1 git://github.com/openstack/cookbook-openstack-#{cookbook}.git`
     end
   end
 end
