@@ -15,3 +15,5 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: coderay
+  coderay:
+    coderay_line_numbers: nil
