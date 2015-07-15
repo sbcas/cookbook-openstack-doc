@@ -68,7 +68,7 @@ def convert_attr_to_md(filename)
       end
     else # is_code
       unless code_block
-        output << "```\n"
+        output << "\n```\n"
         code_block = true
       end
       output << line << "    \n"
