@@ -52,7 +52,7 @@ def convert_attr_to_md(filename)
     case
     when blank?(line)
       if code_block
-        output << "\n```\n"
+        output << "```\n\n"
         code_block = false
       end
     when comment?(line)
@@ -74,7 +74,7 @@ def convert_attr_to_md(filename)
       output << line << "    \n"
     end
   end
-  output << "````\n" if code_block
+  output << "````\n\n" if code_block
   output
 end
 
