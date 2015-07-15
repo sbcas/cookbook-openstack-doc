@@ -569,7 +569,7 @@ have the cache automaticly updated</p>
 <span class="line-numbers"><a href="#n52" name="n52">52</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">node[</span><span style="color:#710">'</span></span>openstack<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>endpoints<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>compute-api<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">] = ...</span></span>
 <span class="line-numbers"><a href="#n53" name="n53">53</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">******************** OpenStack Identity Endpoints ***************************</span></span>
 <span class="line-numbers"><a href="#n54" name="n54">54</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20"></span></span>
-<span class="line-numbers"><a href="#n55" name="n55">55</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">~~~ ruby</span></span>
+<span class="line-numbers"><a href="#n55" name="n55">55</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">``` ruby</span></span>
 <span class="line-numbers"><a href="#n56" name="n56">56</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">default[</span><span style="color:#710">'</span></span>openstack<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>endpoints<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>host<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">] = </span><span style="color:#710">'</span></span><span style="color:#60E">127.0</span>.<span style="color:#F00;background-color:#FAA">0.1</span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"></span></span>
 <span class="line-numbers"><a href="#n57" name="n57">57</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">default[</span><span style="color:#710">'</span></span>openstack<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>endpoints<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>family<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">] = </span><span style="color:#710">'</span></span>inet<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"></span></span>
 <span class="line-numbers"><a href="#n58" name="n58">58</a></span><span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">default[</span><span style="color:#710">'</span></span>openstack<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>endpoints<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">][</span><span style="color:#710">'</span></span>scheme<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">] = </span><span style="color:#710">'</span></span>http<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"></span></span>
@@ -6307,36 +6307,36 @@ mappings to appropriate interfaces on each agent.
 
 Example: physical_interface_mappings = physnet1:eth1
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['physical_interface_mappings'] = ''
-~~~
+```
 
 (BoolOpt) enable VXLAN on the agent
 VXLAN support can be enabled when agent is managed by ml2 plugin using
 linuxbridge mechanism driver. Useless if set while using linuxbridge plugin.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['enable_vxlan'] = false
-~~~
+```
 
 (IntOpt) use specific TTL for vxlan interface protocol packets
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['ttl'] = ''
-~~~
+```
 
 (IntOpt) use specific TOS for vxlan interface protocol packets
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['tos'] = ''
-~~~
+```
 
 (StrOpt) multicast group to use for broadcast emulation.
 This group must be the same on all the agents.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['vxlan_group'] = '224.0.0.1'
-~~~
+```
 
 (BoolOpt) Flag to enable l2population extension. This option should be used
 in conjunction with ml2 plugin l2population mechanism driver (in that case,
@@ -6345,15 +6345,15 @@ It enables plugin to populate VXLAN forwarding table, in order to limit
 the use of broadcast emulation (multicast will be turned off if kernel and
 iproute2 supports unicast flooding - requires 3.11 kernel and iproute2 3.10)
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['l2_population'] = false
-~~~
+```
 
 Agent's polling interval in seconds
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['polling_interval'] = 2
-~~~
+```
 
 (BoolOpt) Enable server RPC compatibility with old (pre-havana)
 agents.
@@ -6361,65 +6361,65 @@ agents.
 rpc_support_old_agents = False
 Example: rpc_support_old_agents = True
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['rpc_support_old_agents'] = false
-~~~
+```
 
 Firewall driver for realizing neutron security group function
 firewall_driver = neutron.agent.firewall.NoopFirewallDriver
 Example: firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['firewall_driver'] = 'neutron.agent.firewall.NoopFirewallDriver'
-~~~
+```
 
 Controls if neutron security group is enabled or not.
 It should be false when you use nova security group.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['linuxbridge']['enable_security_group'] = 'True'
-~~~
+```
 
 ============================= BigSwitch Plugin Configuration =============
 Not really sure what this is...
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['bigswitch']['servers'] = 'localhost:8080'
-~~~
+```
 
 ============================= Brocade Plugin Configuration ===============
 username = <mgmt admin="" username="">
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['switch_username'] = 'admin'
-~~~
+```
 
 password = <mgmt admin="" password="">
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['switch_password'] = 'admin'
-~~~
+```
 
 address  = <switch mgmt="" ip="" address="">
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['switch_address'] = '127.0.0.1'
-~~~
+```
 
 ostype   = NOS
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['switch_ostype'] = 'NOS'
-~~~
+```
 
 physical_interface = <physical network="" name="">
 
 Example:
 physical_interface = physnet1
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['physical_interface'] = 'physnet1'
-~~~
+```
 
 (ListOpt) Comma-separated list of
 <physical_network>[:<vlan_min>:<vlan_max>] tuples enumerating ranges
@@ -6430,9 +6430,9 @@ VLAN provider network creation.
 Default: network_vlan_ranges =
 Example: network_vlan_ranges = physnet1:1000:2999
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['network_vlan_ranges'] = ''
-~~~
+```
 
 (ListOpt) Comma-separated list of
 <physical_network>:<physical_interface> tuples mapping physical
@@ -6443,72 +6443,72 @@ mappings to appropriate interfaces on each agent.
 
 Example: physical_interface_mappings = physnet1:eth1
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['brocade']['physical_interface_mappings'] = ''
-~~~
+```
 
 ============================= Cisco Plugin Configuration =================
 The module and class name path for the nexus plugin
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['nexus_plugin'] = 'neutron.plugins.cisco.nexus.cisco_nexus_plugin_v2.NexusPlugin'
-~~~
+```
 
 The module and class name path for the vswitch plugin
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['vswitch_plugin'] = 'neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2'
-~~~
+```
 
 Start of the tenant VLAN range
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['vlan_start'] = 100
-~~~
+```
 
 End of the tenant VLAN range
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['vlan_end'] = 3000
-~~~
+```
 
 Prefix for tenant VLANs
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['vlan_name_prefix'] = 'q-'
-~~~
+```
 
 Maximum number of ports
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['max_ports'] = 100
 # Max number of port profiles
 default['openstack']['network']['cisco']['max_port_profiles'] = 65568
-~~~
+```
 
 Maximum number of networks
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['max_networks'] = 65568
-~~~
+```
 
 Module and class path for switch model
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['model_class'] = 'neutron.plugins.cisco.models.virt_phy_sw_v2.VirtualPhysicalSwitchModelV2'
-~~~
+```
 
 Module and class path for VLAN network manager
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['manager_class'] = 'neutron.plugins.cisco.segmentation.l2network_vlan_mgr_v2.L2NetworkVLANMgr'
-~~~
+```
 
 Module and class path for the Nexus driver
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['nexus_driver'] = 'neutron.plugins.cisco.tests.unit.v2.nexus.fake_nexus_driver.CiscoNEXUSFakeDriver'
-~~~
+```
 
 For each Nexus switch, add a hash to the
 node['openstack']['network']['cisco']['nexus_switches'] Hash,
@@ -6538,9 +6538,9 @@ username=admin
 password=mySecretPassword
 
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['cisco']['nexus_switches'] = {}
-~~~
+```
 
 ============================= Hyper-V Plugin Configuration ===============
 Type of network to allocate for tenant networks. The
@@ -6550,9 +6550,9 @@ provides no connectivity between hosts. You MUST change this to
 networks to provide connectivity between hosts. Set to 'none' to
 disable creation of tenant networks.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['hyperv']['tenant_network_type'] = 'local'
-~~~
+```
 
 Comma-separated list of <physical_network>[:<vlan_min>:<vlan_max>] tuples enumerating
 ranges of VLAN IDs on named physical networks that are available for allocation.
@@ -6563,15 +6563,15 @@ networks may be created.
 
 Example: network_vlan_ranges = physnet1:1000:2999
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['hyperv']['network_vlan_ranges'] = ''
-~~~
+```
 
 Agent's polling interval in seconds
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['hyperv']['polling_interval'] = 2
-~~~
+```
 
 (ListOpt) Comma separated list of <physical_network>:<vswitch>
 where the physical networks can be expressed with wildcards,
@@ -6584,77 +6584,77 @@ the plugin will look for a virtual switch with the same name.
 Default: physical_network_vswitch_mappings = *:external
 Example: physical_network_vswitch_mappings = net1:external1,net2:external2
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['hyperv']['physical_network_vswitch_mappings'] = '*:external'
-~~~
+```
 
 (StrOpt) Private virtual switch name used for local networking.
 
 Default: local_network_vswitch = private
 Example: local_network_vswitch = custom_vswitch
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['hyperv']['local_network_vswitch'] = 'private'
-~~~
+```
 
 Firewall driver for realizing neutron security group function
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['hyperv']['firewall_driver'] = 'neutron.plugins.hyperv.agent.security_groups_driver.HyperVSecurityGroupsDriver'
-~~~
+```
 
 ============================= Metaplugin Plugin Configuration ============
 This is list of flavor:neutron_plugins
 extension method is used in the order of this list
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['metaplugin']['plugin_list'] = 'openvswitch:neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2,linuxbridge:neutron.plugins.linuxbridge.lb_neutron_plugin.LinuxBridgePluginV2'
 default['openstack']['network']['metaplugin']['l3_plugin_list'] = 'openvswitch:neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2,linuxbridge:neutron.plugins.linuxbridge.lb_neutron_plugin.LinuxBridgePluginV2'
-~~~
+```
 
 Default 'flavor' for L2 and L3
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['metaplugin']['default_flavor'] = 'openvswitch'
 default['openstack']['network']['metaplugin']['default_l3_flavor'] = 'openvswitch'
-~~~
+```
 
 ============================= Midonet Plugin Configuration ===============
 MidoNet API server URI
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['midonet']['midonet_uri'] = 'http://localhost:8080/midonet-api'
-~~~
+```
 
 MidoNet admin username
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['midonet']['username'] = 'admin'
-~~~
+```
 
 MidoNet admin password
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['midonet']['password'] = 'passw0rd'
-~~~
+```
 
 ID of the project that MidoNet admin user belongs to
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['midonet']['project_id'] = '77777777-7777-7777-7777-777777777777'
-~~~
+```
 
 Virtual provider router ID
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['midonet']['provider_router_id'] = '00112233-0011-0011-0011-001122334455'
-~~~
+```
 
 Virtual metadata router ID
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['midonet']['metadata_router_id'] = 'ffeeddcc-ffee-ffee-ffee-ffeeddccbbaa'
-~~~
+```
 
 ============================= NEC Plugin Configuration ===================
 Do not change this parameter unless you have a good reason to.
@@ -6663,146 +6663,146 @@ The integration bridge acts as a virtual 'patch port'. All VM VIFs are
 attached to this bridge and then 'patched' according to their network
 connectivity.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nec']['integration_bridge'] = 'br-int'
-~~~
+```
 
 Agent's polling interval in seconds
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nec']['polling_interval'] = 2
-~~~
+```
 
 Firewall driver for realizing neutron security group function
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nec']['firewall_driver'] = 'neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver'
-~~~
+```
 
 Specify OpenFlow Controller Host, Port and Driver to connect.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nec']['ofc_host'] = '127.0.0.1'
 default['openstack']['network']['nec']['ofc_port'] = 8888
-~~~
+```
 
 Drivers are in neutron/plugins/nec/drivers/ .
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nec']['ofc_driver'] = 'trema'
-~~~
+```
 
 PacketFilter is available when it's enabled in this configuration
 and supported by the driver.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nec']['ofc_enable_packet_filter'] = 'true'
-~~~
+```
 
 ============================= Nicira Plugin Configuration ================
 User name for NVP controller
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['nvp_user'] = 'admin'
-~~~
+```
 
 Password for NVP controller
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['nvp_password'] = 'admin'
-~~~
+```
 
 Total time limit for a cluster request
 (including retries across different controllers)
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['req_timeout'] = 30
-~~~
+```
 
 Time before aborting a request on an unresponsive controller
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['http_timeout'] = 10
-~~~
+```
 
 Maximum number of times a particular request should be retried
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['retries'] = 2
-~~~
+```
 
 Maximum number of times a redirect response should be followed
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['redirects'] = 2
-~~~
+```
 
 Comma-separated list of NVP controller endpoints (<ip>:<port>). When port
 is omitted, 443 is assumed. This option MUST be specified, e.g.:
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['nvp_controllers'] = 'xx.yy.zz.ww:443, aa.bb.cc.dd, ee.ff.gg.hh.ee:80'
-~~~
+```
 
 UUID of the pre-existing default NVP Transport zone to be used for creating
 tunneled isolated 'Neutron' networks. This option MUST be specified, e.g.:
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['default_tz_uuid'] = '1e8e52cf-fa7f-46b0-a14a-f99835a9cb53'
-~~~
+```
 
 (Optional) UUID of the cluster in NVP.  It can be retrieved from NVP management
 console 'admin' section.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['nvp_cluster_uuid'] = '615be8e4-82e9-4fd2-b4b3-fd141e51a5a7'
-~~~
+```
 
 (Optional) UUID for the default l3 gateway service to use with this cluster.
 To be specified if planning to use logical routers with external gateways.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['default_l3_gw_service_uuid'] = ''
-~~~
+```
 
 (Optional) UUID for the default l2 gateway service to use with this cluster.
 To be specified for providing a predefined gateway tenant for connecting their networks.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['default_l2_gw_service_uuid'] = ''
-~~~
+```
 
 Name of the default interface name to be used on network-gateway.  This value
 will be used for any device associated with a network gateway for which an
 interface name was not specified
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['default_iface_name'] = 'breth0'
-~~~
+```
 
 number of network gateways allowed per tenant, -1 means unlimited
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['quota_network_gateway'] = 5
-~~~
+```
 
 Maximum number of ports for each bridged logical switch
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['max_lp_per_bridged_ls'] = 64
-~~~
+```
 
 Maximum number of ports for each overlay (stt, gre) logical switch
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['max_lp_per_overlay_ls'] = 256
-~~~
+```
 
 Number of connects to each controller node.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['concurrent_connections'] = 3
-~~~
+```
 
 Acceptable values for 'metadata_mode' are:
 - 'access_network': this enables a dedicated connection to the metadata
@@ -6811,35 +6811,35 @@ proxy for metadata server access via Neutron router.
 This option is only useful if running on a host that does not support
 namespaces otherwise access_network should be used.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['nicira']['metadata_mode'] = 'access_network'
-~~~
+```
 
 ============================= PLUMGrid Plugin Configuration ==============
 This line should be pointing to the NOS server,
 for the PLUMgrid platform. In other deployments,
 this is known as controller
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['plumgrid']['nos_server'] = '127.0.0.1'
 default['openstack']['network']['plumgrid']['nos_server_port'] = '<nos-port>'
-~~~
+```
 
 Authentification parameters for the NOS server.
 These are the admin credentials to manage and control
 the NOS server.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['plumgrid']['username'] = '<nos-admin-username>'
 default['openstack']['network']['plumgrid']['password'] = '<nos-admin-password>'
 default['openstack']['network']['plumgrid']['servertimeout'] = 5
-~~~
+```
 
 Name of the network topology to be deployed by NOS
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['plumgrid']['topologyname'] = '<nos-topology-name>'
-~~~
+```
 
 ============================= Ryu Plugin Configuration ===================
 Do not change this parameter unless you have a good reason to.
@@ -6848,33 +6848,33 @@ The integration bridge acts as a virtual 'patch port'. All VM VIFs are
 attached to this bridge and then 'patched' according to their network
 connectivity.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['integration_bridge'] = 'br-int'
-~~~
+```
 
 openflow_rest_api = <host ip="" address="" of="" ofp="" rest="" api="" service="">:&lt;port: 8080&gt;
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['openflow_rest_api'] = '127.0.0.1:8080'
-~~~
+```
 
 tunnel key range: 0 &lt; tunnel_key_min &lt; tunnel_key_max
 VLAN: 12bits, GRE, VXLAN: 24bits
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['tunnel_key_min'] = 1
 default['openstack']['network']['ryu']['tunnel_key_max'] = '0xffffff'
-~~~
+```
 
 tunnel_ip = <ip address="" for="" tunneling="">
 tunnel_interface = interface for tunneling
 when tunnel_ip is NOT specified, ip address is read
 from this interface
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['tunnel_ip'] = ''
 default['openstack']['network']['ryu']['tunnel_interface'] = 'eth0'
-~~~
+```
 
 ovsdb_port = port number on which ovsdb is listening
 ryu-agent uses this parameter to setup ovsdb.
@@ -6886,23 +6886,23 @@ ovsdb_interface = interface for ovsdb
 when ovsdb_addr NOT specifiied, ip address is gotten
 from this interface
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['ovsdb_port'] = 6634
 default['openstack']['network']['ryu']['ovsdb_ip'] = ''
 default['openstack']['network']['ryu']['ovsdb_interface'] = 'eth0'
-~~~
+```
 
 Firewall driver for realizing neutron security group function
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['firewall_driver'] = 'neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver'
-~~~
+```
 
 Agent's polling interval in seconds
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ryu']['polling_interval'] = 2
-~~~
+```
 
 ============================= ML2 Plugin Configuration ===================
 (ListOpt) List of network type driver entrypoints to be loaded from
@@ -6911,9 +6911,9 @@ the neutron.ml2.type_drivers namespace.
 type_drivers = local,flat,vlan,gre,vxlan
 Example: type_drivers = flat,vlan,gre,vxlan
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['type_drivers'] = 'local,flat,vlan,gre,vxlan'
-~~~
+```
 
 (ListOpt) Ordered list of network_types to allocate as tenant
 networks. The default value 'local' is useful for single-box testing
@@ -6922,9 +6922,9 @@ but provides no connectivity between hosts.
 tenant_network_types = local
 Example: tenant_network_types = vlan,gre,vxlan
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['tenant_network_types'] = 'local'
-~~~
+```
 
 (ListOpt) Ordered list of networking mechanism driver entrypoints
 to be loaded from the neutron.ml2.mechanism_drivers namespace.
@@ -6932,9 +6932,9 @@ mechanism_drivers =
 Example: mechanism_drivers = arista
 Example: mechanism_drivers = cisco,logger
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['mechanism_drivers'] = 'openvswitch'
-~~~
+```
 
 (ListOpt) List of physical_network names with which flat networks
 can be created. Use * to allow flat networks with arbitrary
@@ -6944,9 +6944,9 @@ flat_networks =
 Example:flat_networks = physnet1,physnet2
 Example:flat_networks = *
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['flat_networks'] = ''
-~~~
+```
 
 (ListOpt) List of <physical_network>[:<vlan_min>:<vlan_max>] tuples
 specifying physical_network names usable for VLAN provider and
@@ -6956,23 +6956,23 @@ physical_network available for allocation as tenant networks.
 network_vlan_ranges =
 Example: network_vlan_ranges = physnet1:1000:2999,physnet2
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['network_vlan_ranges'] = ''
-~~~
+```
 
 (ListOpt) Comma-separated list of <tun_min>:<tun_max> tuples enumerating
 ranges of GRE tunnel IDs that are available for tenant network allocation
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['tunnel_id_ranges'] = ''
-~~~
+```
 
 (ListOpt) Comma-separated list of <vni_min>:<vni_max> tuples enumerating
 ranges of VXLAN VNI IDs that are available for tenant network allocation.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['vni_ranges'] = ''
-~~~
+```
 
 (StrOpt) Multicast group for the VXLAN interface. When configured, will
 enable sending all broadcast traffic to this multicast group. When left
@@ -6981,35 +6981,35 @@ unconfigured, will disable multicast VXLAN mode.
 vxlan_group =
 Example: vxlan_group = 239.1.1.1
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['vxlan_group'] = ''
-~~~
+```
 
 Controls if neutron security group is enabled or not.
 It should be false when you use nova security group.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['enable_security_group'] = 'True'
-~~~
+```
 
 Use ipset to speed-up the iptables security groups. Enabling ipset support
 requires that ipset is installed on L2 agent node.
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['ml2']['enable_ipset'] = 'True'
-~~~
+```
 
 Misc option support
 Allow additional strings to be added to neutron.conf
 For example:  ['# Comment', 'key=value']
 
-~~~ ruby
+``` ruby
 default['openstack']['network']['misc_neutron'] = []
-~~~
+```
 
 platform-specific settings
 
-~~~ ruby
+``` ruby
 case platform_family
 when 'fedora', 'rhel' # :pragma-foodcritic: ~FC024 - won't fix this
   default['openstack']['network']['platform'] = {
@@ -7108,7 +7108,7 @@ when 'debian'
     'package_overrides' =&gt; "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
   }
 end
-~~~
+```
 
 
 
@@ -7119,37 +7119,37 @@ end
 [back to top](#contents)
 
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['service_tenant_name'] = 'service'
 default['openstack']['object-storage']['service_user'] = 'swift'
 default['openstack']['object-storage']['service_role'] = 'service'
-~~~
+```
 
 Default swift user
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['user'] = 'swift'
 # Default swift group
 default['openstack']['object-storage']['group'] = 'swift'
 # Default region
 default['openstack']['object-storage']['region'] = node['openstack']['region']
-~~~
+```
 
 Set to some text value if you want templated config files
 to contain a custom banner at the top of the written file
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['custom_template_banner'] = "
 # This file autogenerated by Chef
 # Do not edit, changes will be overwritten
 "
-~~~
+```
 
 --------------------
 node/ring settings
 --------------------
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['state'] = {}
 # Hour to run swift_auditor on storage nodes
 default['openstack']['object-storage']['audit_hour'] = '5'
@@ -7169,7 +7169,7 @@ default['openstack']['object-storage']['auto_rebuild_rings'] = false
 default['openstack']['object-storage']['git_builder_ip'] = '127.0.0.1'
 # How many server changes require before a rebalance is done
 default['openstack']['object-storage']['wait_for'] = 1
-~~~
+```
 
 swift_hash_path_suffix and swift_hash_path_prefix are used as part of the
 the hashing algorithm when determining data placement in the cluster.
@@ -7177,12 +7177,12 @@ These values should remain secret and MUST NOT change
 once a cluster has been deployed.
 Deprecated in juno, use swift_hash_path_prefix
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['swift_hash'] = nil
 # A value of nil will get the hash from the get_password library method in common
 default['openstack']['object-storage']['swift_hash_path_prefix'] = node['openstack']['object-storage']['swift_hash']
 default['openstack']['object-storage']['swift_hash_path_suffix'] = nil
-~~~
+```
 
 The swift-constraints section sets the basic constraints on data
 saved in the swift cluster. These constraints are automatically
@@ -7194,7 +7194,7 @@ This value is set in bytes. Setting it to lower than 1MiB will cause
 some tests to fail. It is STRONGLY recommended to leave this value at
 the default (5 * 2**30 + 2).
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['max_file_size'] = 5368709122
 # max_meta_name_length is the max number of bytes in the utf8 encoding
 # of the name portion of a metadata header.
@@ -7230,7 +7230,7 @@ default['openstack']['object-storage']['max_account_name_length'] = 256
 # max_container_name_length is the max number of bytes in the utf8 encoding
 # of a container name
 default['openstack']['object-storage']['max_container_name_length'] = 256
-~~~
+```
 
 Use the openstack-common cookbook databags with the
 following keys:
@@ -7251,29 +7251,29 @@ following attributes overriding any default attributes here
 "dispersion_auth_key": "test"
 }
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['swift_secret_databag_name'] = nil
-~~~
+```
 
 --------------------
 roles
 --------------------
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['setup_chef_role']             = 'os-object-storage-setup'
 default['openstack']['object-storage']['management_server_chef_role'] = 'os-object-storage-management'
 default['openstack']['object-storage']['proxy_server_chef_role']      = 'os-object-storage-proxy'
 default['openstack']['object-storage']['object_server_chef_role']     = 'os-object-storage-object'
 default['openstack']['object-storage']['account_server_chef_role']    = 'os-object-storage-account'
 default['openstack']['object-storage']['container_server_chef_role']  = 'os-object-storage-container'
-~~~
+```
 
 --------------------
 authentication
 --------------------
 Authenitcation mode, either keystone or swauth
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['authmode']              = 'keystone'
 default['openstack']['object-storage']['authkey']               = nil
 default['openstack']['object-storage']['swift_url']             = 'http://127.0.0.1:8080/v1/'
@@ -7283,22 +7283,22 @@ default['openstack']['object-storage']['auth_url']              = 'http://127.0.
 default['openstack']['object-storage']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
 # Keystone PKI signing directory
 default['openstack']['object-storage']['api']['auth']['cache_dir'] = '/var/cache/swift/api'
-~~~
+```
 
 ---------------------
 dispersion settings
 ---------------------
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['dispersion']['auth_user'] = nil
 default['openstack']['object-storage']['dispersion']['auth_key'] = nil
-~~~
+```
 
 settings for the swift ring - these default settings are
 a safe setting for testing but part_power should be set to
 26 in production to allow a swift cluster with 50,000 spindles
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['ring']['part_power'] = 18
 # The minimum number of hours before swift is allowed to migrate a partition
 default['openstack']['object-storage']['ring']['min_part_hours'] = 1
@@ -7308,17 +7308,17 @@ default['openstack']['object-storage']['ring']['replicas'] = 3
 default['openstack']['object-storage']['ring']['zone'] = '1'
 # Region, will look like "r1" on swift-ring-builder command line
 default['openstack']['object-storage']['ring']['region'] = '1'
-~~~
+```
 
 ------------------
 statistics
 ------------------
 Current statsd cookbook is not supported on rhel platforms
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['statistics']['enabled'] = platform_family?('debian')
 default['openstack']['object-storage']['statistics']['sample_rate'] = 1
-~~~
+```
 
 there are two ways to discover your graphite server ip for
 statsd to periodically publish to.  You can directly set
@@ -7329,43 +7329,43 @@ name to retrieve the appropriate internal ip address from
 if no servers with the role below can be found then
 127.0.0.1 will be used
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['statistics']['graphing_ip']  = nil
 default['openstack']['object-storage']['statistics']['graphing_role'] = 'graphite-role'
 default['openstack']['object-storage']['statistics']['graphing_interface'] = 'eth0'
-~~~
+```
 
 how frequently to run chef instantiated /usr/local/bin/swift_statsd_publish.py
 which publishes dispersion and recon statistics (in minutes)
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['statistics']['report_frequency'] = 15
-~~~
+```
 
 enable or disable specific portions of generated report
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['statistics']['enable_dispersion_report'] = true
 default['openstack']['object-storage']['statistics']['enable_recon_report'] = true
 default['openstack']['object-storage']['statistics']['enable_disk_report'] = true
-~~~
+```
 
 settings for statsd which should be configured to use the local
 statsd daemon that chef will install if statistics are enabled
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['statistics']['statsd_host'] = '127.0.0.1'
 default['openstack']['object-storage']['statistics']['statsd_port'] = '8125'
 default['openstack']['object-storage']['statistics']['statsd_prefix'] = 'openstack.swift'
-~~~
+```
 
 paths to the recon cache files
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['statistics']['recon_account_cache'] = '/var/cache/swift/account.recon'
 default['openstack']['object-storage']['statistics']['recon_container_cache'] = '/var/cache/swift/container.recon'
 default['openstack']['object-storage']['statistics']['recon_object_cache'] = '/var/cache/swift/object.recon'
-~~~
+```
 
 ------------------
 network settings
@@ -7378,44 +7378,44 @@ communication
 Deprecated in Juno, use Common attributes instead
 proxy servers
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['network']['proxy-bind-ip']            = nil
 default['openstack']['object-storage']['network']['proxy-bind-port']          = nil
 default['openstack']['object-storage']['network']['proxy-cidr']               = '127.0.0.0/8'
-~~~
+```
 
 account servers
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['network']['account-bind-ip']          = '0.0.0.0'
 default['openstack']['object-storage']['network']['account-bind-port']        = '6002'
-~~~
+```
 
 container servers
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['network']['container-bind-ip']        = '0.0.0.0'
 default['openstack']['object-storage']['network']['container-bind-port']      = '6001'
-~~~
+```
 
 object servers
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['network']['object-bind-ip']           = '0.0.0.0'
 default['openstack']['object-storage']['network']['object-bind-port']         = '6000'
 default['openstack']['object-storage']['network']['object-cidr']              = '127.0.0.0/8'
-~~~
+```
 
 ------------------
 sysctl
 ------------------
 set sysctl properties for time waits
 
-~~~ ruby
+``` ruby
 default['openstack']['sysctl']['net.ipv4.tcp_tw_recycle'] = 1
 default['openstack']['sysctl']['net.ipv4.tcp_tw_reuse'] = 1
 default['openstack']['sysctl']['net.ipv4.tcp_syncookies'] = 0
-~~~
+```
 
 N.B. conntrack_max may also need to be adjusted if
 server is running a stateful firewall
@@ -7430,13 +7430,13 @@ formatting.
 Each rule gets evaluated with "candidate" set to the device name
 without the leading "/dev/") and info set to the node hash value.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['disk_test_filter'] = [
   'candidate =~ /(sd|hd|xvd|vd)(?!a$)[a-z]+/',
   "File.exist?('/dev/' + candidate)",
   "not system('/sbin/parted /dev/' + candidate + ' -s print | grep linux-swap')",
   "not info.has_key?('removable') or info['removable'] == 0.to_s"]
-~~~
+```
 
 -------------------
 template overrides
@@ -7448,30 +7448,30 @@ effective cpu cores in the system.  It's worth noting that individual
 workers will # use many eventlet co-routines to service multiple concurrent
 requests.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['account-server']['workers'] = 'auto'
-~~~
+```
 
 Maximum number of clients one worker can process simultaneously (it will
 actually accept(2) N + 1). Setting this to one (1) will only handle one request
 at a time, without accepting another request concurrently.  The default is 1024.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['account-server']['max_clients'] = 1024
-~~~
+```
 
 Parent directory or where devices are mounted. Default is /srv/node
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['account-server']['devices'] = '/srv/node'
-~~~
+```
 
 Whether or not check if the devices are mounted to prevent accidentally writing to
 the root device. The default is set to true.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['account-server']['mount_check'] = true
-~~~
+```
 
 proxy-server
 Use an integer to override the number of pre-forked processes that will
@@ -7480,140 +7480,140 @@ effective cpu cores in the system.  It's worth noting that individual
 workers will # use many eventlet co-routines to service multiple concurrent
 requests.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['proxy-server']['workers'] = 'auto'
-~~~
+```
 
 Maximum number of clients one worker can process simultaneously (it will
 actually accept(2) N + 1). Setting this to one (1) will only handle one request
 at a time, without accepting another request concurrently.  The default is 1024.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['proxy-server']['max_clients'] = 1024
-~~~
+```
 
 Request timeout to external services. The default is 10 seconds.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['proxy-server']['node_timeout'] = 10
-~~~
+```
 
 enable or disable formpost
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['formpost']['enabled'] = false
-~~~
+```
 
 enable or disable tempurl
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['tempurl']['enabled'] = false
-~~~
+```
 
 The headers to remove from incoming requests. Simply a whitespace delimited
 list of header names and names can optionally end with '*' to indicate a
 prefix match. incoming_allow_headers is a list of exceptions to these
 removals.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['tempurl']['incoming_remove_headers'] = 'x-timestamp'
-~~~
+```
 
 The headers allowed as exceptions to incoming_remove_headers. Simply a
 whitespace delimited list of header names and names can optionally end with
 '*' to indicate a prefix match.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['tempurl']['incoming_allow_headers'] = ''
-~~~
+```
 
 The headers to remove from outgoing responses. Simply a whitespace delimited
 list of header names and names can optionally end with '*' to indicate a
 prefix match. outgoing_allow_headers is a list of exceptions to these
 removals.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['tempurl']['outgoing_remove_headers'] = 'x-object-meta-*'
-~~~
+```
 
 The headers allowed as exceptions to outgoing_remove_headers. Simply a
 whitespace delimited list of header names and names can optionally end with
 '*' to indicate a prefix match.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['tempurl']['outgoing_allow_headers'] = 'x-object-meta-public-*'
-~~~
+```
 
 enable or disable domain_remap
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['enabled'] = false
-~~~
+```
 
 enable domain log name
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['log_name'] = 'domain_remap'
-~~~
+```
 
 domain remap log facilty
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['log_facility'] = 'LOG_LOCAL0'
-~~~
+```
 
 domain remap log level
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['log_level'] = 'INFO'
-~~~
+```
 
 domain remap log headers
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['log_headers'] = 'False'
-~~~
+```
 
 domain remap reseller domain
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['storage_domain'] = 'example.com'
-~~~
+```
 
 domain remap root path
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['path_root'] = 'v1'
-~~~
+```
 
 domain remap reseller prefixes
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['domain_remap']['reseller_prefixes'] = 'AUTH'
-~~~
+```
 
 whether or not to enable staticweb in the swift proxy
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['staticweb']['enabled'] = false
-~~~
+```
 
 Seconds to cache container x-container-meta-web-* header values.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['staticweb']['cache_timeout'] = 300
-~~~
+```
 
 staticweb logging options
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['staticweb']['log_facility'] = 'LOG_LOCAL0'
 default['openstack']['object-storage']['staticweb']['log_level'] = 'INFO'
 default['openstack']['object-storage']['staticweb']['access_log_name'] = 'staticweb'
 default['openstack']['object-storage']['staticweb']['access_log_facility'] = 'LOG_LOCAL0'
 default['openstack']['object-storage']['staticweb']['access_log_level'] = 'INFO'
 default['openstack']['object-storage']['staticweb']['log_headers'] = 'False'
-~~~
+```
 
 container-server
 Use an integer to override the number of pre-forked processes that will
@@ -7622,65 +7622,65 @@ effective cpu cores in the system.  It's worth noting that individual
 workers will # use many eventlet co-routines to service multiple concurrent
 requests.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['workers'] = 'auto'
-~~~
+```
 
 Maximum number of clients one worker can process simultaneously (it will
 actually accept(2) N + 1). Setting this to one (1) will only handle one request
 at a time, without accepting another request concurrently.  The default is 1024.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['max_clients'] = 1024
-~~~
+```
 
 Parent directory or where devices are mounted. Default is /srv/node
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['devices'] = '/srv/node'
-~~~
+```
 
 Whether or not check if the devices are mounted to prevent accidentally writing to
 the root device. The default is set to true.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['mount_check'] = true
-~~~
+```
 
 Override this with an allowed list of your various swift clusters if you wish
 to enable container sync for your end-users between clusters.  This should
 be an array of fqdn hostnames for the cluster end-points that your end-users
 would access in the format of ['host1', 'host2', 'host3']
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['allowed_sync_hosts'] = []
-~~~
+```
 
 container-sync logging settings
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['container-sync']['log_name'] = 'container-sync'
 default['openstack']['object-storage']['container-server']['container-sync']['log_facility'] = 'LOG_LOCAL0'
 default['openstack']['object-storage']['container-server']['container-sync']['log_level'] = 'INFO'
-~~~
+```
 
 If you need to use an HTTP Proxy, set it here; defaults to no proxy.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['container-sync']['sync_proxy'] = nil
-~~~
+```
 
 Will sync, at most, each container once per interval (in seconds)
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['container-sync']['interval'] = 300
-~~~
+```
 
 Maximum amount of time to spend syncing each container per pass (in seconds)
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['container-server']['container-sync']['container_time'] = 60
-~~~
+```
 
 object-server
 Use an integer to override the number of pre-forked processes that will
@@ -7689,43 +7689,43 @@ effective cpu cores in the system.  It's worth noting that individual
 workers will # use many eventlet co-routines to service multiple concurrent
 requests.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['object-server']['workers'] = 'auto'
-~~~
+```
 
 Maximum number of clients one worker can process simultaneously (it will
 actually accept(2) N + 1). Setting this to one (1) will only handle one request
 at a time, without accepting another request concurrently.  The default is 1024.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['object-server']['max_clients'] = 1024
-~~~
+```
 
 Parent directory or where devices are mounted. Default is /srv/node
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['object-server']['devices'] = '/srv/node'
-~~~
+```
 
 Whether or not check if the devices are mounted to prevent accidentally writing to
 the root device. The default is set to true.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['object-server']['mount_check'] = true
-~~~
+```
 
 Time in seconds to wait between replication passes. The default is 30.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['object-server']['replicator']['run_pause'] = 30
-~~~
+```
 
 Time elapsed in seconds before an object can be reclaimed. The default is
 604800 seconds.
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['object-server']['replicator']['reclaim_age'] = 604800
-~~~
+```
 
 ------------------
 swauth source
@@ -7735,18 +7735,18 @@ allows us to chose to install directly from a tagged branch of
 gholt's repository.
 values:  package, git
 
-~~~ ruby
+``` ruby
 default['openstack']['object-storage']['swauth_source'] = 'package'
 default['openstack']['object-storage']['swauth_repository'] = 'https://github.com/gholt/swauth.git'
 default['openstack']['object-storage']['swauth_version'] = '1.0.8'
-~~~
+```
 
 ------------------
 packages
 ------------------
 Leveling between distros
 
-~~~ ruby
+``` ruby
 case platform_family
 when 'rhel'
   default['openstack']['object-storage']['platform'] = {
@@ -7787,7 +7787,7 @@ when 'debian'
     'swift_statsd_publish' =&gt; '/usr/local/bin/swift-statsd-publish.py'
   }
 end
-~~~
+```
 
 
 
@@ -7800,12 +7800,12 @@ end
 Set to some text value if you want templated config files
 to contain a custom banner at the top of the written file
 
-~~~ ruby
+``` ruby
 default['openstack']['db']['custom_template_banner'] = '
 # This file autogenerated by Chef
 # Do not edit, changes will be overwritten
 '
-~~~
+```
 
 
 
@@ -7818,14 +7818,14 @@ default['openstack']['db']['custom_template_banner'] = '
 MySql attributes that we use the mysql cookbook defaults:
 Data directory
 
-~~~ ruby
+``` ruby
 default['openstack']['mysql']['data_dir'] = nil
-~~~
+```
 
 MySql attributes that we select defaults for:
 Version, support 5.5 and above
 
-~~~ ruby
+``` ruby
 default['openstack']['mysql']['version'] = '5.5'
 # Service name
 default['openstack']['mysql']['service_name'] = 'default'
@@ -7857,7 +7857,7 @@ default['openstack']['mysql']['character-set-server'] = 'latin1'
 default['openstack']['mysql']['query_cache_size'] = '0'
 # Maximum number of connections
 default['openstack']['mysql']['max_connections'] = '151'
-~~~
+```
 
 
 
@@ -7868,24 +7868,24 @@ default['openstack']['mysql']['max_connections'] = '151'
 [back to top](#contents)
 
 
-~~~ ruby
+``` ruby
 default['openstack']['mq']['cluster'] = false
-~~~
+```
 
 Allow cluster_disk_nodes to be optionally set based upon a node role search.
 If set to false, mq cluster nodes can be added on-the-fly using the cluster command.
 see https://www.rabbitmq.com/clustering.html
 
-~~~ ruby
+``` ruby
 default['openstack']['mq']['search_for_cluster_disk_nodes'] = true
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 if platform_family?('debian', 'suse')
   override['rabbitmq']['use_distro_version'] = true
 end
-~~~
+```
 
 
 
@@ -7898,25 +7898,25 @@ end
 Set to some text value if you want templated config files
 to contain a custom banner at the top of the written file
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['custom_template_banner'] = '
 # This file autogenerated by Chef
 # Do not edit, changes will be overwritten
 '
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['verbose'] = 'False'
 default['openstack']['orchestration']['debug'] = 'False'
 default['openstack']['orchestration']['log_dir'] = '/var/log/heat'
 # This is the name of the Chef role that will install the Keystone Service API
 default['openstack']['orchestration']['identity_service_chef_role'] = 'os-identity'
-~~~
+```
 
 Number of heat-engine processes to fork and run.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['num_engine_workers'] = nil
 # Number of workers for Heat api service.
 default['openstack']['orchestration']['api']['workers'] = 0
@@ -7924,36 +7924,36 @@ default['openstack']['orchestration']['api']['workers'] = 0
 default['openstack']['orchestration']['api_cfn']['workers'] = 0
 # Number of workers for Heat api cloudwatch service.
 default['openstack']['orchestration']['api_cloudwatch']['workers'] = 0
-~~~
+```
 
 Gets set in the Heat Endpoint when registering with Keystone
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['region'] = node['openstack']['region']
-~~~
+```
 
 The name of the Chef role that knows about the message queue server
 that Heat uses
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['rabbit_server_chef_role'] = 'os-ops-messaging'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['service_tenant_name'] = 'service'
 default['openstack']['orchestration']['service_user'] = 'heat'
 default['openstack']['orchestration']['service_role'] = 'service'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients']['ca_file'] = nil
 # Cert file to use for clients when verifying HTTPs connections.
 default['openstack']['orchestration']['clients']['cert_file'] = nil
@@ -7961,11 +7961,11 @@ default['openstack']['orchestration']['clients']['cert_file'] = nil
 default['openstack']['orchestration']['clients']['key_file'] = nil
 # Whether to allow insecure SSL (https) requests when calling clients.
 default['openstack']['orchestration']['clients']['insecure'] = false
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_ceilometer when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_ceilometer']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_ceilometer when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_ceilometer']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -7973,11 +7973,11 @@ default['openstack']['orchestration']['clients_ceilometer']['cert_file'] = node[
 default['openstack']['orchestration']['clients_ceilometer']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_ceilometer.
 default['openstack']['orchestration']['clients_ceilometer']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_cinder when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_cinder']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_cinder when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_cinder']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -7985,11 +7985,11 @@ default['openstack']['orchestration']['clients_cinder']['cert_file'] = node['ope
 default['openstack']['orchestration']['clients_cinder']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_cinder.
 default['openstack']['orchestration']['clients_cinder']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_glance when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_glance']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_glance when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_glance']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -7997,11 +7997,11 @@ default['openstack']['orchestration']['clients_glance']['cert_file'] = node['ope
 default['openstack']['orchestration']['clients_glance']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_glance.
 default['openstack']['orchestration']['clients_glance']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_heat when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_heat']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_heat when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_heat']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -8009,11 +8009,11 @@ default['openstack']['orchestration']['clients_heat']['cert_file'] = node['opens
 default['openstack']['orchestration']['clients_heat']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_heat.
 default['openstack']['orchestration']['clients_heat']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_keystone when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_keystone']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_keystone when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_keystone']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -8021,11 +8021,11 @@ default['openstack']['orchestration']['clients_keystone']['cert_file'] = node['o
 default['openstack']['orchestration']['clients_keystone']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_keystone.
 default['openstack']['orchestration']['clients_keystone']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_neutron when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_neutron']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_neutron when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_neutron']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -8033,11 +8033,11 @@ default['openstack']['orchestration']['clients_neutron']['cert_file'] = node['op
 default['openstack']['orchestration']['clients_neutron']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_neutron.
 default['openstack']['orchestration']['clients_neutron']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A PEM encoded Certificate Authority to use for clients_nova when verifying HTTPs connections.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['clients_nova']['ca_file'] = node['openstack']['orchestration']['clients']['ca_file']
 # Cert file to use for clients_nova when verifying HTTPs connections.
 default['openstack']['orchestration']['clients_nova']['cert_file'] = node['openstack']['orchestration']['clients']['cert_file']
@@ -8045,146 +8045,146 @@ default['openstack']['orchestration']['clients_nova']['cert_file'] = node['opens
 default['openstack']['orchestration']['clients_nova']['key_file'] = node['openstack']['orchestration']['clients']['key_file']
 # Whether to allow insecure SSL (https) requests when calling clients_nova.
 default['openstack']['orchestration']['clients_nova']['insecure'] = node['openstack']['orchestration']['clients']['insecure']
-~~~
+```
 
 A list of memcached server(s) for caching
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['memcached_servers'] = nil
-~~~
+```
 
 Whether token data should be authenticated or authenticated and encrypted. Acceptable values are MAC or ENCRYPT
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['memcache_security_strategy'] = nil
-~~~
+```
 
 This string is used for key derivation
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['memcache_secret_key'] = nil
-~~~
+```
 
 Hash algorithms to use for hashing PKI tokens
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['hash_algorithms'] = 'md5'
-~~~
+```
 
 A PEM encoded Certificate Authority to use when verifying HTTPs connections
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['cafile'] = nil
-~~~
+```
 
 Whether to allow the client to perform insecure SSL (https) requests
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['insecure'] = false
-~~~
+```
 
 Keystone role for heat template-defined users. (string value)
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['heat_stack_user_role'] = nil
-~~~
+```
 
 Keystone domain id which contains heat template-defined users.
 If this option is set, stack_user_domain_name option
 will be ignored. (string value)
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['stack_user_domain_id'] = nil
-~~~
+```
 
 Keystone domain name which contains heat template-defined users. (string value)
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['stack_user_domain_name'] = nil
-~~~
+```
 
 Keystone username, a user with roles sufficient to manage
 users and projects in the stack_user_domain. (string value)
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['stack_domain_admin'] = nil
-~~~
+```
 
 Select deferred auth method, stored password or trusts.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['deferred_auth_method'] = 'trusts'
-~~~
+```
 
 If true, will passing stack information to scheduler hints when creating instances.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['stack_scheduler_hints'] = false
-~~~
+```
 
 If set, heat API service will bind to the address on this interface,
 otherwise it will bind to the API endpoint's host.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['bind_interface'] = nil
-~~~
+```
 
 If set, heat api-cfn service will bind to the address on this interface,
 otherwise it will bind to the API endpoint's host.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api-cfn']['bind_interface'] = nil
-~~~
+```
 
 If set, heat api-cloudwatch service will bind to the address on this interface,
 otherwise it will bind to the API endpoint's host.
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api-cloudwatch']['bind_interface'] = nil
-~~~
+```
 
 Keystone PKI signing directory. Only written to the filter:authtoken section
 of the api-paste.ini when node['openstack']['auth']['strategy'] == 'pki'
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['api']['auth']['cache_dir'] = '/var/cache/heat'
-~~~
+```
 
 logging attribute
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['syslog']['use'] = false
 default['openstack']['orchestration']['syslog']['facility'] = 'LOG_LOCAL2'
 default['openstack']['orchestration']['syslog']['config_facility'] = 'local2'
-~~~
+```
 
 Common rpc definitions
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['rpc_thread_pool_size'] = 64
 default['openstack']['orchestration']['rpc_conn_pool_size'] = 30
 default['openstack']['orchestration']['rpc_response_timeout'] = 60
-~~~
+```
 
 Notification definitions
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['notification_driver'] = 'heat.openstack.common.notifier.rpc_notifier'
 default['openstack']['orchestration']['default_notification_level'] = 'INFO'
 default['openstack']['orchestration']['default_publisher_id'] = ''
 default['openstack']['orchestration']['list_notifier_drivers'] = 'heat.openstack.common.notifier.no_op_notifier'
 default['openstack']['orchestration']['notification_topics'] = 'notifications'
-~~~
+```
 
 Array of options for `heat.conf` (e.g. ['option1=value1', 'option2=value2'])
 
-~~~ ruby
+``` ruby
 default['openstack']['orchestration']['misc_heat'] = nil
-~~~
+```
 
 platform-specific settings
 
-~~~ ruby
+``` ruby
 case platform_family
 when 'fedora', 'rhel' # :pragma-foodcritic: ~FC024 - won't fix this
   default['openstack']['orchestration']['user'] = 'heat'
@@ -8220,7 +8220,7 @@ when 'debian'
     'package_overrides' =&gt; "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
   }
 end
-~~~
+```
 
 
 
@@ -8233,104 +8233,104 @@ end
 The name of the Chef role that knows about the message queue server
 that Nova uses
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['rabbit_server_chef_role'] = 'os-ops-messaging'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['conf_dir'] = '/etc/ceilometer'
 default['openstack']['telemetry']['conf'] = ::File.join(node['openstack']['telemetry']['conf_dir'], 'ceilometer.conf')
 default['openstack']['telemetry']['periodic_interval'] = 600
 default['openstack']['telemetry']['syslog']['use'] = false
 default['openstack']['telemetry']['verbose'] = 'true'
 default['openstack']['telemetry']['debug'] = 'false'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['cache_dir'] = '/var/cache/ceilometer/api'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['version'] = node['openstack']['api']['auth']['version']
-~~~
+```
 
 A list of memcached server(s) to use for caching
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['memcached_servers'] = nil
-~~~
+```
 
 Whether token data should be authenticated or authenticated and encrypted. Acceptable values are MAC or ENCRYPT
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['memcache_security_strategy'] = nil
-~~~
+```
 
 This string is used for key derivation
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['memcache_secret_key'] = nil
-~~~
+```
 
 Hash algorithms to use for hashing PKI tokens
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['hash_algorithms'] = 'md5'
-~~~
+```
 
 A PEM encoded Certificate Authority to use when verifying HTTPs connections
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['cafile'] = nil
-~~~
+```
 
 Verify HTTPS connections
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['api']['auth']['insecure'] = false
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['user'] = 'ceilometer'
 default['openstack']['telemetry']['group'] = 'ceilometer'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['region'] = node['openstack']['region']
 default['openstack']['telemetry']['service_user'] = 'ceilometer'
 default['openstack']['telemetry']['service_tenant_name'] = 'service'
 default['openstack']['telemetry']['service_role'] = 'admin'
-~~~
+```
 
 A PEM encoded Certificate Authority to use when verifying HTTPs connections (for service polling authentication)
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['service-credentials']['cafile'] = nil
-~~~
+```
 
 Verify HTTPS connections (for service polling authentication)
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['service-credentials']['insecure'] = false
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['sample_source'] = 'openstack'
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['dbsync_timeout'] = 3600
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 case node['openstack']['compute']['driver']
 when 'libvirt.LibvirtDriver'
   default['openstack']['telemetry']['hypervisor_inspector'] = 'libvirt'
@@ -8339,10 +8339,10 @@ when 'vmwareapi.VMwareESXDriver', 'vmwareapi.VMwareVCDriver'
 else
   default['openstack']['telemetry']['hypervisor_inspector'] = nil
 end
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 case platform_family
 when 'suse' # :pragma-foodcritic: ~FC024 - won't fix this
   default['openstack']['telemetry']['platform'] = {
@@ -8364,10 +8364,10 @@ when 'suse' # :pragma-foodcritic: ~FC024 - won't fix this
     'collector_service' =&gt; 'openstack-ceilometer-collector',
     'package_overrides' =&gt; ''
   }
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 when 'fedora', 'rhel'
   default['openstack']['telemetry']['platform'] = {
     'common_packages' =&gt; ['openstack-ceilometer-common'],
@@ -8388,10 +8388,10 @@ when 'fedora', 'rhel'
     'collector_service' =&gt; 'openstack-ceilometer-collector',
     'package_overrides' =&gt; ''
   }
-~~~
+```
 
 
-~~~ ruby
+``` ruby
 when 'debian'
   default['openstack']['telemetry']['platform'] = {
     'common_packages' =&gt; ['ceilometer-common'],
@@ -8413,19 +8413,19 @@ when 'debian'
     'package_overrides' =&gt; "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
   }
 end
-~~~
+```
 
 The time to live value for samples which is specified in seconds, override to -1 if no data expiry is required
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['database']['time_to_live'] = 1800
-~~~
+```
 
 Decide whether to store events in notification service or not
 
-~~~ ruby
+``` ruby
 default['openstack']['telemetry']['notification']['store_events'] = false
-~~~
+```
 
 </vni_max></vni_min></tun_max></tun_min></vlan_max></vlan_min></physical_network></host></ovsdb_port></ip></host></nos-topology-name></nos-admin-password></nos-admin-username></nos-port></port></ip></vswitch></physical_network></vlan_max></vlan_min></physical_network></port></hostname></credential></credential></ssh></physical_interface></physical_network></vlan_max></vlan_min></physical_network></physical></switch></mgmt></mgmt></physical_interface></physical_network>
     
