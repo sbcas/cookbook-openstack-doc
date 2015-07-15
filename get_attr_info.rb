@@ -64,7 +64,7 @@ def convert_attr_to_md(filename)
       if code_block
         output << line << "\n"
       else
-        output << line.strip.gsub!(/^#+[[:blank:]]*/, '') << "\n"
+        output << line.strip.gsub!(/^#+[[:blank:]]*/, '').gsub!(/<|>/,'') << "\n"
       end
     else # is_code
       unless code_block
