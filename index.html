@@ -88,10 +88,10 @@
 
 <p>======================== OpenStack DB Support ================================</p>
 
-<p>This section of node attributes stores information about the database hosts
+<p>This section of node attributes stores information about the database hosts<br />
 used in an OpenStack deployment.</p>
 
-<p>There is no ‘scheme’ key. Instead, there is a ‘service_type’ key that should
+<p>There is no ‘scheme’ key. Instead, there is a ‘service_type’ key that should<br />
 contain one of ‘sqlite’, ‘mysql’, ‘db2’ or ‘postgresql’</p>
 
 <p>The ::Openstack::db(<service_name>) library routine allows a lookup from any recipe
@@ -103,37 +103,37 @@ the database for <service_name>, where <service_name> is one of 'compute' (Nova)
 returns the SQLAlchemy DB URI for <service_name>, with the supplied user and password
 that a calling service might be using when connecting to the database.</service_name></password></user></service_name></p>
 
-<p>For example, let’s assume that the database that is used by the OpenStack Identity
+<p>For example, let’s assume that the database that is used by the OpenStack Identity<br />
 service (Keystone) is configured as follows:</p>
 
-<p>host: 192.168.0.3
-port: 3306
-service_type: mysql
+<p>host: 192.168.0.3<br />
+port: 3306<br />
+service_type: mysql<br />
 db_name: keystone</p>
 
-<p>Further suppose that a node running the OpenStack Identity API service needs to
-connect to the above identity database server. It has the following in it’s node
+<p>Further suppose that a node running the OpenStack Identity API service needs to<br />
+connect to the above identity database server. It has the following in it’s node<br />
 attributes:</p>
 
 <p>node[‘openstack’][‘db’][‘identity’][‘username’] = ‘keystone’</p>
 
 <p>In a ‘keystone’ recipe, you might find the following code:</p>
 
-<p>user = node[‘openstack’][‘db’][‘identity’][‘username’]
+<p>user = node[‘openstack’][‘db’][‘identity’][‘username’]<br />
 pass = get_password ‘db’, ‘keystone’</p>
 
 <p>sql_connection = ::Openstack::db_uri(‘identity’, user, pass)</p>
 
-<p>The sql_connection variable would then be set to “mysql://keystone:password@192.168.0.3:keystone”
+<p>The sql_connection variable would then be set to “mysql://keystone:password@192.168.0.3:keystone”<br />
 and could then be written to the keystone.conf file in a template.</p>
 
 <p>Database Migrations:</p>
 
 <p>node[‘openstack’][‘db’][<service_name>]['migrate']</service_name></p>
 
-<p>The above attribute causes database migrations to be executed for the given
-service.  There are cases where migrations should not be executed.  For
-example when upgrading a zone, and the image or identity database are replicated
+<p>The above attribute causes database migrations to be executed for the given<br />
+service.  There are cases where migrations should not be executed.  For<br />
+example when upgrading a zone, and the image or identity database are replicated<br />
 across many zones.</p>
 
 <p><strong>**</strong><strong>**</strong><strong>**</strong>** Database Endpoint <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>**</p>
@@ -329,7 +329,7 @@ across many zones.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -361,17 +361,17 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>Setting this to True means that database passwords and service user
-passwords for Keystone will be easy-to-remember values – they will be
-the same value as the key. For instance, if a cookbook calls the
+<p>Setting this to True means that database passwords and service user<br />
+passwords for Keystone will be easy-to-remember values – they will be<br />
+the same value as the key. For instance, if a cookbook calls the<br />
 ::Openstack::secret routine like so:</p>
 
 <p>pass = secret “passwords”, “nova”</p>
 
 <p>The value of pass will be “nova”</p>
 
-<p>Use data bags for storing passwords
-Set this to false in order to get the passwords from attributes like:
+<p>Use data bags for storing passwords<br />
+Set this to false in order to get the passwords from attributes like:<br />
 node[‘openstack’][‘secret’][key][type]</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -380,13 +380,13 @@ node[‘openstack’][‘secret’][key][type]</p>
 </div>
 </div>
 
-<p>Set databag type
-acceptable values ‘encrypted’, ‘standard’, ‘vault’
-Set this to ‘standard’ in order to use regular databags.
-this is not recommended for anything other than dev/CI
-type environments.  Storing real secrets in plaintext = craycray.
-In addition to the encrypted data_bags which are an included
-feature of the official chef project, you can use ‘vault’ to
+<p>Set databag type<br />
+acceptable values ‘encrypted’, ‘standard’, ‘vault’<br />
+Set this to ‘standard’ in order to use regular databags.<br />
+this is not recommended for anything other than dev/CI<br />
+type environments.  Storing real secrets in plaintext = craycray.<br />
+In addition to the encrypted data_bags which are an included<br />
+feature of the official chef project, you can use ‘vault’ to<br />
 encrypt your secrets with the method provided in the chef-vault gem.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -426,9 +426,9 @@ encrypt your secrets with the method provided in the chef-vault gem.</p>
 
 <p>========================= Encrypted Databag Setup ===========================</p>
 
-<p>The openstack-common cookbook’s default library contains a <code>secret</code>
-routine that looks up the value of encrypted databag values. This routine
-uses the secret key file located at the following location to decrypt the
+<p>The openstack-common cookbook’s default library contains a <code>secret</code><br />
+routine that looks up the value of encrypted databag values. This routine<br />
+uses the secret key file located at the following location to decrypt the<br />
 values in the data bag.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -445,8 +445,8 @@ values in the data bag.</p>
 </div>
 </div>
 
-<p>The name of the encrypted data bag that stores service user passwords, with
-each key in the data bag corresponding to a named OpenStack service, like
+<p>The name of the encrypted data bag that stores service user passwords, with<br />
+each key in the data bag corresponding to a named OpenStack service, like<br />
 “nova”, “cinder”, etc.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -455,8 +455,8 @@ each key in the data bag corresponding to a named OpenStack service, like
 </div>
 </div>
 
-<p>The name of the encrypted data bag that stores DB passwords, with
-each key in the data bag corresponding to a named OpenStack database, like
+<p>The name of the encrypted data bag that stores DB passwords, with<br />
+each key in the data bag corresponding to a named OpenStack database, like<br />
 “nova”, “cinder”, etc.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -465,7 +465,7 @@ each key in the data bag corresponding to a named OpenStack database, like
 </div>
 </div>
 
-<p>The name of the encrypted data bag that stores Keystone user passwords, with
+<p>The name of the encrypted data bag that stores Keystone user passwords, with<br />
 each key in the data bag corresponding to a user (Keystone or otherwise).</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -476,9 +476,9 @@ each key in the data bag corresponding to a user (Keystone or otherwise).</p>
 
 <p>========================= Package and Repository Setup ======================</p>
 
-<p>Various Linux distributions provide OpenStack packages and repositories.
-The provide some sensible defaults, but feel free to override per your
-needs.
+<p>Various Linux distributions provide OpenStack packages and repositories.<br />
+The provide some sensible defaults, but feel free to override per your<br />
+needs.<br />
 The coordinated release of OpenStack codename</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -487,13 +487,13 @@ The coordinated release of OpenStack codename</p>
 </div>
 </div>
 
-<p>The Ubuntu Cloud Archive has packages for multiple Ubuntu releases. For
-more information, see: https://wiki.ubuntu.com/ServerTeam/CloudArchive.
-In the component strings, %codename% will be replaced by the value of
-the node[‘lsb’][‘codename’] Ohai value and %release% will be replaced
+<p>The Ubuntu Cloud Archive has packages for multiple Ubuntu releases. For<br />
+more information, see: https://wiki.ubuntu.com/ServerTeam/CloudArchive.<br />
+In the component strings, %codename% will be replaced by the value of<br />
+the node[‘lsb’][‘codename’] Ohai value and %release% will be replaced<br />
 by the value of node[‘openstack’][‘release’]</p>
 
-<p>Change [‘openstack’][‘apt’][‘update_apt_cache’] to true if you would like
+<p>Change [‘openstack’][‘apt’][‘update_apt_cache’] to true if you would like<br />
 have the cache automaticly updated</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -589,11 +589,11 @@ actual endpoint for that service, which may be a load balanced IP.</service-name
 </div>
 </div>
 
-<p>The OpenStack Identity (Keystone) API endpoint. This is commonly called
-the Keystone Service endpoint…
-NOTE(mancdaz): There is a single ‘identity-bind’ mash that is used
-by the identity cookbook, for both service and admin endpoint binds.
-This is because keystone presents two ports but only a single service,
+<p>The OpenStack Identity (Keystone) API endpoint. This is commonly called<br />
+the Keystone Service endpoint…<br />
+NOTE(mancdaz): There is a single ‘identity-bind’ mash that is used<br />
+by the identity cookbook, for both service and admin endpoint binds.<br />
+This is because keystone presents two ports but only a single service,<br />
 that can only be bound to a single IP.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -613,14 +613,14 @@ that can only be bound to a single IP.</p>
 </div>
 </div>
 
-<p>The OpenStack Identity (Keystone) Internal API endpoint
-For a reference architecture this is a sensable default, however with a more
-complex network setup the public endpoint may not be reachable by internal
-systems, thus the ability to set this to something different must be present.
-Even if the public endpoint is reachable there may be other reasons to send
-interal communications to a different endpoint, for security or auditing
-purposes for example.
-Generally this listens on the same IP as the admin interface, but with the
+<p>The OpenStack Identity (Keystone) Internal API endpoint<br />
+For a reference architecture this is a sensable default, however with a more<br />
+complex network setup the public endpoint may not be reachable by internal<br />
+systems, thus the ability to set this to something different must be present.<br />
+Even if the public endpoint is reachable there may be other reasons to send<br />
+interal communications to a different endpoint, for security or auditing<br />
+purposes for example.<br />
+Generally this listens on the same IP as the admin interface, but with the<br />
 public pipeline(5000) instead of the admin pipeline(35357).</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -653,7 +653,7 @@ public pipeline(5000) instead of the admin pipeline(35357).</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong> OpenStack Compute Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>
+<p><strong>**</strong><strong>**</strong><strong>**</strong> OpenStack Compute Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><br />
 The OpenStack Compute (Nova) Native API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -823,7 +823,7 @@ The OpenStack Compute (Nova) Native API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Network Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><em>**</em>
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Network Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><em>**</em><br />
 The OpenStack Network (Neutron) API endpoint.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -870,7 +870,7 @@ The OpenStack Network (Neutron) API endpoint.</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Image Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Image Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><br />
 The OpenStack Image (Glance) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -913,7 +913,7 @@ The OpenStack Image (Glance) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Volume Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*****
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Volume Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*****<br />
 The OpenStack Volume (Cinder) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -934,7 +934,7 @@ The OpenStack Volume (Cinder) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Object Storage Endpoint <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*****
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Object Storage Endpoint <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*****<br />
 The OpenStack Object Storage (Swift) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -955,7 +955,7 @@ The OpenStack Object Storage (Swift) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Metering Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Metering Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***<br />
 The OpenStack Metering (Ceilometer) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -978,7 +978,7 @@ The OpenStack Metering (Ceilometer) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Orchestration Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Orchestration Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***<br />
 The OpenStack Orchestration (Heat) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1039,7 +1039,7 @@ The OpenStack Orchestration (Heat) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Database Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Database Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***<br />
 The OpenStack Database (Trove) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1060,7 +1060,7 @@ The OpenStack Database (Trove) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Bare Metal Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*****
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Bare Metal Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>*****<br />
 The OpenStack Bare Metal (Ironic) API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1081,7 +1081,7 @@ The OpenStack Bare Metal (Ironic) API endpoint</p>
 </div>
 </div>
 
-<p><strong>**</strong><strong>**</strong><strong>**</strong> OpenStack Dashboard Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>
+<p><strong>**</strong><strong>**</strong><strong>**</strong> OpenStack Dashboard Endpoints <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><br />
 The OpenStack Dashboard non-SSL endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1103,23 +1103,23 @@ The OpenStack Dashboard non-SSL endpoint</p>
 </div>
 
 <hr />
-<p>Alternately, if you used some standardized DNS naming scheme, you could
+<p>Alternately, if you used some standardized DNS naming scheme, you could<br />
 do something like this, which would override any part-wise specifications above.</p>
 
-<p>default[‘openstack’][‘endpoints’][‘identity-api’][‘uri’]         = ‘https://identity.example.com:35357/v2.0’
-default[‘openstack’][‘endpoints’][‘identity-admin’][‘uri’]       = ‘https://identity.example.com:5000/v2.0’
-default[‘openstack’][‘endpoints’][‘compute-api’][‘uri’]          = ‘https://compute.example.com:8774/v2/%(tenant_id)s’
-default[‘openstack’][‘endpoints’][‘compute-ec2-api’][‘uri’]      = ‘https://ec2.example.com:8773/services/Cloud’
-default[‘openstack’][‘endpoints’][‘compute-ec2-admin’][‘uri’]    = ‘https://ec2.example.com:8773/services/Admin’
-default[‘openstack’][‘endpoints’][‘compute-xvpvnc’][‘uri’]       = ‘https://xvpvnc.example.com:6081/console’
-default[‘openstack’][‘endpoints’][‘compute-novnc’][‘uri’]        = ‘https://novnc.example.com:6080/vnc_auto.html’
-default[‘openstack’][‘endpoints’][‘image-api’][‘uri’]            = ‘https://image.example.com:9292/v2’
-default[‘openstack’][‘endpoints’][‘image-registry’][‘uri’]       = ‘https://image.example.com:9191/v2’
-default[‘openstack’][‘endpoints’][‘block-storage-api’][‘uri’]           = ‘https://volume.example.com:8776/v1/%(tenant_id)s’
-default[‘openstack’][‘endpoints’][‘telemetry-api’][‘uri’]        = ‘https://telemetry.example.com:9000/v1’
-default[‘openstack’][‘endpoints’][‘orchestration-api’][‘uri’]               = ‘https://orchestration.example.com:8004//v1/%(tenant_id)s’
-default[‘openstack’][‘endpoints’][‘orchestration-api-cfn’][‘uri’]           = ‘https://orchestration.example.com:8000/v1’
-default[‘openstack’][‘endpoints’][‘orchestration-api-cloudwatch’][‘uri’]    = ‘https://orchestration.example.com:8003/v1’
+<p>default[‘openstack’][‘endpoints’][‘identity-api’][‘uri’]         = ‘https://identity.example.com:35357/v2.0’<br />
+default[‘openstack’][‘endpoints’][‘identity-admin’][‘uri’]       = ‘https://identity.example.com:5000/v2.0’<br />
+default[‘openstack’][‘endpoints’][‘compute-api’][‘uri’]          = ‘https://compute.example.com:8774/v2/%(tenant_id)s’<br />
+default[‘openstack’][‘endpoints’][‘compute-ec2-api’][‘uri’]      = ‘https://ec2.example.com:8773/services/Cloud’<br />
+default[‘openstack’][‘endpoints’][‘compute-ec2-admin’][‘uri’]    = ‘https://ec2.example.com:8773/services/Admin’<br />
+default[‘openstack’][‘endpoints’][‘compute-xvpvnc’][‘uri’]       = ‘https://xvpvnc.example.com:6081/console’<br />
+default[‘openstack’][‘endpoints’][‘compute-novnc’][‘uri’]        = ‘https://novnc.example.com:6080/vnc_auto.html’<br />
+default[‘openstack’][‘endpoints’][‘image-api’][‘uri’]            = ‘https://image.example.com:9292/v2’<br />
+default[‘openstack’][‘endpoints’][‘image-registry’][‘uri’]       = ‘https://image.example.com:9191/v2’<br />
+default[‘openstack’][‘endpoints’][‘block-storage-api’][‘uri’]           = ‘https://volume.example.com:8776/v1/%(tenant_id)s’<br />
+default[‘openstack’][‘endpoints’][‘telemetry-api’][‘uri’]        = ‘https://telemetry.example.com:9000/v1’<br />
+default[‘openstack’][‘endpoints’][‘orchestration-api’][‘uri’]               = ‘https://orchestration.example.com:8004//v1/%(tenant_id)s’<br />
+default[‘openstack’][‘endpoints’][‘orchestration-api-cfn’][‘uri’]           = ‘https://orchestration.example.com:8000/v1’<br />
+default[‘openstack’][‘endpoints’][‘orchestration-api-cloudwatch’][‘uri’]    = ‘https://orchestration.example.com:8003/v1’<br />
 Set a default region that other regions are set to - such that changing the region for all services can be done in one place</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1128,7 +1128,7 @@ Set a default region that other regions are set to - such that changing the regi
 </div>
 </div>
 
-<p>Set a default auth api version that other components use to interact with identity service.
+<p>Set a default auth api version that other components use to interact with identity service.<br />
 Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1560,7 +1560,7 @@ Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 </div>
 </div>
 
-<p>identity
+<p>identity<br />
 AMQP topics used for openstack notifications, can be comma-separated values</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1570,7 +1570,7 @@ AMQP topics used for openstack notifications, can be comma-separated values</p>
 </div>
 </div>
 
-<p>network
+<p>network<br />
 AMQP topics used for openstack notifications, can be comma-separated values</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1610,7 +1610,7 @@ AMQP topics used for openstack notifications, can be comma-separated values</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1629,8 +1629,8 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>Maximum number of worker threads that can be started
-simultaneously by a periodic task. Should be less than RPC
+<p>Maximum number of worker threads that can be started<br />
+simultaneously by a periodic task. Should be less than RPC<br />
 thread pool size. (integer value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1657,7 +1657,7 @@ thread pool size. (integer value)</p>
 </div>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
+<p>The name of the Chef role that knows about the message queue server<br />
 that Ironic uses</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1816,7 +1816,7 @@ that Ironic uses</p>
 </div>
 </div>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1835,7 +1835,7 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>Name of this node.  This can be an opaque identifier.  It is
+<p>Name of this node.  This can be an opaque identifier.  It is<br />
 not necessarily a hostname, FQDN, or IP address. (StrOpt)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1864,8 +1864,8 @@ not necessarily a hostname, FQDN, or IP address. (StrOpt)</p>
 </div>
 </div>
 
-<p>Number of workers for OpenStack Volume API service. The
-default is equal to the number of CPUs available. (integer
+<p>Number of workers for OpenStack Volume API service. The<br />
+default is equal to the number of CPUs available. (integer<br />
 value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1883,7 +1883,7 @@ value)</p>
 </div>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
+<p>The name of the Chef role that knows about the message queue server<br />
 that Cinder uses</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1970,8 +1970,8 @@ that Cinder uses</p>
 </div>
 </div>
 
-<p>If True, this indicates that glance-api allows the client to perform
-insecure SSL(https) requests; this should be the same as the setting
+<p>If True, this indicates that glance-api allows the client to perform<br />
+insecure SSL(https) requests; this should be the same as the setting<br />
 in the glance-api service.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -1996,7 +1996,7 @@ in the glance-api service.</p>
 </div>
 </div>
 
-<p>Maximum allocatable gigabytes
+<p>Maximum allocatable gigabytes<br />
 Should equal total backend storage, default is 10TB</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2005,7 +2005,7 @@ Should equal total backend storage, default is 10TB</p>
 </div>
 </div>
 
-<p>Storage availability zone
+<p>Storage availability zone<br />
 Default is nova</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2158,9 +2158,9 @@ Default is nova</p>
 </div>
 </div>
 
-<p>EMC VMAX/VNX tSupport
-The EmcUserName user’s password is stored in an encrypted databag and
-accessed with openstack-common cookbook library’s “get_password” routeine. You
+<p>EMC VMAX/VNX tSupport<br />
+The EmcUserName user’s password is stored in an encrypted databag and<br />
+accessed with openstack-common cookbook library’s “get_password” routeine. You<br />
 are expected to create the user and pass in a wrapper cookbook.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2204,8 +2204,8 @@ are expected to create the user and pass in a wrapper cookbook.</p>
 </div>
 </div>
 
-<p>IBMNAS (SONAS, Storwize V7000 Unified) Support
-The attribute “nas_password” is stored in databag and
+<p>IBMNAS (SONAS, Storwize V7000 Unified) Support<br />
+The attribute “nas_password” is stored in databag and<br />
 accessed with openstack-common cookbook library’s “get_password” routeine.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2294,17 +2294,17 @@ accessed with openstack-common cookbook library’s “get_password” routeine.
 </div>
 </div>
 
-<p>Multiple backend support
-Allow multiple backends configured in cinder.conf
-For example: {
-‘lvm1’ =&gt; {
-‘volume_driver’: ‘cinder.volume.drivers.lvm.LVMISCSIDriver’,
-‘volume_backend_name’: ‘lvm-backend-1’
-}
-‘lvm2’ =&gt; {
-‘volume_driver’: ‘cinder.volume.drivers.lvm.LVMISCSIDriver’,
-‘volume_backend_name’: ‘lvm-backend-2’
-}
+<p>Multiple backend support<br />
+Allow multiple backends configured in cinder.conf<br />
+For example: {<br />
+‘lvm1’ =&gt; {<br />
+‘volume_driver’: ‘cinder.volume.drivers.lvm.LVMISCSIDriver’,<br />
+‘volume_backend_name’: ‘lvm-backend-1’<br />
+}<br />
+‘lvm2’ =&gt; {<br />
+‘volume_driver’: ‘cinder.volume.drivers.lvm.LVMISCSIDriver’,<br />
+‘volume_backend_name’: ‘lvm-backend-2’<br />
+}<br />
 }</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2313,8 +2313,8 @@ For example: {
 </div>
 </div>
 
-<p>Default volume-type for volumes to be created as when client does not request
-a specific type.  Volume types are configured from cinder-client and
+<p>Default volume-type for volumes to be created as when client does not request<br />
+a specific type.  Volume types are configured from cinder-client and<br />
 will reference the backend name.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2323,8 +2323,8 @@ will reference the backend name.</p>
 </div>
 </div>
 
-<p>Misc option support
-Allow additional strings to be added to cinder.conf
+<p>Misc option support<br />
+Allow additional strings to be added to cinder.conf<br />
 For example: [’# Comment’, ‘key=value’]</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2333,9 +2333,9 @@ For example: [’# Comment’, ‘key=value’]</p>
 </div>
 </div>
 
-<p>Default lock_path
-The lock_path normally uses /var/lock/cinder, but it’s does not work
-in cases like systemd, so setting lock_path to $state_path/lock like
+<p>Default lock_path<br />
+The lock_path normally uses /var/lock/cinder, but it’s does not work<br />
+in cases like systemd, so setting lock_path to $state_path/lock like<br />
 in nova and neutron.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2472,7 +2472,7 @@ in nova and neutron.</p>
 </div>
 </div>
 
-<p>Swift support
+<p>Swift support<br />
 The URL of Swift endpoint (string value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2533,7 +2533,7 @@ The URL of Swift endpoint (string value)</p>
 </div>
 </div>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2545,7 +2545,7 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
+<p>The name of the Chef role that knows about the message queue server<br />
 that Nova uses</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2571,7 +2571,7 @@ that Nova uses</p>
 </div>
 </div>
 
-<p>The lock_path normally uses /var/lock/nova, but it’s not allowed in openSUSE,
+<p>The lock_path normally uses /var/lock/nova, but it’s not allowed in openSUSE,<br />
 so setting lock_path to $state_path/lock like in Neutron.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2581,7 +2581,7 @@ so setting lock_path to $state_path/lock like in Neutron.</p>
 </div>
 </div>
 
-<p>Workers
+<p>Workers<br />
 nova will default to number of cpus</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2705,7 +2705,7 @@ nova will default to number of cpus</p>
 </div>
 </div>
 
-<p>Support multiple network types.  Default network type is ‘nova’
+<p>Support multiple network types.  Default network type is ‘nova’<br />
 with the other option supported being ‘neutron’</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2714,7 +2714,7 @@ with the other option supported being ‘neutron’</p>
 </div>
 </div>
 
-<p>if the network type is not nova, we will load the following
+<p>if the network type is not nova, we will load the following<br />
 plugins from openstack-network</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2743,8 +2743,8 @@ plugins from openstack-network</p>
 </div>
 </div>
 
-<p>If True, this indicates that glance-api allows the client to perform
-insecure SSL(https) requests; this should be the same as the setting
+<p>If True, this indicates that glance-api allows the client to perform<br />
+insecure SSL(https) requests; this should be the same as the setting<br />
 in the glance-api service.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2777,7 +2777,7 @@ in the glance-api service.</p>
 </div>
 </div>
 
-<p>A list of url scheme that can be downloaded directly
+<p>A list of url scheme that can be downloaded directly<br />
 via the direct_url.  Currently supported schemes: [file].</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2786,46 +2786,46 @@ via the direct_url.  Currently supported schemes: [file].</p>
 </div>
 </div>
 
-<p>Image file url support
-For each entry in the filesystem list a new configuration section must be
+<p>Image file url support<br />
+For each entry in the filesystem list a new configuration section must be<br />
 added with the following format:</p>
 
 <p>filesystem name:</p>
 
-<p>id:
-An opaque string.  In order for this module to know that the remote
-FS is the same one that is mounted locally it must share information
-with the glance deployment.  Both glance and nova-compute must be
-configured with a unique matching string.  This ensures that the
-file:// advertised URL is describing a file system that is known
-to nova-compute
-mountpoint:
-The location at which the file system is locally mounted.  Glance
-may mount a shared file system on a different path than nova-compute.
-This value will be compared against the metadata advertised with
-glance and paths will be adjusted to ensure that the correct file
+<p>id:<br />
+An opaque string.  In order for this module to know that the remote<br />
+FS is the same one that is mounted locally it must share information<br />
+with the glance deployment.  Both glance and nova-compute must be<br />
+configured with a unique matching string.  This ensures that the<br />
+file:// advertised URL is describing a file system that is known<br />
+to nova-compute<br />
+mountpoint:<br />
+The location at which the file system is locally mounted.  Glance<br />
+may mount a shared file system on a different path than nova-compute.<br />
+This value will be compared against the metadata advertised with<br />
+glance and paths will be adjusted to ensure that the correct file<br />
 is copied.</p>
 
-<p>For example: {
-‘some_fs’ =&gt; {
-‘id’ =&gt; ‘00000000-0000-0000-0000-000000000000’,
-‘mountpoint’ =&gt; ‘/mount/some_fs/images’
-},
-‘another_fs’ =&gt; {
-‘id’ =&gt; ‘1111111-1111-1111-1111-1111111111111’,
-‘mountpoint’ =&gt; ‘/mount/another_fs/images’
-}
+<p>For example: {<br />
+‘some_fs’ =&gt; {<br />
+‘id’ =&gt; ‘00000000-0000-0000-0000-000000000000’,<br />
+‘mountpoint’ =&gt; ‘/mount/some_fs/images’<br />
+},<br />
+‘another_fs’ =&gt; {<br />
+‘id’ =&gt; ‘1111111-1111-1111-1111-1111111111111’,<br />
+‘mountpoint’ =&gt; ‘/mount/another_fs/images’<br />
+}<br />
 }</p>
 
 <p>This will produce the following in nova.conf</p>
 
-<p>[image_file_url]
-filesystems=some_fs,another_fs
-[image_file_url:some_fs]
-id=00000000-0000-0000-0000-000000000000
-mountpoint=/mount/some_fs/images
-[image_file_url:another_fs]
-id=1111111-1111-1111-1111-1111111111111
+<p>[image_file_url]<br />
+filesystems=some_fs,another_fs<br />
+[image_file_url:some_fs]<br />
+id=00000000-0000-0000-0000-000000000000<br />
+mountpoint=/mount/some_fs/images<br />
+[image_file_url:another_fs]<br />
+id=1111111-1111-1111-1111-1111111111111<br />
 mountpoint=/mount/another_fs/images</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2834,9 +2834,9 @@ mountpoint=/mount/another_fs/images</p>
 </div>
 </div>
 
-<p>Neutron options
-If True, this indicates that neutron api allows the client to perform
-insecure SSL (https) requests. This should be the same as the setting
+<p>Neutron options<br />
+If True, this indicates that neutron api allows the client to perform<br />
+insecure SSL (https) requests. This should be the same as the setting<br />
 in the neutron api service.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -2899,34 +2899,34 @@ in the neutron api service.</p>
 
 <p>For VLAN Networking, do the following:</p>
 
-<p>default[‘openstack’][‘compute’][‘network’][‘network_manager’] = ‘nova.network.manager.VlanManager’
+<p>default[‘openstack’][‘compute’][‘network’][‘network_manager’] = ‘nova.network.manager.VlanManager’<br />
 default[‘openstack’][‘compute’][‘network’][‘vlan_interface’] = ‘eth1’  # Or ‘eth2’, ‘bond1’, etc…</p>
 
 <p>In addition to the above, you typically either want to do one of the following:</p>
 
-<p>1) Set default[‘openstack’][‘compute’][‘networks’] to an empty Array ([]) and create your
+<p>1) Set default[‘openstack’][‘compute’][‘networks’] to an empty Array ([]) and create your<br />
 VLAN networks (using nova-manage network create) <strong>when you create a tenant</strong>.</p>
 
-<p>2) Set default[‘openstack’][‘compute’][‘networks’] to an Array of VLAN networks that get created
-<strong>without a tenant assignment</strong> for tenants to use when they are created later.
+<p>2) Set default[‘openstack’][‘compute’][‘networks’] to an Array of VLAN networks that get created<br />
+<strong>without a tenant assignment</strong> for tenants to use when they are created later.<br />
 Such an array might look like this:</p>
 
-<p>default[‘openstack’][‘compute’][‘networks’] = [
-{
-‘label’: ‘vlan100’,
-‘vlan’: ‘100’,
-‘ipv4_cidr’: ‘10.0.100.0/24’
-},
-{
-‘label’: ‘vlan101’,
-‘vlan’: ‘101’,
-‘ipv4_cidr’: ‘10.0.101.0/24’
-},
-{
-‘label’: ‘vlan102’,
-‘vlan’: ‘102’,
-‘ipv4_cidr’: ‘10.0.102.0/24’
-},
+<p>default[‘openstack’][‘compute’][‘networks’] = [<br />
+{<br />
+‘label’: ‘vlan100’,<br />
+‘vlan’: ‘100’,<br />
+‘ipv4_cidr’: ‘10.0.100.0/24’<br />
+},<br />
+{<br />
+‘label’: ‘vlan101’,<br />
+‘vlan’: ‘101’,<br />
+‘ipv4_cidr’: ‘10.0.101.0/24’<br />
+},<br />
+{<br />
+‘label’: ‘vlan102’,<br />
+‘vlan’: ‘102’,<br />
+‘ipv4_cidr’: ‘10.0.102.0/24’<br />
+},<br />
 ]</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3051,7 +3051,7 @@ Such an array might look like this:</p>
 </div>
 </div>
 
-<p>Explicitly set the cpu_mode option under libvirt section
+<p>Explicitly set the cpu_mode option under libvirt section<br />
 When this option is set, it will override all other logics related to cpu_mode</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3099,7 +3099,7 @@ When this option is set, it will override all other logics related to cpu_mode</
 </div>
 </div>
 
-<p>force_config_drive can be nil or ‘always’,
+<p>force_config_drive can be nil or ‘always’,<br />
 if it’s ‘always’, nova will create a config drive regardless of if the user specified –config-drive true in their nova boot call</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3121,7 +3121,7 @@ if it’s ‘always’, nova will create a config drive regardless of if the use
 </div>
 </div>
 
-<p>Cinder options
+<p>Cinder options<br />
 Location of ca certificates file to use for cinder client requests.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3300,7 +3300,7 @@ Location of ca certificates file to use for cinder client requests.</p>
 </div>
 </div>
 
-<p>Conductor settings
+<p>Conductor settings<br />
 Perform nova-conductor operations locally (boolean value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3449,11 +3449,11 @@ Perform nova-conductor operations locally (boolean value)</p>
 </div>
 </div>
 
-<p>To disable the EC2 API endpoint, simply remove ‘ec2,’ from the list
-of enabled API services.
-NOTE: The metadata api service is enabled via including it’s recipe
-NOTE: api-metadata.  By default the api-metadata recipe is included in
-NOTE: the os-compute-api role which is included in the
+<p>To disable the EC2 API endpoint, simply remove ‘ec2,’ from the list<br />
+of enabled API services.<br />
+NOTE: The metadata api service is enabled via including it’s recipe<br />
+NOTE: api-metadata.  By default the api-metadata recipe is included in<br />
+NOTE: the os-compute-api role which is included in the<br />
 NOTE: os-compute-single-controller role.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3550,23 +3550,23 @@ NOTE: os-compute-single-controller role.</p>
 </div>
 </div>
 
-<p>Lock the version of RPC messages and allow live upgrading of the services
-without interruption caused by version mismatch.
-The configuration options allow the specification of RPC version numbers if desired,
-but release name alias are also supported.
-options e.g.:
-default[‘openstack’][‘compute’][‘upgrade_levels’] = {
-‘baseapi’ =&gt; ‘kilo’,
-‘console’ =&gt; ‘kilo’,
-‘consoleauth’ =&gt; ‘kilo’,
-‘cert’ =&gt; ‘kilo’,
-‘scheduler’ =&gt; ‘kilo’,
-‘compute’ =&gt; ‘kilo’,
-‘intercell’ =&gt; ‘kilo’,
-‘conductor’ =&gt; ‘2.0’,
-‘network’ =&gt; ‘3.0’,
-‘cells’ =&gt; ‘kilo’
-}
+<p>Lock the version of RPC messages and allow live upgrading of the services<br />
+without interruption caused by version mismatch.<br />
+The configuration options allow the specification of RPC version numbers if desired,<br />
+but release name alias are also supported.<br />
+options e.g.:<br />
+default[‘openstack’][‘compute’][‘upgrade_levels’] = {<br />
+‘baseapi’ =&gt; ‘kilo’,<br />
+‘console’ =&gt; ‘kilo’,<br />
+‘consoleauth’ =&gt; ‘kilo’,<br />
+‘cert’ =&gt; ‘kilo’,<br />
+‘scheduler’ =&gt; ‘kilo’,<br />
+‘compute’ =&gt; ‘kilo’,<br />
+‘intercell’ =&gt; ‘kilo’,<br />
+‘conductor’ =&gt; ‘2.0’,<br />
+‘network’ =&gt; ‘3.0’,<br />
+‘cells’ =&gt; ‘kilo’<br />
+}<br />
 choose the needed ones to set</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3575,8 +3575,8 @@ choose the needed ones to set</p>
 </div>
 </div>
 
-<p>Docker configurations
-Docker compute configuration is supported only in Rhel and Ubuntu
+<p>Docker configurations<br />
+Docker compute configuration is supported only in Rhel and Ubuntu<br />
 This is to be true to make a compute docker type and use nova docker driver as compute driver</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3601,7 +3601,7 @@ This is to be true to make a compute docker type and use nova docker driver as c
 </div>
 </div>
 
-<p>Serial console configurations
+<p>Serial console configurations<br />
 Enable serial console related features</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3618,7 +3618,7 @@ Enable serial console related features</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3642,7 +3642,7 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>Don’t cache html pages.
+<p>Don’t cache html pages.<br />
 NOTE: This setting requires apache 2.4 or greater is used</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3687,7 +3687,7 @@ NOTE: This setting requires apache 2.4 or greater is used</p>
 </div>
 </div>
 
-<p>List of hosts/domains the dashboard can serve. This should be changed, a ‘*’
+<p>List of hosts/domains the dashboard can serve. This should be changed, a ‘*’<br />
 allows everything</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3716,7 +3716,7 @@ allows everything</p>
 
 <p>Allow TRACE method</p>
 
-<p>Set to “extended” to also reflect the request body (only for testing and
+<p>Set to “extended” to also reflect the request body (only for testing and<br />
 diagnostic purposes).</p>
 
 <table>
@@ -3754,7 +3754,7 @@ diagnostic purposes).</p>
 </div>
 </div>
 
-<p>Dashboard specific database packages
+<p>Dashboard specific database packages<br />
 Put common ones here and platform specific ones below.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3768,9 +3768,9 @@ Put common ones here and platform specific ones below.</p>
 </div>
 </div>
 
-<p>The hash algorithm to use for authentication tokens. This must match the hash
-algorithm that the identity (Keystone) server and the auth_token middleware
-are using. Allowed values are the algorithms supported by Python’s hashlib
+<p>The hash algorithm to use for authentication tokens. This must match the hash<br />
+algorithm that the identity (Keystone) server and the auth_token middleware<br />
+are using. Allowed values are the algorithms supported by Python’s hashlib<br />
 library.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3943,25 +3943,25 @@ library.</p>
 </div>
 </div>
 
-<p>Allow for misc sections to be added to the local_settings template
-For example: {
-‘CUSTOM_CONFIG_A’ =&gt; {
-‘variable1’: ‘value1’,
-‘variable2’: ‘value2’
-}
-‘CUSTOM_CONFIG_B’ =&gt; {
-‘variable1’: ‘value1’,
-‘variable2’: ‘value2’
-}
-}
-will generate:
-CUSTOM_CONFIG_A = {
-‘varable1’: ‘value1’,
-‘varable2’: ‘value2’,
-}
-CUSTOM_CONFIG_A = {
-‘varable1’: ‘value1’,
-‘varable2’: ‘value2’,
+<p>Allow for misc sections to be added to the local_settings template<br />
+For example: {<br />
+‘CUSTOM_CONFIG_A’ =&gt; {<br />
+‘variable1’: ‘value1’,<br />
+‘variable2’: ‘value2’<br />
+}<br />
+‘CUSTOM_CONFIG_B’ =&gt; {<br />
+‘variable1’: ‘value1’,<br />
+‘variable2’: ‘value2’<br />
+}<br />
+}<br />
+will generate:<br />
+CUSTOM_CONFIG_A = {<br />
+‘varable1’: ‘value1’,<br />
+‘varable2’: ‘value2’,<br />
+}<br />
+CUSTOM_CONFIG_A = {<br />
+‘varable1’: ‘value1’,<br />
+‘varable2’: ‘value2’,<br />
 }</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -3976,7 +3976,7 @@ CUSTOM_CONFIG_A = {
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4061,7 +4061,7 @@ to contain a custom banner at the top of the written file</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4073,7 +4073,7 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>Adding these as blank
+<p>Adding these as blank<br />
 this needs to be here for the initial deep-merge to work</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4098,11 +4098,11 @@ this needs to be here for the initial deep-merge to work</p>
 </div>
 </div>
 
-<p>Specify a location to retrieve keystone-paste.ini from
-which can either be a remote url using http:// or a
-local path to a file using file:// which would generally
-be a distribution file - if this option is left nil then
-the templated version distributed with this cookbook
+<p>Specify a location to retrieve keystone-paste.ini from<br />
+which can either be a remote url using http:// or a<br />
+local path to a file using file:// which would generally<br />
+be a distribution file - if this option is left nil then<br />
+the templated version distributed with this cookbook<br />
 will be used (keystone-paste.ini.erb)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4119,10 +4119,10 @@ will be used (keystone-paste.ini.erb)</p>
 </div>
 </div>
 
-<p>This specify the pipeline of the keystone public API,
-all Identity public API requests will be processed by the order of the pipeline.
-this value will be used in the templated version of keystone-paste.ini
-The last item in this pipeline must be public_service or an equivalent
+<p>This specify the pipeline of the keystone public API,<br />
+all Identity public API requests will be processed by the order of the pipeline.<br />
+this value will be used in the templated version of keystone-paste.ini<br />
+The last item in this pipeline must be public_service or an equivalent<br />
 application. It cannot be a filter.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4189,13 +4189,13 @@ application. It cannot be a filter.</p>
 </div>
 </div>
 
-<p>This references the domain to use for all Identity API v2
-requests (which are not aware of domains). A domain with
-this ID will be created for you by keystone-manage db_sync
-in migration 008. The domain referenced by this ID cannot be
-deleted on the v3 API, to prevent accidentally breaking the
-v2 API. There is nothing special about this domain, other
-than the fact that it must exist to order to maintain
+<p>This references the domain to use for all Identity API v2<br />
+requests (which are not aware of domains). A domain with<br />
+this ID will be created for you by keystone-manage db_sync<br />
+in migration 008. The domain referenced by this ID cannot be<br />
+deleted on the v3 API, to prevent accidentally breaking the<br />
+v2 API. There is nothing special about this domain, other<br />
+than the fact that it must exist to order to maintain<br />
 support for your v2 clients. (string value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4204,11 +4204,11 @@ support for your v2 clients. (string value)</p>
 </div>
 </div>
 
-<p>A subset (or all) of domains can have their own identity
-driver, each with their own partial configuration file in a
-domain configuration directory. Only values specific to the
-domain need to be placed in the domain specific
-configuration file. This feature is disabled by default; set
+<p>A subset (or all) of domains can have their own identity<br />
+driver, each with their own partial configuration file in a<br />
+domain configuration directory. Only values specific to the<br />
+domain need to be placed in the domain specific<br />
+configuration file. This feature is disabled by default; set<br />
 to true to enable. (boolean value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4217,8 +4217,8 @@ to true to enable. (boolean value)</p>
 </div>
 </div>
 
-<p>Path for Keystone to locate the domain specific identity
-configuration files if domain_specific_drivers_enabled is
+<p>Path for Keystone to locate the domain specific identity<br />
+configuration files if domain_specific_drivers_enabled is<br />
 set to true. (string value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4248,7 +4248,7 @@ set to true. (string value)</p>
 </div>
 </div>
 
-<p>SSL Options
+<p>SSL Options<br />
 Specify whether to enable SSL for Keystone API endpoint</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4274,8 +4274,8 @@ Specify whether to enable SSL for Keystone API endpoint</p>
 </div>
 </div>
 
-<p>Security Assertion Markup Language (SAML)
-Default TTL, in seconds, for any generated SAML assertion
+<p>Security Assertion Markup Language (SAML)<br />
+Default TTL, in seconds, for any generated SAML assertion<br />
 created by Keystone. (integer value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4284,10 +4284,10 @@ created by Keystone. (integer value)</p>
 </div>
 </div>
 
-<p>Binary to be called for XML signing. Install the appropriate
-package, specify absolute path or adjust your PATH
-environment variable if the binary cannot be found. (string
-value)
+<p>Binary to be called for XML signing. Install the appropriate<br />
+package, specify absolute path or adjust your PATH<br />
+environment variable if the binary cannot be found. (string<br />
+value)<br />
 xmlsec1_binary=xmlsec1</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4296,10 +4296,10 @@ xmlsec1_binary=xmlsec1</p>
 </div>
 </div>
 
-<p>Path of the certfile for SAML signing. For non-production
+<p>Path of the certfile for SAML signing. For non-production<br />
 environments, you may be interested in using <code>keystone-
-manage pki_setup</code> to generate self-signed certificates.
-Note, the path cannot contain a comma. (string value)
+manage pki_setup</code> to generate self-signed certificates.<br />
+Note, the path cannot contain a comma. (string value)<br />
 certfile=/etc/keystone/ssl/certs/signing_cert.pem</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4308,8 +4308,8 @@ certfile=/etc/keystone/ssl/certs/signing_cert.pem</p>
 </div>
 </div>
 
-<p>Path of the keyfile for SAML signing. Note, the path cannot
-contain a comma. (string value)
+<p>Path of the keyfile for SAML signing. Note, the path cannot<br />
+contain a comma. (string value)<br />
 keyfile=/etc/keystone/ssl/private/signing_key.pem</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4318,10 +4318,10 @@ keyfile=/etc/keystone/ssl/private/signing_key.pem</p>
 </div>
 </div>
 
-<p>Entity ID value for unique Identity Provider identification.
-Usually FQDN is set with a suffix. A value is required to
-generate IDP Metadata. For example:
-https://keystone.example.com/v3/OS-FEDERATION/saml2/idp
+<p>Entity ID value for unique Identity Provider identification.<br />
+Usually FQDN is set with a suffix. A value is required to<br />
+generate IDP Metadata. For example:<br />
+https://keystone.example.com/v3/OS-FEDERATION/saml2/idp<br />
 (string value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4330,10 +4330,10 @@ https://keystone.example.com/v3/OS-FEDERATION/saml2/idp
 </div>
 </div>
 
-<p>Identity Provider Single-Sign-On service value, required in
-the Identity Provider’s metadata. A value is required to
-generate IDP Metadata. For example:
-https://keystone.example.com/v3/OS-FEDERATION/saml2/sso
+<p>Identity Provider Single-Sign-On service value, required in<br />
+the Identity Provider’s metadata. A value is required to<br />
+generate IDP Metadata. For example:<br />
+https://keystone.example.com/v3/OS-FEDERATION/saml2/sso<br />
 (string value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4350,7 +4350,7 @@ https://keystone.example.com/v3/OS-FEDERATION/saml2/sso
 </div>
 </div>
 
-<p>Organization name the installation belongs to. (string
+<p>Organization name the installation belongs to. (string<br />
 value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4415,7 +4415,7 @@ value)</p>
 </div>
 </div>
 
-<p>Contact type. Allowed values are: technical, support,
+<p>Contact type. Allowed values are: technical, support,<br />
 administrative billing, and other (string value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4424,9 +4424,9 @@ administrative billing, and other (string value)</p>
 </div>
 </div>
 
-<p>Path to the Identity Provider Metadata file. This file
-should be generated with the keystone-manage
-saml_idp_metadata command. (string value)
+<p>Path to the Identity Provider Metadata file. This file<br />
+should be generated with the keystone-manage<br />
+saml_idp_metadata command. (string value)<br />
 idp_metadata_path=/etc/keystone/saml2_idp_metadata.xml</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4435,7 +4435,7 @@ idp_metadata_path=/etc/keystone/saml2_idp_metadata.xml</p>
 </div>
 </div>
 
-<p>PKI signing. Corresponds to the [signing] section of keystone.conf
+<p>PKI signing. Corresponds to the [signing] section of keystone.conf<br />
 Note this section is only written if node[‘openstack’][‘auth’][‘strategy’] == ‘pki’</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4465,10 +4465,10 @@ Note this section is only written if node[‘openstack’][‘auth’][‘strate
 </div>
 </div>
 
-<p>The maximum number of entities that will be returned in a
-collection, with no limit set by default. This global limit
-may be then overridden for a specific driver, by specifying
-a list_limit in the appropriate section (identity, assignment,
+<p>The maximum number of entities that will be returned in a<br />
+collection, with no limit set by default. This global limit<br />
+may be then overridden for a specific driver, by specifying<br />
+a list_limit in the appropriate section (identity, assignment,<br />
 catalog or policy). (integer value)</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4604,8 +4604,8 @@ catalog or policy). (integer value)</p>
 </div>
 </div>
 
-<p>Misc option support
-Allow additional strings to be added to keystone.conf
+<p>Misc option support<br />
+Allow additional strings to be added to keystone.conf<br />
 For example:  [’# Comment’, ‘key=value’]</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4665,7 +4665,7 @@ For example:  [’# Comment’, ‘key=value’]</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4677,7 +4677,7 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>SSL Options
+<p>SSL Options<br />
 Enable SSL for glance api and registry bind endpoints.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4717,7 +4717,7 @@ Enable SSL for glance api and registry bind endpoints.</p>
 </div>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
+<p>The name of the Chef role that knows about the message queue server<br />
 that Glance uses</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4740,7 +4740,7 @@ that Glance uses</p>
 </div>
 </div>
 
-<p>RPC attributes
+<p>RPC attributes<br />
 The AMQP exchange to connect to if using RabbitMQ or Qpid</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4808,7 +4808,7 @@ The AMQP exchange to connect to if using RabbitMQ or Qpid</p>
 </div>
 </div>
 
-<p>Keystone PKI signing directories
+<p>Keystone PKI signing directories<br />
 XXX keystoneclient wants these dirs to exist even if it doesn’t use them</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4896,10 +4896,10 @@ XXX keystoneclient wants these dirs to exist even if it doesn’t use them</p>
 </div>
 </div>
 
-<p>The following two attributes are only available when filesystem_store_metadata_file is specified but
-not exist
-An opaque string. In order for this module to know that the remote FS is the same one that is mounted
-locally it must share information with the nova-compute deployment. Both glance and nova-compute must
+<p>The following two attributes are only available when filesystem_store_metadata_file is specified but<br />
+not exist<br />
+An opaque string. In order for this module to know that the remote FS is the same one that is mounted<br />
+locally it must share information with the nova-compute deployment. Both glance and nova-compute must<br />
 be configured with an unqiue matching string. For example: ‘00000000-0000-0000-0000-000000000000’</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -4958,7 +4958,7 @@ be configured with an unqiue matching string. For example: ‘00000000-0000-0000
 </div>
 </div>
 
-<p>API to use for accessing data. Default value points to sqlalchemy
+<p>API to use for accessing data. Default value points to sqlalchemy<br />
 package.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5073,7 +5073,7 @@ package.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
+<p>Set to some text value if you want templated config files<br />
 to contain a custom banner at the top of the written file</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5136,8 +5136,8 @@ to contain a custom banner at the top of the written file</p>
 </div>
 </div>
 
-<p>Number of separate worker processes to spawn.  The default, 0, runs the
-worker thread in the current process.  Greater than 0 launches that number of
+<p>Number of separate worker processes to spawn.  The default, 0, runs the<br />
+worker thread in the current process.  Greater than 0 launches that number of<br />
 child processes as workers.  The parent process manages them.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5146,10 +5146,10 @@ child processes as workers.  The parent process manages them.</p>
 </div>
 </div>
 
-<p>Number of separate RPC worker processes to spawn.  The default, 0, runs the
-worker thread in the current process.  Greater than 0 launches that number of
-child processes as RPC workers.  The parent process manages them.
-This feature is experimental until issues are addressed and testing has been
+<p>Number of separate RPC worker processes to spawn.  The default, 0, runs the<br />
+worker thread in the current process.  Greater than 0 launches that number of<br />
+child processes as RPC workers.  The parent process manages them.<br />
+This feature is experimental until issues are addressed and testing has been<br />
 enabled for various plugins for compatibility.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5255,11 +5255,11 @@ enabled for various plugins for compatibility.</p>
 </div>
 </div>
 
-<p>The driver for Quota management in Neutron. Possible values:
-neutron.quota.ConfDriver
+<p>The driver for Quota management in Neutron. Possible values:<br />
+neutron.quota.ConfDriver<br />
 neutron.db.quota_db.DbQuotaDriver (default)</p>
 
-<p>Note: set this to the DbDriver if you want to be able to update
+<p>Note: set this to the DbDriver if you want to be able to update<br />
 quotas for networks/subnets/security groups</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5268,9 +5268,9 @@ quotas for networks/subnets/security groups</p>
 </div>
 </div>
 
-<p>default quotas will be used when no more specific tenant entry exists
-when using the DBDriver - override them below to adjust the default
-quotas
+<p>default quotas will be used when no more specific tenant entry exists<br />
+when using the DBDriver - override them below to adjust the default<br />
+quotas<br />
 resource name(s) that are supported in quota features</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5279,9 +5279,9 @@ resource name(s) that are supported in quota features</p>
 </div>
 </div>
 
-<p>default number of resource allowed per tenant, minus for unlimited
-however if more specific setting exists for a quota resource (all known
-quota resources are specified below) those numbers will be used instead
+<p>default number of resource allowed per tenant, minus for unlimited<br />
+however if more specific setting exists for a quota resource (all known<br />
+quota resources are specified below) those numbers will be used instead<br />
 so unless new resources are introduces, this has no effect</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5346,8 +5346,8 @@ so unless new resources are introduces, this has no effect</p>
 </div>
 </div>
 
-<p>(ListOpt) Specify service providers (drivers) for advanced services like loadbalancer, VPN, Firewall.
-Must be in form:
+<p>(ListOpt) Specify service providers (drivers) for advanced services like loadbalancer, VPN, Firewall.<br />
+Must be in form:<br />
 service_provider=<service_type>:<name>:<driver>[:default]
 List of allowed service type include LOADBALANCER, FIREWALL, VPN
 Combination of <service type=""> and <name> must be unique; <driver> must also be unique
@@ -5371,8 +5371,8 @@ service_provider=FIREWALL:name2:firewall_driver_path
 </div>
 </div>
 
-<p>additional service plugins to use for neutron
-e.g. neutron.plugins.services.agent_loadbalancer.plugin.LoadBalancerPlugin
+<p>additional service plugins to use for neutron<br />
+e.g. neutron.plugins.services.agent_loadbalancer.plugin.LoadBalancerPlugin<br />
 for the loadbalancer reference implementation</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5381,8 +5381,8 @@ for the loadbalancer reference implementation</p>
 </div>
 </div>
 
-<p>The bridging interface driver.
-This is used by the L3, DHCP and LBaaS agents.
+<p>The bridging interface driver.<br />
+This is used by the L3, DHCP and LBaaS agents.<br />
 Options are:</p>
 
 <ul>
@@ -5396,7 +5396,7 @@ Options are:</p>
 </div>
 </div>
 
-<p>Maps the above core plugin driver to a simple name
+<p>Maps the above core plugin driver to a simple name<br />
 This is used in the neutron_plugin_package package name and common recipe case statements</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5421,7 +5421,7 @@ This is used in the neutron_plugin_package package name and common recipe case s
 </div>
 </div>
 
-<p>The agent can use other DHCP drivers.  Dnsmasq is the simplest and requires
+<p>The agent can use other DHCP drivers.  Dnsmasq is the simplest and requires<br />
 no additional setup of the DHCP server.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5430,9 +5430,9 @@ no additional setup of the DHCP server.</p>
 </div>
 </div>
 
-<p>Use namespaces and optionally allow overlapping IPs. You
-must enable namespaces to use overlapping ips.  Also,
-you must have kernel build with CONFIG_NET_NS=y and
+<p>Use namespaces and optionally allow overlapping IPs. You<br />
+must enable namespaces to use overlapping ips.  Also,<br />
+you must have kernel build with CONFIG_NET_NS=y and<br />
 iproute2 package that supports namespaces.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5442,7 +5442,7 @@ iproute2 package that supports namespaces.</p>
 </div>
 </div>
 
-<p>VPN agent configuration, default is false
+<p>VPN agent configuration, default is false<br />
 Must enable namespaces to set enable_vpn true</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5492,7 +5492,7 @@ Must enable namespaces to set enable_vpn true</p>
 </div>
 </div>
 
-<p>======== Neutron Nova interactions ==========
+<p>======== Neutron Nova interactions ==========<br />
 Name of the plugin to load</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5525,7 +5525,7 @@ Name of the plugin to load</p>
 </div>
 </div>
 
-<p>Send notifications to nova when port data (fixed_ips/floatingips) change
+<p>Send notifications to nova when port data (fixed_ips/floatingips) change<br />
 so nova can update it’s cache.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5558,7 +5558,7 @@ so nova can update it’s cache.</p>
 </div>
 </div>
 
-<p>Version for connection to nova
+<p>Version for connection to nova<br />
 TODO: (MRV) Need to allow for this in Common.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5567,7 +5567,7 @@ TODO: (MRV) Need to allow for this in Common.</p>
 </div>
 </div>
 
-<p>The uuid of the nova tenant
+<p>The uuid of the nova tenant<br />
 Nil will cause the name below to be used.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5576,10 +5576,10 @@ Nil will cause the name below to be used.</p>
 </div>
 </div>
 
-<p>The name of the nova tenant
-defined here based upon Compute cookbook attribute:
-default[‘openstack’][‘compute’][‘service_tenant_name’] = ‘service’
-Since this cookbook does not depend upon Compute, can’t directly
+<p>The name of the nova tenant<br />
+defined here based upon Compute cookbook attribute:<br />
+default[‘openstack’][‘compute’][‘service_tenant_name’] = ‘service’<br />
+Since this cookbook does not depend upon Compute, can’t directly<br />
 reference that here. Deprecated for Liberty.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5588,7 +5588,7 @@ reference that here. Deprecated for Liberty.</p>
 </div>
 </div>
 
-<p>Project name for project scoping. Use this instead of deprecated ‘admin_tenant_name’,
+<p>Project name for project scoping. Use this instead of deprecated ‘admin_tenant_name’,<br />
 which is still used until Liberty.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5613,7 +5613,7 @@ which is still used until Liberty.</p>
 </div>
 </div>
 
-<p>============================= DHCP Agent Configuration ===================
+<p>============================= DHCP Agent Configuration ===================<br />
 The scheduler class to use for scheduling to DHCP agents</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5622,9 +5622,9 @@ The scheduler class to use for scheduling to DHCP agents</p>
 </div>
 </div>
 
-<p>Override the default mtu setting given to virtual machines
-to 1454 to allow for tunnel and other encapsulation overhead.  You
-can adjust this from 1454 to 1500 if you do not want any lowering
+<p>Override the default mtu setting given to virtual machines<br />
+to 1454 to allow for tunnel and other encapsulation overhead.  You<br />
+can adjust this from 1454 to 1500 if you do not want any lowering<br />
 of the default guest MTU.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5641,7 +5641,7 @@ of the default guest MTU.</p>
 </div>
 </div>
 
-<p>OVS based plugins(Ryu, NEC, NVP, BigSwitch/Floodlight) that use OVS
+<p>OVS based plugins(Ryu, NEC, NVP, BigSwitch/Floodlight) that use OVS<br />
 as OpenFlow switch and check port status</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5650,10 +5650,10 @@ as OpenFlow switch and check port status</p>
 </div>
 </div>
 
-<p>The DHCP server can assist with providing metadata support on isolated
-networks. Setting this value to True will cause the DHCP server to append
-specific host routes to the DHCP request.  The metadata service will only
-be activated when the subnet gateway_ip is None.  The guest instance must
+<p>The DHCP server can assist with providing metadata support on isolated<br />
+networks. Setting this value to True will cause the DHCP server to append<br />
+specific host routes to the DHCP request.  The metadata service will only<br />
+be activated when the subnet gateway_ip is None.  The guest instance must<br />
 be configured to request host routes via DHCP (Option 121).</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5662,11 +5662,11 @@ be configured to request host routes via DHCP (Option 121).</p>
 </div>
 </div>
 
-<p>Allows for serving metadata requests coming from a dedicated metadata
-access network whose cidr is 169.254.169.254/16 (or larger prefix), and
-is connected to a Neutron router from which the VMs send metadata
-request. In this case DHCP Option 121 will not be injected in VMs, as
-they will be able to reach 169.254.169.254 through a router.
+<p>Allows for serving metadata requests coming from a dedicated metadata<br />
+access network whose cidr is 169.254.169.254/16 (or larger prefix), and<br />
+is connected to a Neutron router from which the VMs send metadata<br />
+request. In this case DHCP Option 121 will not be injected in VMs, as<br />
+they will be able to reach 169.254.169.254 through a router.<br />
 This option requires enable_isolated_metadata = True</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5675,7 +5675,7 @@ This option requires enable_isolated_metadata = True</p>
 </div>
 </div>
 
-<p>the version of dnsmasq for centos 6.5 is two revs behind where the dhcp-agent needs
+<p>the version of dnsmasq for centos 6.5 is two revs behind where the dhcp-agent needs<br />
 to run properly. This is a version that allows and starts the dhcp-agent correctly.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5685,8 +5685,8 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </div>
 </div>
 
-<p>The package architecture that will be built which should match the
-archecture of the server this cookbook will run on which will be
+<p>The package architecture that will be built which should match the<br />
+archecture of the server this cookbook will run on which will be<br />
 amd64 or i386</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5711,15 +5711,15 @@ amd64 or i386</p>
 </div>
 </div>
 
-<p>Upstream resolver to use
-This will be used by dnsmasq to resolve recursively
-but will not be used if the tenant specifies a dns
+<p>Upstream resolver to use<br />
+This will be used by dnsmasq to resolve recursively<br />
+but will not be used if the tenant specifies a dns<br />
 server in their subnet</p>
 
-<p>Defaults are spread out across multiple, presumably
+<p>Defaults are spread out across multiple, presumably<br />
 reliable, upstream providers</p>
 
-<p>8.8.8.8 is Google
+<p>8.8.8.8 is Google<br />
 209.244.0.3 is Level3</p>
 
 <p>May be a comma separated list of servers</p>
@@ -5754,11 +5754,11 @@ reliable, upstream providers</p>
 </div>
 </div>
 
-<p>============================= L3 Agent Configuration =====================
-For DVR(Disributed Virtual Router) is still not stable and rubost,
-so it make sense to set DVR disabled by default. User can set this
-attribute ture(bool) or ‘ture’(bool) to enable DVR if they what
-they are doing. Set this ‘auto’, cookbook will do a simple check
+<p>============================= L3 Agent Configuration =====================<br />
+For DVR(Disributed Virtual Router) is still not stable and rubost,<br />
+so it make sense to set DVR disabled by default. User can set this<br />
+attribute ture(bool) or ‘ture’(bool) to enable DVR if they what<br />
+they are doing. Set this ‘auto’, cookbook will do a simple check<br />
 to decide whether or not to enable DVR, default is enabled with OVS.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5775,7 +5775,7 @@ to decide whether or not to enable DVR, default is enabled with OVS.</p>
 </div>
 </div>
 
-<p>If use_namespaces is set as False then the agent can only configure one router.
+<p>If use_namespaces is set as False then the agent can only configure one router.<br />
 This is done by setting the specific router_id.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5784,9 +5784,9 @@ This is done by setting the specific router_id.</p>
 </div>
 </div>
 
-<p>Each L3 agent can be associated with at most one external network.  This
-value should be set to the UUID of that external network.  If empty,
-the agent will enforce that only a single external networks exists and
+<p>Each L3 agent can be associated with at most one external network.  This<br />
+value should be set to the UUID of that external network.  If empty,<br />
+the agent will enforce that only a single external networks exists and<br />
 use that external network id</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5797,9 +5797,9 @@ use that external network id</p>
 </div>
 </div>
 
-<p>Indicates that this L3 agent should also handle routers that do not have
-an external network gateway configured.  This option should be True only
-for a single agent in a Neutron deployment, and may be False for all agents
+<p>Indicates that this L3 agent should also handle routers that do not have<br />
+an external network gateway configured.  This option should be True only<br />
+for a single agent in a Neutron deployment, and may be False for all agents<br />
 if all routers must have an external network gateway</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5808,7 +5808,7 @@ if all routers must have an external network gateway</p>
 </div>
 </div>
 
-<p>Name of bridge used for external network traffic. This should be set to
+<p>Name of bridge used for external network traffic. This should be set to<br />
 empty value for the linux bridge</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5833,7 +5833,7 @@ empty value for the linux bridge</p>
 </div>
 </div>
 
-<p>Send this many gratuitous ARPs for HA setup. Set it below or equal to 0
+<p>Send this many gratuitous ARPs for HA setup. Set it below or equal to 0<br />
 to disable this feature.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5850,7 +5850,7 @@ to disable this feature.</p>
 </div>
 </div>
 
-<p>seconds to start to sync routers’ data after
+<p>seconds to start to sync routers’ data after<br />
 starting agent</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5891,10 +5891,10 @@ starting agent</p>
 </div>
 </div>
 
-<p>============================= VPN Agent Configuration ====================
-VPN device drivers which vpn agent will use
-vpn_device_driver_packages in platform-specific settings is used to get driver dependencies installed, default is openswan
-vpn_device_driver_services in platform-specific settings is used to enable services required by vpn drivers, default is ipsec
+<p>============================= VPN Agent Configuration ====================<br />
+VPN device drivers which vpn agent will use<br />
+vpn_device_driver_packages in platform-specific settings is used to get driver dependencies installed, default is openswan<br />
+vpn_device_driver_services in platform-specific settings is used to enable services required by vpn drivers, default is ipsec<br />
 default_config_area in platform-specific settings is used to set the area where default StrongSwan configuration files are located</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5919,7 +5919,7 @@ default_config_area in platform-specific settings is used to set the area where 
 </div>
 </div>
 
-<p>============================= Metadata Agent Configuration ===============
+<p>============================= Metadata Agent Configuration ===============<br />
 The name of the secret databag containing the metadata secret</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5928,8 +5928,8 @@ The name of the secret databag containing the metadata secret</p>
 </div>
 </div>
 
-<p>This attribute is used to designate the number of the separate
-neutron-metadata-agent processes to spawn. If it is not specified explicitly,
+<p>This attribute is used to designate the number of the separate<br />
+neutron-metadata-agent processes to spawn. If it is not specified explicitly,<br />
 the default value shall be half of the CPU cores.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5938,9 +5938,9 @@ the default value shall be half of the CPU cores.</p>
 </div>
 </div>
 
-<p>============================= LBaaS Agent Configuration ==================
-node[‘openstack’][‘network’][‘neutron_loadbalancer’] is deprecated.  Use
-node[‘openstack’][‘network’][‘service_plugins’] for the loadbalancer plugin.
+<p>============================= LBaaS Agent Configuration ==================<br />
+node[‘openstack’][‘network’][‘neutron_loadbalancer’] is deprecated.  Use<br />
+node[‘openstack’][‘network’][‘service_plugins’] for the loadbalancer plugin.<br />
 See that attribute for details.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -5973,11 +5973,11 @@ See that attribute for details.</p>
 </div>
 </div>
 
-<p>Set lbaas plugin
-Supported types are: ‘ovs’ (ovs based plugins(OVS, Ryu, NEC, NVP, BigSwitch/Floodlight))
-and ‘linuxbridge’.
-The lbaas plugin type can also be used for other drivers using
-node[‘openstack’][‘network’][‘lbaas’][‘custom_interface_driver’] attribute.
+<p>Set lbaas plugin<br />
+Supported types are: ‘ovs’ (ovs based plugins(OVS, Ryu, NEC, NVP, BigSwitch/Floodlight))<br />
+and ‘linuxbridge’.<br />
+The lbaas plugin type can also be used for other drivers using<br />
+node[‘openstack’][‘network’][‘lbaas’][‘custom_interface_driver’] attribute.<br />
 Set this attribute to ‘other’ in order to load a custom driver</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6002,7 +6002,7 @@ Set this attribute to ‘other’ in order to load a custom driver</p>
 </div>
 </div>
 
-<p>============================= FWaaS Configuration ==================
+<p>============================= FWaaS Configuration ==================<br />
 Set to True to enable firewall service</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6027,12 +6027,12 @@ Set to True to enable firewall service</p>
 </div>
 </div>
 
-<p>============================= OVS Plugin Configuration ===================
-Type of network to allocate for tenant networks. The default value ‘local’ is
-useful only for single-box testing and provides no connectivity between hosts.
-You MUST either change this to ‘vlan’ and configure network_vlan_ranges below
-or change this to ‘gre’ and configure tunnel_id_ranges below in order for tenant
-networks to provide connectivity between hosts. Set to ‘none’ to disable creation
+<p>============================= OVS Plugin Configuration ===================<br />
+Type of network to allocate for tenant networks. The default value ‘local’ is<br />
+useful only for single-box testing and provides no connectivity between hosts.<br />
+You MUST either change this to ‘vlan’ and configure network_vlan_ranges below<br />
+or change this to ‘gre’ and configure tunnel_id_ranges below in order for tenant<br />
+networks to provide connectivity between hosts. Set to ‘none’ to disable creation<br />
 of tenant networks.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6056,12 +6056,12 @@ networks may be created</vlan_max></vlan_min></physical_network></p>
 </div>
 </div>
 
-<p>Set to True in the server and the agents to enable support
-for GRE or VXLAN networks. Requires kernel support for OVS patch ports and
+<p>Set to True in the server and the agents to enable support<br />
+for GRE or VXLAN networks. Requires kernel support for OVS patch ports and<br />
 GRE or VXLAN tunneling.</p>
 
-<p>WARNING: This option will be deprecated in the Icehouse release, at which
-point setting tunnel_type below will be required to enable
+<p>WARNING: This option will be deprecated in the Icehouse release, at which<br />
+point setting tunnel_type below will be required to enable<br />
 tunneling.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6070,9 +6070,9 @@ tunneling.</p>
 </div>
 </div>
 
-<p>The type of tunnel network, if any, supported by the plugin. If
-this is set, it will cause tunneling to be enabled. If this is not set and
-the option enable_tunneling is set, this will default to ‘gre’.
+<p>The type of tunnel network, if any, supported by the plugin. If<br />
+this is set, it will cause tunneling to be enabled. If this is not set and<br />
+the option enable_tunneling is set, this will default to ‘gre’.<br />
 ‘gre’ or ‘vxlan’</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6093,10 +6093,10 @@ network allocation if tenant_network_type is 'gre'.</tun_max></tun_min></p>
 </div>
 </div>
 
-<p>Do not change this parameter unless you have a good reason to.
-This is the name of the OVS integration bridge. There is one per hypervisor.
-The integration bridge acts as a virtual ‘patch bay’. All VM VIFs are
-attached to this bridge and then ‘patched’ according to their network
+<p>Do not change this parameter unless you have a good reason to.<br />
+This is the name of the OVS integration bridge. There is one per hypervisor.<br />
+The integration bridge acts as a virtual ‘patch bay’. All VM VIFs are<br />
+attached to this bridge and then ‘patched’ according to their network<br />
 connectivity</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6105,7 +6105,7 @@ connectivity</p>
 </div>
 </div>
 
-<p>Only used for the agent if tunnel_id_ranges (above) is not empty for
+<p>Only used for the agent if tunnel_id_ranges (above) is not empty for<br />
 the server.  In most cases, the default value should be fine</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6146,9 +6146,9 @@ server should have mappings to appropriate bridges on each agent.</bridge></phys
 </div>
 </div>
 
-<p>Create OVS data network bridge for the physical network and configure it
-with the specified port.  If nil or empty string is specified, the data
-network bridge will not be created.
+<p>Create OVS data network bridge for the physical network and configure it<br />
+with the specified port.  If nil or empty string is specified, the data<br />
+network bridge will not be created.<br />
 Format:  <data network="" bridge="" name="">:<external interface=""></external></data></p>
 
 <p>Example: bridge_mapping_interface = br-eth1:eth1</p>
@@ -6167,12 +6167,12 @@ Format:  <data network="" bridge="" name="">:<external interface=""></external><
 </div>
 </div>
 
-<p>The types of tenant network tunnels supported by the openvswitch agent.
-Setting this will enable tunneling support in the agent. This can be set to
-either ‘gre’ or ‘vxlan’. If this is unset, it will default to [] and
-disable tunneling in the agent. When running the agent with the OVS
-plugin, this value must be the same as “tunnel_type” in the “[ovs]” section.
-When running the agent with ML2, you can specify as many values here as
+<p>The types of tenant network tunnels supported by the openvswitch agent.<br />
+Setting this will enable tunneling support in the agent. This can be set to<br />
+either ‘gre’ or ‘vxlan’. If this is unset, it will default to [] and<br />
+disable tunneling in the agent. When running the agent with the OVS<br />
+plugin, this value must be the same as “tunnel_type” in the “[ovs]” section.<br />
+When running the agent with ML2, you can specify as many values here as<br />
 your compute hosts support.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6181,9 +6181,9 @@ your compute hosts support.</p>
 </div>
 </div>
 
-<p>Agent’s MTU size of veth interfaces
-With openvswitch vlan, default of veth_mtu = 1500 is 4 bytes short and you end up
-with either no traffic or abysmal network performance.  Need the 4 extra bytes for
+<p>Agent’s MTU size of veth interfaces<br />
+With openvswitch vlan, default of veth_mtu = 1500 is 4 bytes short and you end up<br />
+with either no traffic or abysmal network performance.  Need the 4 extra bytes for<br />
 the vlan id.  In that case set the value to 1504.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6200,7 +6200,7 @@ the vlan id.  In that case set the value to 1504.</p>
 </div>
 </div>
 
-<p>Controls if neutron security group is enabled or not.
+<p>Controls if neutron security group is enabled or not.<br />
 It should be false when you use nova security group.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6209,10 +6209,10 @@ It should be false when you use nova security group.</p>
 </div>
 </div>
 
-<p>The newest version of OVS which comes with 12.04 Precise is 1.4.0
-Which is legacy. Should we compile a newer version from source?
-If so, set [‘openstack’][‘network’][‘openvswitch’][‘use_source_version’]
-to true, and configure the packages, versions, checksums, etc. you wish
+<p>The newest version of OVS which comes with 12.04 Precise is 1.4.0<br />
+Which is legacy. Should we compile a newer version from source?<br />
+If so, set [‘openstack’][‘network’][‘openvswitch’][‘use_source_version’]<br />
+to true, and configure the packages, versions, checksums, etc. you wish<br />
 to use</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
@@ -6269,12 +6269,12 @@ to use</p>
 </div>
 </div>
 
-<p>============================= LinuxBridge Plugin Configuration ===========
-Type of network to allocate for tenant networks. The
-default value ‘local’ is useful only for single-box testing and
-provides no connectivity between hosts. You MUST change this to
-‘vlan’ and configure network_vlan_ranges below in order for tenant
-networks to provide connectivity between hosts. Set to ‘none’ to
+<p>============================= LinuxBridge Plugin Configuration ===========<br />
+Type of network to allocate for tenant networks. The<br />
+default value ‘local’ is useful only for single-box testing and<br />
+provides no connectivity between hosts. You MUST change this to<br />
+‘vlan’ and configure network_vlan_ranges below in order for tenant<br />
+networks to provide connectivity between hosts. Set to ‘none’ to<br />
 disable creation of tenant networks.</p>
 
 <div class="highlighter-coderay"><div class="CodeRay">
