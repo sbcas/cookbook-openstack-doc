@@ -102,15 +102,18 @@ def get_content(dir)
   content = ''
   Dir.glob("#{dir}/**/cookbook-*/").each do |cookbook|
     puts "## processing: #{cookbook}"
+    cookbook_name = cookbook[/cookbook-.*/].gsub!('/', '')
     readme = cookbook + 'README.md'
-    page_name = readme[/cookbook-.*/].chomp('.md').gsub!('/', '-')
-    content << "\n\n***\n\n## #{page_name}\n\n[back to top](#contents)\n\n"
-    header << "- [#{page_name}](##{page_name.downcase})\n"
+    readme_name = readme[/cookbook-.*/].chomp('.md').gsub!('/', '-')
+    header << "- [#{cookbook_name}](##{cookbook_name})\n"
+    header << "  - [#{readme_name}](##{readme_name.downcase})\n"
+    content << "\n\n***\n\n## #{cookbook_name}\n\n[back to top](#contents)\n\n"
+    content << "\n\n***\n\n### #{readme_name}\n\n[back to top](#contents)\n\n"
     content << convert_readme(readme)
     Dir.glob("#{cookbook}attributes/*.rb").each do |filename|
       page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '-')
-      header << "- [#{page_name}](##{page_name})\n"
-      content << "\n\n***\n\n## #{page_name}\n\n[back to top](#contents)\n\n"
+      header << "  - [#{page_name}](##{page_name})\n"
+      content << "\n\n***\n\n### #{page_name}\n\n[back to top](#contents)\n\n"
       content << convert_attr_to_md(filename)
     end
   end
