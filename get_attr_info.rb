@@ -3,6 +3,7 @@
 # Author: Mark Vanderwiel (<vanderwl@us.ibm.com>)
 # Copyright (c) 2015, IBM, Corp.
 
+require 'pathname'
 require 'tmpdir'
 
 def version
@@ -12,9 +13,9 @@ end
 # rubocop:disable LineLength
 
 def cookbooks
-  %w(common bare-metal block-storage client compute dashboard
-     database data-processing identity image network object-storage
-     ops-database ops-messaging orchestration telemetry)
+  %w(common bare-metal) # block-storage client compute dashboard
+  #   database data-processing identity image network object-storage
+  #   ops-database ops-messaging orchestration telemetry)
 end
 
 def get_cookbooks(dir)
@@ -36,6 +37,10 @@ end
 
 def blank?(line)
   /\S/ !~ line
+end
+
+def skip_to_end?(line)
+  /^Testing|^Contributing/ =~ line
 end
 
 def convert_attr_to_md(filename)
@@ -78,17 +83,39 @@ def convert_attr_to_md(filename)
   output
 end
 
+def convert_readme(filename)
+  output = ''
+
+  File.readlines(filename).each do |line|
+    case
+    when skip_to_end?(line)
+      break
+    else
+      output << line
+    end
+  end
+  output  
+end
+
 def get_content(dir)
   header = "# OpenStack Cookbook Attributes\n\n## Contents\n\n"
   content = ''
-  Dir.glob("#{dir}/**/attributes/*.rb").each do |filename|
-    puts "## processing: #{filename}"
-    page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '_')
-    header << "- [#{page_name}](##{filename[/cookbook-.*/].chomp('.rb').gsub!('/', '')})\n"
+  Dir.glob("#{dir}/**/cookbook-*/").each do |cookbook|
+    puts "## processing: #{cookbook}"
+    readme = cookbook + 'README.md'
+    page_name = readme[/cookbook-.*/].chomp('.md').gsub!('/', '_')
     content << "\n\n***\n\n## #{page_name}\n\n[back to top](#contents)\n\n"
-    content << convert_attr_to_md(filename)
+    header << "- [#{page_name}](##{page_name.downcase})\n"
+    content << convert_readme(readme)
+    Dir.glob("#{cookbook}attributes/*.rb").each do |filename|
+      page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '_')
+      header << "- [#{page_name}](##{page_name})\n"
+      content << "\n\n***\n\n## #{page_name}\n\n[back to top](#contents)\n\n"
+      content << convert_attr_to_md(filename)
+    end
   end
   header << content
+  puts header
 end
 
 def get_attr_info
@@ -99,3 +126,6 @@ def get_attr_info
   end
 end
 
+if __FILE__ == $PROGRAM_NAME
+  get_attr_info
+end
