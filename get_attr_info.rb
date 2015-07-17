@@ -103,12 +103,12 @@ def get_content(dir)
   Dir.glob("#{dir}/**/cookbook-*/").each do |cookbook|
     puts "## processing: #{cookbook}"
     readme = cookbook + 'README.md'
-    page_name = readme[/cookbook-.*/].chomp('.md').gsub!('/', '_')
+    page_name = readme[/cookbook-.*/].chomp('.md').gsub!('/', '-')
     content << "\n\n***\n\n## #{page_name}\n\n[back to top](#contents)\n\n"
     header << "- [#{page_name}](##{page_name.downcase})\n"
     content << convert_readme(readme)
     Dir.glob("#{cookbook}attributes/*.rb").each do |filename|
-      page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '_')
+      page_name = filename[/cookbook-.*/].chomp('.rb').gsub!('/', '-')
       header << "- [#{page_name}](##{page_name})\n"
       content << "\n\n***\n\n## #{page_name}\n\n[back to top](#contents)\n\n"
       content << convert_attr_to_md(filename)
