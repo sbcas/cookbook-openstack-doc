@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Cookbook OpenStack Documentation</title>
-  <meta name="description" content="Documentation for OpenStack cookbooks generated from the source ReadMe and attribute files.
+  <meta name="description" content="Documentation for OpenStack cookbooks generated from the source ReadMe and attribute files. https://github.com/kramvan1/cookbook-openstack-doc
 ">
 
   <link rel="stylesheet" href="http://kramvan1.github.io/cookbook-openstack-doc/css/main.css">
@@ -5133,6 +5133,17 @@ end
   <li><code class="highlighter-rouge">openstack['identity']['ldap']['tls_cacertfile']</code> - Path to CA cert file (default: nil)</li>
   <li><code class="highlighter-rouge">openstack['identity']['ldap']['tls_cacertdir']</code> - Path to CA cert directory (default: nil)</li>
   <li><code class="highlighter-rouge">openstack['identity']['ldap']['tls_req_cert']</code> - CA cert check (‘demand’, ‘allow’ or ‘never’, default: ‘demand’)</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['use_pool']</code> - Enable LDAP connection pool</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['pool_size']</code> - Connection pool size</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['pool_retry_max']</code> - Maximum count of reconnect trials</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['pool_retry_delay']</code> - Time span in seconds to wait between two reconnect trials (floating point value)</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['pool_connection_timeout']</code> - Connector timeout in seconds. Value -1 indicates indefinite</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['pool_connection_lifetime']</code> - Connection lifetime in seconds.(integer value)</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['use_auth_pool']</code> - Enable LDAP connection pooling for end user authentication</li>
+  <li><code class="highlighter-rouge">openstack['identity']['ldap']['auth_pool_size']</code> - End user auth connection pool size. (integer value)</li>
+  <li>
+    <p><code class="highlighter-rouge">openstack['identity']['ldap']['auth_pool_connection_lifetime']</code> -  End user auth connection lifetime in seconds. (integervalue)</p>
+  </li>
   <li><code class="highlighter-rouge">openstack['identity']['misc_keystone']</code> - <strong>Array of strings to be added to keystone.conf</strong></li>
   <li><code class="highlighter-rouge">openstack['identity']['list_limit']</code> - Maximum number of entities that will be returned in a collection</li>
   <li><code class="highlighter-rouge">openstack['identity']['assignment']['list_limit']</code> - Maximum number of entities that will be returned in a assignment collection</li>
@@ -5651,6 +5662,20 @@ catalog or policy). (integer value)</p>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'group_allow_create'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'group_allow_update'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'group_allow_delete'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre>
+</div>
+
+<p>LDAP connection pool settings</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'use_pool'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'pool_size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'pool_retry_max'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'pool_retry_delay'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'pool_connection_timeout'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'pool_connection_lifetime'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'use_auth_pool'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'auth_pool_size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'ldap'</span><span class="p">][</span><span class="s1">'auth_pool_connection_lifetime'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
 </code></pre>
 </div>
 
@@ -6373,6 +6398,14 @@ L3 networking for various hardware vendors and standards.</p>
 
 <ul>
   <li>Registers the OpenStack Network API endpoint and service user with Keystone</li>
+</ul>
+
+<h2 id="hyperv">hyperv</h2>
+
+<ul>
+  <li>Install the drivers for hyperv needed by OpenStack network.</li>
+  <li>The networking-hyperv has not been included by linux distributions, it needs been created by users.</li>
+  <li>The source code of networking-hyperv maintains in https://github.com/stackforge/networking-hyperv.</li>
 </ul>
 
 <h1 id="attributes-9">Attributes</h1>
@@ -8217,6 +8250,8 @@ For example:  [’# Comment’, ‘key=value’]</p>
     <span class="s1">'neutron_openvswitch_agent_service'</span> <span class="o">=&gt;</span> <span class="s1">'neutron-openvswitch-agent'</span><span class="p">,</span>
     <span class="s1">'neutron_linuxbridge_agent_service'</span> <span class="o">=&gt;</span> <span class="s1">'neutron-linuxbridge-agent'</span><span class="p">,</span>
     <span class="s1">'neutron_server_service'</span> <span class="o">=&gt;</span> <span class="s1">'neutron-server'</span><span class="p">,</span>
+    <span class="c1"># TODO: networking-hperv has not been included in Fedora or RHEL distribution, need be created by users.</span>
+    <span class="s1">'neutron_hyperv_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'networking-hyperv'</span><span class="p">],</span>
     <span class="s1">'package_overrides'</span> <span class="o">=&gt;</span> <span class="s1">''</span>
   <span class="p">}</span>
 <span class="k">when</span> <span class="s1">'suse'</span>
@@ -8250,6 +8285,8 @@ For example:  [’# Comment’, ‘key=value’]</p>
     <span class="s1">'neutron_openvswitch_agent_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-neutron-openvswitch-agent'</span><span class="p">,</span>
     <span class="s1">'neutron_linuxbridge_agent_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-neutron-linuxbridge-agent'</span><span class="p">,</span>
     <span class="s1">'neutron_server_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-neutron'</span><span class="p">,</span>
+    <span class="c1"># TODO: networking-hperv has not been included in SUSE distribution, need be created by users.</span>
+    <span class="s1">'neutron_hyperv_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'networking-hyperv'</span><span class="p">],</span>
     <span class="s1">'package_overrides'</span> <span class="o">=&gt;</span> <span class="s1">''</span>
   <span class="p">}</span>
 <span class="k">when</span> <span class="s1">'debian'</span>
@@ -8282,6 +8319,8 @@ For example:  [’# Comment’, ‘key=value’]</p>
     <span class="s1">'neutron_openvswitch_agent_service'</span> <span class="o">=&gt;</span> <span class="s1">'neutron-plugin-openvswitch-agent'</span><span class="p">,</span>
     <span class="s1">'neutron_linuxbridge_agent_service'</span> <span class="o">=&gt;</span> <span class="s1">'neutron-plugin-linuxbridge-agent'</span><span class="p">,</span>
     <span class="s1">'neutron_server_service'</span> <span class="o">=&gt;</span> <span class="s1">'neutron-server'</span><span class="p">,</span>
+    <span class="c1"># TODO: networking-hperv has not been included in DEBIAN distribution, need be created by users.</span>
+    <span class="s1">'neutron_hyperv_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'networking-hyperv'</span><span class="p">],</span>
     <span class="s1">'package_overrides'</span> <span class="o">=&gt;</span> <span class="s2">"-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"</span>
   <span class="p">}</span>
 <span class="k">end</span>
@@ -10396,7 +10435,7 @@ that Nova uses</p>
       </div>
 
       <div class="footer-col  footer-col-3">
-        <p class="text">Documentation for OpenStack cookbooks generated from the source ReadMe and attribute files.
+        <p class="text">Documentation for OpenStack cookbooks generated from the source ReadMe and attribute files. https://github.com/kramvan1/cookbook-openstack-doc
 </p>
       </div>
     </div>
