@@ -3,7 +3,7 @@ title: Cookbook OpenStack Documentation
 email: vanderwl@us.ibm.com
 description: >
   Documentation for OpenStack cookbooks generated from the source ReadMe and
-  attribute files. https://github.com/kramvan1/cookbook-openstack-doc
+  attribute files. 
 baseurl: "http://kramvan1.github.io/cookbook-openstack-doc"
 url: "http://www.openstack.org" # the base hostname & protocol for your site
 twitter_username: MarkRVanderwiel
