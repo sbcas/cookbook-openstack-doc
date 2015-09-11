@@ -419,7 +419,7 @@ constructed from the various parts of the hash corresponding to the keys above.<
 used in an OpenStack deployment.</p>
 
 <p>There is no ‘scheme’ key. Instead, there is a ‘service_type’ key that should<br />
-contain one of ‘sqlite’, ‘mysql’, ‘db2’ or ‘postgresql’</p>
+contain one of ‘sqlite’, ‘mysql’, or ‘postgresql’</p>
 
 <p>The ::Openstack::db(SERVICE_NAME) library routine allows a lookup from any recipe<br />
 to this array, returning the host information for the server that contains<br />
@@ -470,6 +470,9 @@ across many zones.</p>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'3306'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'path'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'bind_interface'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'enabled_slave'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'slave_host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'slave_port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'3316'</span>
 </code></pre>
 </div>
 
@@ -484,7 +487,6 @@ across many zones.</p>
   <span class="ss">postgresql: </span><span class="kp">nil</span><span class="p">,</span>
   <span class="ss">pgsql: </span><span class="kp">nil</span><span class="p">,</span>
   <span class="ss">sqlite: </span><span class="kp">nil</span><span class="p">,</span>
-  <span class="ss">db2: </span><span class="s1">'utf8'</span><span class="p">,</span>
   <span class="ss">nosql: </span><span class="kp">nil</span><span class="p">,</span>
   <span class="ss">galera: </span><span class="s1">'utf8'</span>
 <span class="p">}</span>
@@ -499,7 +501,6 @@ across many zones.</p>
   <span class="ss">mariadb: </span><span class="s2">"?charset=</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'charset'</span><span class="p">][</span><span class="s1">'mariadb'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
   <span class="ss">postgresql: </span><span class="s1">''</span><span class="p">,</span>
   <span class="ss">sqlite: </span><span class="s1">''</span><span class="p">,</span>
-  <span class="ss">db2: </span><span class="s2">"?charset=</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'charset'</span><span class="p">][</span><span class="s1">'db2'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
   <span class="ss">nosql: </span><span class="s1">''</span><span class="p">,</span>
   <span class="ss">galera: </span><span class="s2">"?charset=</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'charset'</span><span class="p">][</span><span class="s1">'galera'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">}</span>
@@ -518,7 +519,6 @@ across many zones.</p>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'mysql'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'MySQL-python'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'mariadb'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'MySQL-python'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'percona-cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'MySQL-python'</span><span class="p">]</span>
-  <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'db2'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python-ibm-db'</span><span class="p">,</span> <span class="s1">'python-ibm-db-sa'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'galera'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'MySQL-python'</span><span class="p">]</span>
 <span class="k">when</span> <span class="s1">'suse'</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'service_type'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'mysql'</span>
@@ -531,7 +531,6 @@ across many zones.</p>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'mysql'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python-mysqldb'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'mariadb'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python-mysqldb'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'percona-cluster'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python-mysqldb'</span><span class="p">]</span>
-  <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'db2'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ibm-db'</span><span class="p">,</span> <span class="s1">'ibm-db-sa'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'python_packages'</span><span class="p">][</span><span class="s1">'galera'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python-mysqldb'</span><span class="p">]</span>
 <span class="k">end</span>
 </code></pre>
@@ -546,6 +545,11 @@ across many zones.</p>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="n">service</span><span class="p">][</span><span class="s1">'db_name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="n">service</span><span class="p">][</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="n">project</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="n">service</span><span class="p">][</span><span class="s1">'options'</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'options'</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="n">service</span><span class="p">][</span><span class="s1">'slave_host'</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'slave_host'</span><span class="p">]</span>
+  <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="n">service</span><span class="p">][</span><span class="s1">'slave_port'</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'slave_port'</span><span class="p">]</span>
 </code></pre>
 </div>
 
@@ -752,7 +756,7 @@ The provide some sensible defaults, but feel free to override per your<br />
 needs.<br />
 The coordinated release of OpenStack codename</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'release'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'kilo'</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'release'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'liberty'</span>
 </code></pre>
 </div>
 
@@ -781,8 +785,10 @@ have the cache automaticly updated</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'rdo_enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'rdo_delorean_enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
-<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'uri'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'http://repos.fedorapeople.org/repos/openstack/openstack-kilo/el7'</span>
-<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'repo-key'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'https://raw.githubusercontent.com/redhat-openstack/rdo-release/master/RPM-GPG-KEY-RDO-kilo'</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'uri'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'http://repos.fedorapeople.org/repos/openstack/openstack-liberty/el7'</span>
+<span class="c1"># Add rdo-testing repo from rdo-release.rpm</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'testing-uri'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'http://repos.fedorapeople.org/repos/openstack/openstack-liberty/testing/el7'</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'repo-key'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'https://raw.githubusercontent.com/redhat-openstack/rdo-release/master/RPM-GPG-KEY-RDO-liberty'</span>
 <span class="c1"># Enforcing GnuPG signature check for RDO repo. Set this to false if you want to disable the check.</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'yum'</span><span class="p">][</span><span class="s1">'gpgcheck'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 
@@ -3025,9 +3031,7 @@ The URL of Swift endpoint (string value)</p>
   <li><code class="highlighter-rouge">openstack["compute"]["api"]["signing_dir"]</code> - Keystone PKI needs a location to hold the signed tokens</li>
   <li><code class="highlighter-rouge">openstack["compute"]["rpc_thread_pool_size"]</code> - Size of RPC thread pool (default 64)</li>
   <li><code class="highlighter-rouge">openstack["compute"]["rpc_conn_pool_size"]</code> - Size of RPC connection pool (default 30)</li>
-  <li><code class="highlighter-rouge">openstack["compute"]["rpc_response_timeout"]</code> - Seconds to wait for a response from call or multicall (default 60)<br />
-TODO: Add DB2 support on other platforms</li>
-  <li><code class="highlighter-rouge">openstack["compute"]["platform"]["db2_python_packages"]</code> - Array of DB2 python packages, only available on redhat platform</li>
+  <li><code class="highlighter-rouge">openstack["compute"]["rpc_response_timeout"]</code> - Seconds to wait for a response from call or multicall (default 60)</li>
   <li><code class="highlighter-rouge">openstack['compute']['api']['auth']['version']</code> - Select v2.0 or v3.0. Default v2.0. The auth API version used to interact with identity service.</li>
   <li><code class="highlighter-rouge">openstack['compute']['api']['auth']['memcached_servers']</code> - A list of memcached server(s) for caching</li>
   <li><code class="highlighter-rouge">openstack['compute']['api']['auth']['memcache_security_strategy']</code> - Whether token data should be authenticated or authenticated and encrypted. Acceptable values are MAC or ENCRYPT.</li>
@@ -4231,16 +4235,16 @@ The configuration options allow the specification of RPC version numbers if desi
 but release name alias are also supported.<br />
 options e.g.:<br />
 default[‘openstack’][‘compute’][‘upgrade_levels’] = {<br />
-‘baseapi’ = ‘kilo’,<br />
-‘console’ = ‘kilo’,<br />
-‘consoleauth’ = ‘kilo’,<br />
-‘cert’ = ‘kilo’,<br />
-‘scheduler’ = ‘kilo’,<br />
-‘compute’ = ‘kilo’,<br />
-‘intercell’ = ‘kilo’,<br />
+‘baseapi’ = ‘liberty’,<br />
+‘console’ = ‘liberty’,<br />
+‘consoleauth’ = ‘liberty’,<br />
+‘cert’ = ‘liberty’,<br />
+‘scheduler’ = ‘liberty’,<br />
+‘compute’ = ‘liberty’,<br />
+‘intercell’ = ‘liberty’,<br />
 ‘conductor’ = ‘2.0’,<br />
 ‘network’ = ‘3.0’,<br />
-‘cells’ = ‘kilo’<br />
+‘cells’ = ‘liberty’<br />
 }<br />
 choose the needed ones to set</p>
 
@@ -4505,7 +4509,6 @@ diagnostic purposes).</p>
 Put common ones here and platform specific ones below.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'db_python_packages'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="ss">db2: </span><span class="p">[],</span>
   <span class="ss">mysql: </span><span class="p">[],</span>
   <span class="ss">postgresql: </span><span class="p">[],</span>
   <span class="ss">sqlite: </span><span class="p">[]</span>
@@ -4533,7 +4536,6 @@ library.</p>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'login_url'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'webroot'</span><span class="p">]</span><span class="si">}</span><span class="s2">auth/login/"</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'logout_url'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'webroot'</span><span class="p">]</span><span class="si">}</span><span class="s2">auth/logout/"</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'login_redirect_url'</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'webroot'</span><span class="p">]</span>
-  <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'db_python_packages'</span><span class="p">][</span><span class="s1">'db2'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'python-ibm-db-django'</span><span class="p">]</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'platform'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'horizon_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-dashboard'</span><span class="p">],</span>
     <span class="s1">'memcache_python_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'python-memcached'</span><span class="p">],</span>
@@ -5572,6 +5574,15 @@ catalog or policy). (integer value)</p>
 <span class="c1"># The maximum number of entities that will be returned in an</span>
 <span class="c1"># policy collection. (integer value)</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'policy'</span><span class="p">][</span><span class="s1">'list_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+</code></pre>
+</div>
+
+<p>The authorization configuration options<br />
+The external (REMOTE_USER) auth plugin module. (String value)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'external'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'keystone.auth.plugins.external.DefaultDomain'</span>
+<span class="c1"># Default auth methods. (List value)</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'methods'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'external, password, token, oauth1'</span>
 </code></pre>
 </div>
 
@@ -7122,7 +7133,8 @@ if all routers must have an external network gateway</p>
 </div>
 
 <p>Name of bridge used for external network traffic. This should be set to<br />
-empty value for the linux bridge</p>
+empty value for the linux bridge. When external_network_bridge is empty or nil,<br />
+creation of external bridge will be skipped in the recipe.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'l3'</span><span class="p">][</span><span class="s1">'external_network_bridge'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'br-ex'</span>
 </code></pre>
@@ -9802,7 +9814,8 @@ that Heat uses</p>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'ec2authtoken'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'v2.0'</span>
+<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span>
 </code></pre>
 </div>
 
@@ -10044,15 +10057,15 @@ of the api-paste.ini when node[‘openstack’][‘auth’][‘strategy’] == �
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'user'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'heat'</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'group'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'heat'</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'platform'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'heat_common_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-heat'</span><span class="p">],</span>
+    <span class="s1">'heat_common_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-heat-common'</span><span class="p">],</span>
     <span class="s1">'heat_client_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'python-heatclient'</span><span class="p">],</span>
-    <span class="s1">'heat_api_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'python-heatclient'</span><span class="p">],</span>
+    <span class="s1">'heat_api_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-heat-api'</span><span class="p">,</span> <span class="s1">'python-heatclient'</span><span class="p">],</span>
     <span class="s1">'heat_api_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-heat-api'</span><span class="p">,</span>
-    <span class="s1">'heat_api_cfn_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'python-heatclient'</span><span class="p">],</span>
+    <span class="s1">'heat_api_cfn_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-heat-api-cfn'</span><span class="p">,</span> <span class="s1">'python-heatclient'</span><span class="p">],</span>
     <span class="s1">'heat_api_cfn_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-heat-api-cfn'</span><span class="p">,</span>
-    <span class="s1">'heat_api_cloudwatch_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'python-heatclient'</span><span class="p">],</span>
+    <span class="s1">'heat_api_cloudwatch_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-heat-api-cloudwatch'</span><span class="p">,</span> <span class="s1">'python-heatclient'</span><span class="p">],</span>
     <span class="s1">'heat_api_cloudwatch_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-heat-api-cloudwatch'</span><span class="p">,</span>
-    <span class="s1">'heat_engine_packages'</span> <span class="o">=&gt;</span> <span class="p">[],</span>
+    <span class="s1">'heat_engine_packages'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'openstack-heat-engine'</span><span class="p">],</span>
     <span class="s1">'heat_engine_service'</span> <span class="o">=&gt;</span> <span class="s1">'openstack-heat-engine'</span><span class="p">,</span>
     <span class="s1">'heat_api_process_name'</span> <span class="o">=&gt;</span> <span class="s1">'heat-api'</span><span class="p">,</span>
     <span class="s1">'package_overrides'</span> <span class="o">=&gt;</span> <span class="s1">''</span>
