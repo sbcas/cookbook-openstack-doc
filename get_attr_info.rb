@@ -61,15 +61,23 @@ def convert_attr_to_md(filename)
         code_block = false
       end
     when comment?(line)
+      if comment_header?(line)
+        hdr = line[/([*=]+\s)(.*)(\s[*=]+)/,2]
+        if hdr.nil?
+          puts "cmt hdr: #{line}"
+          next
+        end
+        line = '**' + hdr + '**'
+      end  
       if comment_header?(line) && code_block
-        output << "\n####"
+        output << "\n"
         code_block = false
       end
 
       if code_block
         output << line << "\n"
       else
-        output << line.strip.gsub!(/^#+[[:blank:]]*|<|>/, '') << "\n"
+        output << line.strip.gsub!(/^#*[[:blank:]]*|<|>/, '') << "\n"
       end
     else # is_code
       unless code_block
