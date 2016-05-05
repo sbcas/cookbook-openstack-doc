@@ -40,7 +40,7 @@ def blank?(line)
 end
 
 def skip_to_end?(line)
-  /^Testing|^Contributing/ =~ line
+  /^Testing|^Contributing|^License/ =~ line
 end
 
 def convert_attr_to_md(filename)
