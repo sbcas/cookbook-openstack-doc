@@ -62,7 +62,7 @@ def convert_attr_to_md(filename)
       end
     when comment?(line)
       if comment_header?(line) && code_block
-        output << "\n"
+        output << "\n####"
         code_block = false
       end
 
@@ -107,7 +107,7 @@ def get_content(dir)
     readme_name = readme[/cookbook-.*/].chomp('.md').gsub!('/', '-')
     header << "- [#{cookbook_name}](##{cookbook_name})\n"
     header << "  - [#{readme_name}](##{readme_name.downcase})\n"
-    content << "\n\n***\n\n## #{cookbook_name}\n\n[back to top](#contents)\n\n"
+    content << "\n\n***\n\n## #{cookbook_name}\n\n"
     content << "\n\n***\n\n### #{readme_name}\n\n[back to top](#contents)\n\n"
     content << convert_readme(readme)
     Dir.glob("#{cookbook}attributes/*.rb").each do |filename|

@@ -184,8 +184,6 @@
 
 <h2 id="cookbook-openstack-common">cookbook-openstack-common</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-common-readme">cookbook-openstack-common-README</h3>
@@ -1195,8 +1193,6 @@ AMQP topics used for openstack notifications, can be comma-separated values</p>
 
 <h2 id="cookbook-openstack-bare-metal">cookbook-openstack-bare-metal</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-bare-metal-readme">cookbook-openstack-bare-metal-README</h3>
@@ -1389,8 +1385,6 @@ that Ironic uses</p>
 <hr />
 
 <h2 id="cookbook-openstack-block-storage">cookbook-openstack-block-storage</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
@@ -1658,7 +1652,7 @@ The OpenStack Volume (Cinder) API endpoint</p>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'8776'</span>
 
-<span class="o">=============================</span> <span class="n">rootwrap</span> <span class="no">Configuration</span> <span class="o">===================</span>
+<span class="c1">####============================= rootwrap Configuration ===================</span>
 <span class="n">use</span> <span class="n">cinder</span> <span class="n">root</span> <span class="n">wrap</span>
 
 <span class="sb">``` ruby
@@ -1677,8 +1671,6 @@ end
 <hr />
 
 <h2 id="cookbook-openstack-client">cookbook-openstack-client</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
@@ -1746,8 +1738,6 @@ end
 <hr />
 
 <h2 id="cookbook-openstack-compute">cookbook-openstack-compute</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
@@ -2321,8 +2311,6 @@ The OpenStack Compute (Nova) XVPvnc endpoint</p>
 
 <h2 id="cookbook-openstack-dashboard">cookbook-openstack-dashboard</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-dashboard-readme">cookbook-openstack-dashboard-README</h3>
@@ -2407,7 +2395,7 @@ to contain a custom banner at the top of the written file</p>
 # Do not edit, changes will be overwritten
 '</span>
 
-<span class="o">******************</span> <span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="no">Endpoints</span> <span class="o">******************************</span>
+<span class="c1">####****************** OpenStack Dashboard Endpoints ******************************</span>
 <span class="no">The</span> <span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="n">non</span><span class="o">-</span><span class="no">SSL</span> <span class="n">endpoint</span>
 
 <span class="sb">``` ruby
@@ -2689,8 +2677,6 @@ library.</p>
 
 <h2 id="cookbook-openstack-database">cookbook-openstack-database</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-database-readme">cookbook-openstack-database-README</h3>
@@ -2813,8 +2799,6 @@ to contain a custom banner at the top of the written file</p>
 
 <h2 id="cookbook-openstack-data-processing">cookbook-openstack-data-processing</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-data-processing-readme">cookbook-openstack-data-processing-README</h3>
@@ -2830,8 +2814,6 @@ to contain a custom banner at the top of the written file</p>
 <hr />
 
 <h2 id="cookbook-openstack-identity">cookbook-openstack-identity</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
@@ -3375,8 +3357,6 @@ Note this section is only written if node[‘openstack’][‘auth’][‘strate
 
 <h2 id="cookbook-openstack-image">cookbook-openstack-image</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-image-readme">cookbook-openstack-image-README</h3>
@@ -3814,8 +3794,6 @@ The OpenStack Image (Glance) endpoints</p>
 
 <h2 id="cookbook-openstack-network">cookbook-openstack-network</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-network-readme">cookbook-openstack-network-README</h3>
@@ -4232,7 +4210,7 @@ Set to True to enable firewall service</p>
 <span class="c1"># Custom the fwaas config file path</span>
 <span class="c1"># default['openstack']['network']['fwaas']['config_file'] = '/etc/neutron/fwaas_driver.ini'</span>
 
-<span class="o">=============================</span> <span class="n">platform</span><span class="o">-</span><span class="n">specific</span> <span class="n">settings</span> <span class="o">===========</span>
+<span class="c1">####============================= platform-specific settings ===========</span>
 
 <span class="sb">``` ruby
 default['openstack']['network']['platform'].tap do |platform|
@@ -4399,8 +4377,6 @@ end
 <hr />
 
 <h2 id="cookbook-openstack-object-storage">cookbook-openstack-object-storage</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
@@ -5290,8 +5266,6 @@ Leveling between distros</p>
 
 <h2 id="cookbook-openstack-ops-database">cookbook-openstack-ops-database</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-ops-database-readme">cookbook-openstack-ops-database-README</h3>
@@ -5478,8 +5452,6 @@ Version, support 5.5 and above</p>
 
 <h2 id="cookbook-openstack-ops-messaging">cookbook-openstack-ops-messaging</h2>
 
-<p><a href="#contents">back to top</a></p>
-
 <hr />
 
 <h3 id="cookbook-openstack-ops-messaging-readme">cookbook-openstack-ops-messaging-README</h3>
@@ -5581,8 +5553,6 @@ see https://www.rabbitmq.com/clustering.html</p>
 <hr />
 
 <h2 id="cookbook-openstack-orchestration">cookbook-openstack-orchestration</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
@@ -5796,8 +5766,6 @@ that Heat uses</p>
 <hr />
 
 <h2 id="cookbook-openstack-telemetry">cookbook-openstack-telemetry</h2>
-
-<p><a href="#contents">back to top</a></p>
 
 <hr />
 
