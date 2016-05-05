@@ -61,18 +61,17 @@ def convert_attr_to_md(filename)
         code_block = false
       end
     when comment?(line)
+      # pull out *****  header **** and bold it, ignore others
       if comment_header?(line)
         hdr = line[/([*=]+\s)(.*)(\s[*=]+)/,2]
-        if hdr.nil?
-          next
+        next if hdr.nil?
+        line = '**' + hdr + "**"
+        if code_block
+          output << "\n"
+          code_block = false
         end
-        line = '**' + hdr + "** XXXX\n\n"
       end  
-      if comment_header?(line) && code_block
-        output << "\n"
-        code_block = false
-      end
-
+      
       if code_block
         output << line << "\n"
       else
