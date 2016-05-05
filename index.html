@@ -442,7 +442,7 @@ supplied hash.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p><strong>OpenStack DB Support</strong></p>
+<p><strong>======================== OpenStack DB Support</strong></p>
 
 <p>This section of node attributes stores information about the database hosts
 used in an OpenStack deployment.</p>
@@ -492,7 +492,7 @@ service.  There are cases where migrations should not be executed.  For
 example when upgrading a zone, and the image or identity database are replicated
 across many zones.</p>
 
-<p><strong>Database Endpoint</strong></p>
+<p><strong>**</strong><strong>**</strong><strong>**</strong><strong>** Database Endpoint</strong></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(endpoints bind_service)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">type</span><span class="o">|</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="n">type</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
@@ -746,7 +746,7 @@ encrypt your secrets with the method provided in the chef-vault gem.</p>
 </code></pre>
 </div>
 
-<p><strong>Encrypted Databag Setup</strong></p>
+<p><strong>========================= Encrypted Databag Setup</strong></p>
 
 <p>The openstack-common cookbook’s default library contains a <code class="highlighter-rouge">secret</code>
 routine that looks up the value of encrypted databag values. This routine
@@ -786,7 +786,7 @@ each key in the data bag corresponding to a user (Keystone or otherwise).</p>
 </code></pre>
 </div>
 
-<p><strong>Package and Repository Setup</strong></p>
+<p><strong>========================= Package and Repository Setup</strong></p>
 
 <p>Various Linux distributions provide OpenStack packages and repositories.
 The provide some sensible defaults, but feel free to override per your
@@ -1022,7 +1022,7 @@ Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p><strong>RabbitMQ Endpoint</strong></p>
+<p><strong>**</strong><strong>**</strong><strong>**</strong><strong>** RabbitMQ Endpoint</strong></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(endpoints bind_service)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">type</span><span class="o">|</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="n">type</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
@@ -1057,9 +1057,8 @@ Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 </code></pre>
 </div>
 
-<p>Default rabbit values (for attribute assignment below)</p>
-
-<p>global switch for handling rabbit ssl</p>
+<p>Default rabbit values (for attribute assignment below)
+global switch for handling rabbit ssl</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'rabbitmq'</span><span class="p">][</span><span class="s1">'use_ssl'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># SSL version to use (valid only if SSL enabled)</span>
@@ -1127,9 +1126,8 @@ Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 </code></pre>
 </div>
 
-<p>Overrides and additional attributes for individual services</p>
-
-<p>bare-metal</p>
+<p>Overrides and additional attributes for individual services
+bare-metal</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'rabbit'</span><span class="p">][</span><span class="s1">'notification_topic'</span><span class="p">]</span> <span class="o">=</span>
   <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'notification_topic'</span><span class="p">]</span>
@@ -1517,7 +1515,6 @@ openstack-common cookbook.</p>
 <p>Toggles - These can be overridden at the environment level</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'developer_mode'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span> <span class="c1"># we want secure passwords by default</span>
-<span class="c1">########################################################################</span>
 </code></pre>
 </div>
 
@@ -1640,7 +1637,7 @@ that Cinder uses</p>
 </code></pre>
 </div>
 
-<p><strong>OpenStack Volume Endpoints</strong>
+<p><strong>**</strong><strong>**</strong><strong>**</strong><strong>** OpenStack Volume Endpoints</strong>
 The OpenStack Volume (Cinder) API endpoint</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(public internal admin)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">ep_type</span><span class="o">|</span>
@@ -1651,20 +1648,21 @@ The OpenStack Volume (Cinder) API endpoint</p>
 <span class="k">end</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'8776'</span>
-<span class="o">**</span><span class="n">rootwrap</span> <span class="no">Configuration</span><span class="o">**</span>
 
+<span class="o">**=============================</span> <span class="n">rootwrap</span> <span class="no">Configuration</span><span class="o">**</span>
+<span class="n">use</span> <span class="n">cinder</span> <span class="n">root</span> <span class="n">wrap</span>
 
-<span class="c1"># use cinder root wrap</span>
-<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'use_rootwrap'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
-<span class="c1"># rootwrap.conf</span>
-<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'rootwrap'</span><span class="p">][</span><span class="s1">'conf'</span><span class="p">].</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">conf</span><span class="o">|</span>
-  <span class="n">conf</span><span class="p">[</span><span class="s1">'DEFAULT'</span><span class="p">][</span><span class="s1">'filters_path'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/etc/cinder/rootwrap.d,/usr/share/cinder/rootwrap'</span>
-  <span class="n">conf</span><span class="p">[</span><span class="s1">'DEFAULT'</span><span class="p">][</span><span class="s1">'exec_dirs'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/sbin,/usr/sbin,/bin,/usr/bin'</span>
-  <span class="n">conf</span><span class="p">[</span><span class="s1">'DEFAULT'</span><span class="p">][</span><span class="s1">'use_syslog'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
-  <span class="n">conf</span><span class="p">[</span><span class="s1">'DEFAULT'</span><span class="p">][</span><span class="s1">'syslog_log_facility'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'syslog'</span>
-  <span class="n">conf</span><span class="p">[</span><span class="s1">'DEFAULT'</span><span class="p">][</span><span class="s1">'syslog_log_level'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'ERROR'</span>
-<span class="k">end</span>
-</code></pre>
+<span class="sb">``` ruby
+default['openstack']['block-storage']['use_rootwrap'] = true
+# rootwrap.conf
+default['openstack']['block-storage']['rootwrap']['conf'].tap do |conf|
+  conf['DEFAULT']['filters_path'] = '/etc/cinder/rootwrap.d,/usr/share/cinder/rootwrap'
+  conf['DEFAULT']['exec_dirs'] = '/sbin,/usr/sbin,/bin,/usr/bin'
+  conf['DEFAULT']['use_syslog'] = false
+  conf['DEFAULT']['syslog_log_facility'] = 'syslog'
+  conf['DEFAULT']['syslog_log_level'] = 'ERROR'
+end
+</span></code></pre>
 </div>
 
 <hr />
@@ -1877,7 +1875,6 @@ glance and keystone servers</li>
 <p><a href="#contents">back to top</a></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'enable_monit'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span> <span class="c1"># OS provides packages</span>
-<span class="c1">########################################################################</span>
 </code></pre>
 </div>
 
@@ -2177,7 +2174,7 @@ This is to be true to make a compute docker type and use nova docker driver as c
 </code></pre>
 </div>
 
-<p><strong>OpenStack Compute Endpoints</strong>
+<p><strong>**</strong><strong>**</strong><strong>**</strong>** OpenStack Compute Endpoints**
 The OpenStack Compute (Nova) XVPvnc endpoint</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(
@@ -2393,17 +2390,14 @@ to contain a custom banner at the top of the written file</p>
 # This file autogenerated by Chef
 # Do not edit, changes will be overwritten
 '</span>
-<span class="o">**</span><span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="no">Endpoints</span><span class="o">**</span>
 
+<span class="o">********************</span> <span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="no">Endpoints</span><span class="o">**</span>
+<span class="no">The</span> <span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="n">non</span><span class="o">-</span><span class="no">SSL</span> <span class="n">endpoint</span>
 
-</code></pre>
-</div>
-
-<p>The OpenStack Dashboard non-SSL endpoint</p>
-
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'dashboard_http'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'0.0.0.0'</span>
-<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'dashboard_http'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'80'</span>
-</code></pre>
+<span class="sb">``` ruby
+default['openstack']['bind_service']['dashboard_http']['host'] = '0.0.0.0'
+default['openstack']['bind_service']['dashboard_http']['port'] = '80'
+</span></code></pre>
 </div>
 
 <p>The OpenStack Dashboard SSL endpoint</p>
@@ -3665,7 +3659,7 @@ Whether to use any of the default caching pipelines from the paste configuration
 </code></pre>
 </div>
 
-<p><strong>OpenStack Image Endpoints</strong>
+<p><strong>**</strong><strong>**</strong><strong>**</strong><strong>** OpenStack Image Endpoints</strong>
 The OpenStack Image (Glance) endpoints</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(public internal admin)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">ep_type</span><span class="o">|</span>
@@ -4062,7 +4056,7 @@ config)</p>
 </code></pre>
 </div>
 
-<p><strong>rootwrap Configuration</strong>
+<p><strong>============================= rootwrap Configuration</strong>
 use neutron root wrap</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'use_rootwrap'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
@@ -4077,7 +4071,7 @@ use neutron root wrap</p>
 </code></pre>
 </div>
 
-<p><strong>dnsmasq Configuration</strong>
+<p><strong>============================= dnsmasq Configuration</strong>
 TODO: (jklare) this should be refactored and probably pull in the some dnsmasq
 cookbook to do the proper configuration
 the version of dnsmasq for centos 6.5 is two revs behind where the dhcp-agent needs
@@ -4101,7 +4095,7 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </code></pre>
 </div>
 
-<p><strong>DHCP Agent Configuration</strong></p>
+<p><strong>============================= DHCP Agent Configuration</strong></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_dhcp'</span><span class="p">][</span><span class="s1">'config_file'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/etc/neutron/dhcp_agent.ini'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_dhcp'</span><span class="p">][</span><span class="s1">'conf'</span><span class="p">].</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">conf</span><span class="o">|</span>
@@ -4111,7 +4105,7 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </code></pre>
 </div>
 
-<p><strong>L3 Agent Configuration</strong></p>
+<p><strong>============================= L3 Agent Configuration</strong></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_l3'</span><span class="p">][</span><span class="s1">'external_network_bridge_interface'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'eth1'</span>
 </code></pre>
@@ -4131,7 +4125,7 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </code></pre>
 </div>
 
-<p><strong>Metadata Agent Configuration</strong></p>
+<p><strong>============================= Metadata Agent Configuration</strong></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_metadata'</span><span class="p">][</span><span class="s1">'config_file'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/etc/neutron/metadata_agent.ini'</span>
 <span class="c1"># The name of the secret databag containing the metadata secret</span>
@@ -4140,7 +4134,7 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </code></pre>
 </div>
 
-<p><strong>Metering Agent Configuration</strong></p>
+<p><strong>============================= Metering Agent Configuration</strong></p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_metering'</span><span class="p">][</span><span class="s1">'config_file'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/etc/neutron/metering_agent.ini'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_metering'</span><span class="p">][</span><span class="s1">'conf'</span><span class="p">].</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">conf</span><span class="o">|</span>
@@ -4152,7 +4146,7 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </code></pre>
 </div>
 
-<p><strong>VPN Agent Configuration</strong>
+<p><strong>============================= VPN Agent Configuration</strong>
 vpn_device_driver_packages in platform-specific settings is used to get driver dependencies installed, default is openswan
 vpn_device_driver_services in platform-specific settings is used to enable services required by vpn drivers, default is ipsec
 Set to true to enable vpnaas</p>
@@ -4177,7 +4171,7 @@ Set to true to enable vpnaas</p>
 </code></pre>
 </div>
 
-<p><strong>LBaaS Agent Configuration</strong>
+<p><strong>============================= LBaaS Agent Configuration</strong>
 Set to true to enable lbaas</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_lbaas'</span><span class="p">][</span><span class="s1">'enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
@@ -4198,7 +4192,7 @@ Set to true to enable lbaas</p>
 </code></pre>
 </div>
 
-<p><strong>FWaaS Configuration</strong>
+<p><strong>============================= FWaaS Configuration</strong>
 TODO(jklare) : check why the package is installed and if the configuration
 works at all (if so, this needs refactoring parallel to the lbaas and vpnaas
 recipes and attributes)
@@ -4209,116 +4203,117 @@ Set to True to enable firewall service</p>
 <span class="c1"># default['openstack']['network']['fwaas']['driver'] = 'neutron_fwaas.services.firewall.drivers.linux.iptables_fwaas.IptablesFwaasDriver'</span>
 <span class="c1"># Custom the fwaas config file path</span>
 <span class="c1"># default['openstack']['network']['fwaas']['config_file'] = '/etc/neutron/fwaas_driver.ini'</span>
-<span class="o">**</span><span class="n">platform</span><span class="o">-</span><span class="n">specific</span> <span class="n">settings</span><span class="o">**</span>
 
+<span class="o">**=============================</span> <span class="n">platform</span><span class="o">-</span><span class="n">specific</span> <span class="n">settings</span><span class="o">**</span>
 
-<span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'platform'</span><span class="p">].</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">platform</span><span class="o">|</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'neutron'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'group'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'neutron'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'vpn_device_driver_packages'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="sx">%w(openswan)</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_dhcp_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-dhcp-agent'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_l3_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-l3-agent'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_vpn_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-vpn-agent'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'vpn_device_driver_services'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="sx">%w(ipsec)</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_lb_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-lbaas-agent'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_metadata_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-metadata-agent'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_metering_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-metering-agent'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_server_service'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="s1">'neutron-server'</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_lbaas_python_dependencies'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="sx">%w(python-neutron-lbaas)</span>
-  <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_vpnaas_python_dependencies'</span><span class="p">]</span> <span class="o">=</span>
-    <span class="sx">%w(python-neutron-vpnaas)</span>
-  <span class="k">case</span> <span class="n">platform_family</span>
-  <span class="k">when</span> <span class="s1">'fedora'</span><span class="p">,</span> <span class="s1">'rhel'</span> <span class="c1"># :pragma-foodcritic: ~FC024 - won't fix this</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron openstack-neutron-ml2 iproute)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_client_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(python-neutronclient)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_dhcp_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron iproute)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_l3_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron iproute radvd keepalived)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_plugin_package'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">'neutron-plugin-ml2'</span>
-    <span class="c1"># openstack-neutron-fwaas</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_vpnaas_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron-vpnaas iproute)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_lbaas_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron-lbaas haproxy iproute)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openvswitch)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron-openvswitch iproute)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_linuxbridge_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron-linuxbridge iproute)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_linuxbridge_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-plugin-linuxbridge-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_metadata_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w()</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_metering_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openstack-neutron-metering-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_server_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w()</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_service'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">'openvswitch'</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">'neutron-openvswitch-agent'</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'package_overrides'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">''</span>
-  <span class="k">when</span> <span class="s1">'debian'</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-common python-pyparsing python-cliff)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_client_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(python-neutronclient python-pyparsing)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_dhcp_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-dhcp-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_l3_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-l3-agent radvd keepalived)</span>
-    <span class="c1"># python-neutron-fwaas</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_vpnaas_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(python-neutron-vpnaas neutron-vpn-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_lbaas_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(python-neutron-lbaas neutron-lbaas-agent haproxy)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(openvswitch-switch openvswitch-datapath-dkms bridge-utils)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_build_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(
+<span class="sb">``` ruby
+default['openstack']['network']['platform'].tap do |platform|
+  platform['user'] = 'neutron'
+  platform['group'] = 'neutron'
+  platform['vpn_device_driver_packages'] =
+    %w(openswan)
+  platform['neutron_dhcp_agent_service'] =
+    'neutron-dhcp-agent'
+  platform['neutron_l3_agent_service'] =
+    'neutron-l3-agent'
+  platform['neutron_vpn_agent_service'] =
+    'neutron-vpn-agent'
+  platform['vpn_device_driver_services'] =
+    %w(ipsec)
+  platform['neutron_lb_agent_service'] =
+    'neutron-lbaas-agent'
+  platform['neutron_metadata_agent_service'] =
+    'neutron-metadata-agent'
+  platform['neutron_metering_agent_service'] =
+    'neutron-metering-agent'
+  platform['neutron_server_service'] =
+    'neutron-server'
+  platform['neutron_lbaas_python_dependencies'] =
+    %w(python-neutron-lbaas)
+  platform['neutron_vpnaas_python_dependencies'] =
+    %w(python-neutron-vpnaas)
+  case platform_family
+  when 'fedora', 'rhel' # :pragma-foodcritic: ~FC024 - won't fix this
+    platform['neutron_packages'] =
+      %w(openstack-neutron openstack-neutron-ml2 iproute)
+    platform['neutron_client_packages'] =
+      %w(python-neutronclient)
+    platform['neutron_dhcp_packages'] =
+      %w(openstack-neutron iproute)
+    platform['neutron_l3_packages'] =
+      %w(openstack-neutron iproute radvd keepalived)
+    platform['neutron_plugin_package'] =
+      'neutron-plugin-ml2'
+    # openstack-neutron-fwaas
+    platform['neutron_vpnaas_packages'] =
+      %w(openstack-neutron-vpnaas iproute)
+    platform['neutron_lbaas_packages'] =
+      %w(openstack-neutron-lbaas haproxy iproute)
+    platform['neutron_openvswitch_packages'] =
+      %w(openvswitch)
+    platform['neutron_openvswitch_agent_packages'] =
+      %w(openstack-neutron-openvswitch iproute)
+    platform['neutron_linuxbridge_agent_packages'] =
+      %w(openstack-neutron-linuxbridge iproute)
+    platform['neutron_linuxbridge_agent_service'] =
+      %w(neutron-plugin-linuxbridge-agent)
+    platform['neutron_metadata_agent_packages'] =
+      %w()
+    platform['neutron_metering_agent_packages'] =
+      %w(openstack-neutron-metering-agent)
+    platform['neutron_server_packages'] =
+      %w()
+    platform['neutron_openvswitch_service'] =
+      'openvswitch'
+    platform['neutron_openvswitch_agent_service'] =
+      'neutron-openvswitch-agent'
+    platform['package_overrides'] =
+      ''
+  when 'debian'
+    platform['neutron_packages'] =
+      %w(neutron-common python-pyparsing python-cliff)
+    platform['neutron_client_packages'] =
+      %w(python-neutronclient python-pyparsing)
+    platform['neutron_dhcp_packages'] =
+      %w(neutron-dhcp-agent)
+    platform['neutron_l3_packages'] =
+      %w(neutron-l3-agent radvd keepalived)
+    # python-neutron-fwaas
+    platform['neutron_vpnaas_packages'] =
+      %w(python-neutron-vpnaas neutron-vpn-agent)
+    platform['neutron_lbaas_packages'] =
+      %w(python-neutron-lbaas neutron-lbaas-agent haproxy)
+    platform['neutron_openvswitch_packages'] =
+      %w(openvswitch-switch openvswitch-datapath-dkms bridge-utils)
+    platform['neutron_openvswitch_build_packages'] =
+      %w(
         build-essential pkg-config fakeroot
         libssl-dev openssl debhelper
         autoconf dkms python-all
         python-qt4 python-zopeinterface
         python-twisted-conch
-      )</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-openvswitch-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_linuxbridge_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-plugin-linuxbridge neutron-plugin-linuxbridge-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_linuxbridge_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">'neutron-plugin-linuxbridge-agent'</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_metadata_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-metadata-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_metering_agent_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-metering-agent)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_server_packages'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="sx">%w(neutron-server)</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_service'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">'openvswitch-switch'</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'neutron_openvswitch_agent_service'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s1">'neutron-openvswitch-agent'</span>
-    <span class="n">platform</span><span class="p">[</span><span class="s1">'package_overrides'</span><span class="p">]</span> <span class="o">=</span>
-      <span class="s2">"-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre>
+      )
+    platform['neutron_openvswitch_agent_packages'] =
+      %w(neutron-openvswitch-agent)
+    platform['neutron_linuxbridge_agent_packages'] =
+      %w(neutron-plugin-linuxbridge neutron-plugin-linuxbridge-agent)
+    platform['neutron_linuxbridge_agent_service'] =
+      'neutron-plugin-linuxbridge-agent'
+    platform['neutron_metadata_agent_packages'] =
+      %w(neutron-metadata-agent)
+    platform['neutron_metering_agent_packages'] =
+      %w(neutron-metering-agent)
+    platform['neutron_server_packages'] =
+      %w(neutron-server)
+    platform['neutron_openvswitch_service'] =
+      'openvswitch-switch'
+    platform['neutron_openvswitch_agent_service'] =
+      'neutron-openvswitch-agent'
+    platform['package_overrides'] =
+      "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
+  end
+end
+</span></code></pre>
 </div>
 
 <hr />
