@@ -444,53 +444,71 @@ supplied hash.</p>
 
 <p><strong>OpenStack DB Support</strong></p>
 
-<p>This section of node attributes stores information about the database hosts
-used in an OpenStack deployment.</p>
+<p>This section of node attributes stores information about the database hosts</p>
 
-<p>There is no ‘scheme’ key. Instead, there is a ‘service_type’ key that should
-contain one of ‘sqlite’, ‘mysql’, or ‘postgresql’</p>
+<p>used in an OpenStack deployment.</p>
 
-<p>The ::Openstack::db(SERVICE_NAME) library routine allows a lookup from any recipe
-to this array, returning the host information for the server that contains
-the database for SERVICE_NAME, where SERVICE_NAME is one of ‘compute’ (Nova),
-‘image’ (Glance), ‘identity’ (Keystone), ‘network’ (Neutron), or ‘volume’ (Cinder)</p>
+<p>There is no ‘scheme’ key. Instead, there is a ‘service_type’ key that should</p>
 
-<p>The ::Openstack::db_connection(SERVICE_NAME, USER, PASSWORD) library routine
-returns the SQLAlchemy DB URI for SERVICE_NAME, with the supplied user and password
-that a calling service might be using when connecting to the database.</p>
+<p>contain one of ‘sqlite’, ‘mysql’, or ‘postgresql’</p>
 
-<p>For example, let’s assume that the database that is used by the OpenStack Identity
-service (Keystone) is configured as follows:</p>
+<p>The ::Openstack::db(SERVICE_NAME) library routine allows a lookup from any recipe</p>
 
-<p>host: 192.168.0.3
-port: 3306
-service_type: mysql
-db_name: keystone</p>
+<p>to this array, returning the host information for the server that contains</p>
 
-<p>Further suppose that a node running the OpenStack Identity API service needs to
-connect to the above identity database server. It has the following in it’s node
-attributes:</p>
+<p>the database for SERVICE_NAME, where SERVICE_NAME is one of ‘compute’ (Nova),</p>
+
+<p>‘image’ (Glance), ‘identity’ (Keystone), ‘network’ (Neutron), or ‘volume’ (Cinder)</p>
+
+<p>The ::Openstack::db_connection(SERVICE_NAME, USER, PASSWORD) library routine</p>
+
+<p>returns the SQLAlchemy DB URI for SERVICE_NAME, with the supplied user and password</p>
+
+<p>that a calling service might be using when connecting to the database.</p>
+
+<p>For example, let’s assume that the database that is used by the OpenStack Identity</p>
+
+<p>service (Keystone) is configured as follows:</p>
+
+<p>host: 192.168.0.3</p>
+
+<p>port: 3306</p>
+
+<p>service_type: mysql</p>
+
+<p>db_name: keystone</p>
+
+<p>Further suppose that a node running the OpenStack Identity API service needs to</p>
+
+<p>connect to the above identity database server. It has the following in it’s node</p>
+
+<p>attributes:</p>
 
 <p>node[‘openstack’][‘db’][‘identity’][‘username’] = ‘keystone’</p>
 
 <p>In a ‘keystone’ recipe, you might find the following code:</p>
 
-<p>user = node[‘openstack’][‘db’][‘identity’][‘username’]
-pass = get_password ‘db’, ‘keystone’</p>
+<p>user = node[‘openstack’][‘db’][‘identity’][‘username’]</p>
+
+<p>pass = get_password ‘db’, ‘keystone’</p>
 
 <p>sql_connection = ::Openstack::db_uri(‘identity’, user, pass)</p>
 
-<p>The sql_connection variable would then be set to “mysql://keystone:password@192.168.0.3:keystone”
-and could then be written to the keystone.conf file in a template.</p>
+<p>The sql_connection variable would then be set to “mysql://keystone:password@192.168.0.3:keystone”</p>
+
+<p>and could then be written to the keystone.conf file in a template.</p>
 
 <p>Database Migrations:</p>
 
 <p>node[‘openstack’][‘db’][SERVICE_NAME][‘migrate’]</p>
 
-<p>The above attribute causes database migrations to be executed for the given
-service.  There are cases where migrations should not be executed.  For
-example when upgrading a zone, and the image or identity database are replicated
-across many zones.</p>
+<p>The above attribute causes database migrations to be executed for the given</p>
+
+<p>service.  There are cases where migrations should not be executed.  For</p>
+
+<p>example when upgrading a zone, and the image or identity database are replicated</p>
+
+<p>across many zones.</p>
 
 <p><strong>Database Endpoint</strong></p>
 
@@ -505,14 +523,21 @@ across many zones.</p>
 </code></pre>
 </div>
 
-<p>If you bind the database to a specific ip-address (you can only choose one
-here for mysql, so 127.0.0.1 + external address is not an option), to allow
-the services and applications to access it via this one, you probably do not
-want to allow the db root user to access it via this external address. In this
-case you have the option to allow root access only via localhost, which
-will work for mysql databases, since it will use a direct connection via
-the socket, so the database does not have not to listen on 127.0.0.1.
-Set this to ‘localhost’ for mysql to connect via socket.</p>
+<p>If you bind the database to a specific ip-address (you can only choose one</p>
+
+<p>here for mysql, so 127.0.0.1 + external address is not an option), to allow</p>
+
+<p>the services and applications to access it via this one, you probably do not</p>
+
+<p>want to allow the db root user to access it via this external address. In this</p>
+
+<p>case you have the option to allow root access only via localhost, which</p>
+
+<p>will work for mysql databases, since it will use a direct connection via</p>
+
+<p>the socket, so the database does not have not to listen on 127.0.0.1.</p>
+
+<p>Set this to ‘localhost’ for mysql to connect via socket.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'host_for_db_root_user'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 </code></pre>
@@ -664,8 +689,9 @@ Set this to ‘localhost’ for mysql to connect via socket.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'common'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -693,31 +719,43 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>Setting this to True means that database passwords and service user
-passwords for Keystone will be easy-to-remember values – they will be
-the same value as the key. For instance, if a cookbook calls the
-::Openstack::secret routine like so:</p>
+<p>Setting this to True means that database passwords and service user</p>
+
+<p>passwords for Keystone will be easy-to-remember values – they will be</p>
+
+<p>the same value as the key. For instance, if a cookbook calls the</p>
+
+<p>::Openstack::secret routine like so:</p>
 
 <p>pass = secret “passwords”, “nova”</p>
 
 <p>The value of pass will be “nova”</p>
 
-<p>Use data bags for storing passwords
-Set this to false in order to get the passwords from attributes like:
-node[‘openstack’][‘secret’][key][type]</p>
+<p>Use data bags for storing passwords</p>
+
+<p>Set this to false in order to get the passwords from attributes like:</p>
+
+<p>node[‘openstack’][‘secret’][key][type]</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'use_databags'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 </code></pre>
 </div>
 
-<p>Set databag type
-acceptable values ‘encrypted’, ‘standard’, ‘vault’
-Set this to ‘standard’ in order to use regular databags.
-this is not recommended for anything other than dev/CI
-type environments.  Storing real secrets in plaintext = craycray.
-In addition to the encrypted data_bags which are an included
-feature of the official chef project, you can use ‘vault’ to
-encrypt your secrets with the method provided in the chef-vault gem.</p>
+<p>Set databag type</p>
+
+<p>acceptable values ‘encrypted’, ‘standard’, ‘vault’</p>
+
+<p>Set this to ‘standard’ in order to use regular databags.</p>
+
+<p>this is not recommended for anything other than dev/CI</p>
+
+<p>type environments.  Storing real secrets in plaintext = craycray.</p>
+
+<p>In addition to the encrypted data_bags which are an included</p>
+
+<p>feature of the official chef project, you can use ‘vault’ to</p>
+
+<p>encrypt your secrets with the method provided in the chef-vault gem.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'databag_type'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'encrypted'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'vault_gem_version'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'~&gt; 2.3'</span>
@@ -748,10 +786,13 @@ encrypt your secrets with the method provided in the chef-vault gem.</p>
 
 <p><strong>Encrypted Databag Setup</strong></p>
 
-<p>The openstack-common cookbook’s default library contains a <code class="highlighter-rouge">secret</code>
-routine that looks up the value of encrypted databag values. This routine
-uses the secret key file located at the following location to decrypt the
-values in the data bag.</p>
+<p>The openstack-common cookbook’s default library contains a <code class="highlighter-rouge">secret</code></p>
+
+<p>routine that looks up the value of encrypted databag values. This routine</p>
+
+<p>uses the secret key file located at the following location to decrypt the</p>
+
+<p>values in the data bag.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'secret'</span><span class="p">][</span><span class="s1">'key_path'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/etc/chef/openstack_data_bag_secret'</span>
 </code></pre>
@@ -763,24 +804,29 @@ values in the data bag.</p>
 </code></pre>
 </div>
 
-<p>The name of the encrypted data bag that stores service user passwords, with
-each key in the data bag corresponding to a named OpenStack service, like
-“nova”, “cinder”, etc.</p>
+<p>The name of the encrypted data bag that stores service user passwords, with</p>
+
+<p>each key in the data bag corresponding to a named OpenStack service, like</p>
+
+<p>“nova”, “cinder”, etc.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'secret'</span><span class="p">][</span><span class="s1">'service_passwords_data_bag'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'service_passwords'</span>
 </code></pre>
 </div>
 
-<p>The name of the encrypted data bag that stores DB passwords, with
-each key in the data bag corresponding to a named OpenStack database, like
-“nova”, “cinder”, etc.</p>
+<p>The name of the encrypted data bag that stores DB passwords, with</p>
+
+<p>each key in the data bag corresponding to a named OpenStack database, like</p>
+
+<p>“nova”, “cinder”, etc.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'secret'</span><span class="p">][</span><span class="s1">'db_passwords_data_bag'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'db_passwords'</span>
 </code></pre>
 </div>
 
-<p>The name of the encrypted data bag that stores Keystone user passwords, with
-each key in the data bag corresponding to a user (Keystone or otherwise).</p>
+<p>The name of the encrypted data bag that stores Keystone user passwords, with</p>
+
+<p>each key in the data bag corresponding to a user (Keystone or otherwise).</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'secret'</span><span class="p">][</span><span class="s1">'user_passwords_data_bag'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'user_passwords'</span>
 </code></pre>
@@ -788,23 +834,31 @@ each key in the data bag corresponding to a user (Keystone or otherwise).</p>
 
 <p><strong>Package and Repository Setup</strong></p>
 
-<p>Various Linux distributions provide OpenStack packages and repositories.
-The provide some sensible defaults, but feel free to override per your
-needs.
-The coordinated release of OpenStack codename</p>
+<p>Various Linux distributions provide OpenStack packages and repositories.</p>
+
+<p>The provide some sensible defaults, but feel free to override per your</p>
+
+<p>needs.</p>
+
+<p>The coordinated release of OpenStack codename</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'release'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'mitaka'</span>
 </code></pre>
 </div>
 
-<p>The Ubuntu Cloud Archive has packages for multiple Ubuntu releases. For
-more information, see: https://wiki.ubuntu.com/ServerTeam/CloudArchive.
-In the component strings, %codename% will be replaced by the value of
-the node[‘lsb’][‘codename’] Ohai value and %release% will be replaced
-by the value of node[‘openstack’][‘release’]</p>
+<p>The Ubuntu Cloud Archive has packages for multiple Ubuntu releases. For</p>
 
-<p>Change [‘openstack’][‘apt’][‘update_apt_cache’] to true if you would like
-have the cache automaticly updated</p>
+<p>more information, see: https://wiki.ubuntu.com/ServerTeam/CloudArchive.</p>
+
+<p>In the component strings, %codename% will be replaced by the value of</p>
+
+<p>the node[‘lsb’][‘codename’] Ohai value and %release% will be replaced</p>
+
+<p>by the value of node[‘openstack’][‘release’]</p>
+
+<p>Change [‘openstack’][‘apt’][‘update_apt_cache’] to true if you would like</p>
+
+<p>have the cache automaticly updated</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'apt'</span><span class="p">][</span><span class="s1">'update_apt_cache'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'apt'</span><span class="p">][</span><span class="s1">'live_updates_enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
@@ -830,8 +884,9 @@ have the cache automaticly updated</p>
 </code></pre>
 </div>
 
-<p>Set a default auth api version that other components use to interact with identity service.
-Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
+<p>Set a default auth api version that other components use to interact with identity service.</p>
+
+<p>Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'auth'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'v2.0'</span>
 </code></pre>
@@ -1057,8 +1112,9 @@ Allowed auth API versions: v2.0 or v3.0. By default, it is set to v2.0.</p>
 </code></pre>
 </div>
 
-<p>Default rabbit values (for attribute assignment below)
-global switch for handling rabbit ssl</p>
+<p>Default rabbit values (for attribute assignment below)</p>
+
+<p>global switch for handling rabbit ssl</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'rabbitmq'</span><span class="p">][</span><span class="s1">'use_ssl'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># SSL version to use (valid only if SSL enabled)</span>
@@ -1126,8 +1182,9 @@ global switch for handling rabbit ssl</p>
 </code></pre>
 </div>
 
-<p>Overrides and additional attributes for individual services
-bare-metal</p>
+<p>Overrides and additional attributes for individual services</p>
+
+<p>bare-metal</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'rabbit'</span><span class="p">][</span><span class="s1">'notification_topic'</span><span class="p">]</span> <span class="o">=</span>
   <span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'notification_topic'</span><span class="p">]</span>
@@ -1153,16 +1210,18 @@ bare-metal</p>
 </code></pre>
 </div>
 
-<p>identity
-AMQP topics used for openstack notifications, can be comma-separated values</p>
+<p>identity</p>
+
+<p>AMQP topics used for openstack notifications, can be comma-separated values</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'notification_topics'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'notifications'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'control_exchange'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'identity'</span>
 </code></pre>
 </div>
 
-<p>network
-AMQP topics used for openstack notifications, can be comma-separated values</p>
+<p>network</p>
+
+<p>AMQP topics used for openstack notifications, can be comma-separated values</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'notification_topics'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'notifications'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'control_exchange'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'neutron'</span>
@@ -1229,8 +1288,9 @@ TODO: Write usage instructions for each cookbook.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"
 # This file autogenerated by Chef
@@ -1244,9 +1304,11 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>Maximum number of worker threads that can be started
-simultaneously by a periodic task. Should be less than RPC
-thread pool size. (integer value)</p>
+<p>Maximum number of worker threads that can be started</p>
+
+<p>simultaneously by a periodic task. Should be less than RPC</p>
+
+<p>thread pool size. (integer value)</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'conductor'</span><span class="p">][</span><span class="s1">'periodic_max_workers'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span>
 </code></pre>
@@ -1266,8 +1328,9 @@ thread pool size. (integer value)</p>
 </code></pre>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
-that Ironic uses</p>
+<p>The name of the Chef role that knows about the message queue server</p>
+
+<p>that Ironic uses</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bare-metal'</span><span class="p">][</span><span class="s1">'rabbit_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-ops-messaging'</span>
 </code></pre>
@@ -1518,8 +1581,9 @@ openstack-common cookbook.</p>
 </code></pre>
 </div>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -1541,8 +1605,9 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
-that Cinder uses</p>
+<p>The name of the Chef role that knows about the message queue server</p>
+
+<p>that Cinder uses</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'rabbit_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-ops-messaging'</span>
 </code></pre>
@@ -1637,8 +1702,9 @@ that Cinder uses</p>
 </code></pre>
 </div>
 
-<p><strong>OpenStack Volume Endpoints</strong>
-The OpenStack Volume (Cinder) API endpoint</p>
+<p><strong>OpenStack Volume Endpoints</strong></p>
+
+<p>The OpenStack Volume (Cinder) API endpoint</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(public internal admin)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">ep_type</span><span class="o">|</span>
   <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'endpoints'</span><span class="p">][</span><span class="n">ep_type</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'scheme'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'http'</span>
@@ -1650,7 +1716,9 @@ The OpenStack Volume (Cinder) API endpoint</p>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'8776'</span>
 
 <span class="o">**</span><span class="n">rootwrap</span> <span class="no">Configuration</span><span class="o">**</span>
+
 <span class="n">use</span> <span class="n">cinder</span> <span class="n">root</span> <span class="n">wrap</span>
+
 
 <span class="sb">``` ruby
 default['openstack']['block-storage']['use_rootwrap'] = true
@@ -1878,8 +1946,9 @@ glance and keystone servers</li>
 </code></pre>
 </div>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'compute'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -1888,8 +1957,9 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
-that Nova uses</p>
+<p>The name of the Chef role that knows about the message queue server</p>
+
+<p>that Nova uses</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'compute'</span><span class="p">][</span><span class="s1">'rabbit_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-ops-messaging'</span>
 </code></pre>
@@ -1980,8 +2050,9 @@ that Nova uses</p>
 </code></pre>
 </div>
 
-<p>Base URL that will be presented to users in links
-to the OpenStack Compute API</p>
+<p>Base URL that will be presented to users in links</p>
+
+<p>to the OpenStack Compute API</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'compute'</span><span class="p">][</span><span class="s1">'config'</span><span class="p">][</span><span class="s1">'osapi_compute_link_prefix'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 <span class="c1"># Base URL that will be presented to users in links</span>
@@ -1991,9 +2062,11 @@ to the OpenStack Compute API</p>
 </code></pre>
 </div>
 
-<p><code class="highlighter-rouge">start</code> will cause nova-compute to error out if a VM is already running, where
-<code class="highlighter-rouge">resume</code> checks to see if it is running first.
-requires https://review.openstack.org/#/c/8423/</p>
+<p><code class="highlighter-rouge">start</code> will cause nova-compute to error out if a VM is already running, where</p>
+
+<p><code class="highlighter-rouge">resume</code> checks to see if it is running first.</p>
+
+<p>requires https://review.openstack.org/#/c/8423/</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'compute'</span><span class="p">][</span><span class="s1">'config'</span><span class="p">][</span><span class="s1">'resume_guests_state_on_host_boot'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 </code></pre>
@@ -2145,14 +2218,21 @@ requires https://review.openstack.org/#/c/8423/</p>
 </code></pre>
 </div>
 
-<p>NOTE: The metadata api service is enabled via including it’s recipe
-NOTE: api-metadata.  By default the api-metadata recipe is included in
-NOTE: the os-compute-api role which is included in the
-NOTE: os-compute-single-controller role.
-For true case, this logic allows the following ironic-related attribtes to be overwritten automatically.
-Docker configurations
-Docker compute configuration is supported only in Rhel and Ubuntu
-This is to be true to make a compute docker type and use nova docker driver as compute driver</p>
+<p>NOTE: The metadata api service is enabled via including it’s recipe</p>
+
+<p>NOTE: api-metadata.  By default the api-metadata recipe is included in</p>
+
+<p>NOTE: the os-compute-api role which is included in the</p>
+
+<p>NOTE: os-compute-single-controller role.</p>
+
+<p>For true case, this logic allows the following ironic-related attribtes to be overwritten automatically.</p>
+
+<p>Docker configurations</p>
+
+<p>Docker compute configuration is supported only in Rhel and Ubuntu</p>
+
+<p>This is to be true to make a compute docker type and use nova docker driver as compute driver</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'compute'</span><span class="p">][</span><span class="s1">'docker'</span><span class="p">][</span><span class="s1">'enable'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># The nova docker driver that will be configured in a docker type compute</span>
@@ -2174,8 +2254,9 @@ This is to be true to make a compute docker type and use nova docker driver as c
 </code></pre>
 </div>
 
-<p><strong>OpenStack Compute Endpoints</strong>
-The OpenStack Compute (Nova) XVPvnc endpoint</p>
+<p><strong>OpenStack Compute Endpoints</strong></p>
+
+<p>The OpenStack Compute (Nova) XVPvnc endpoint</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(
   compute-xvpvnc compute-novnc
@@ -2383,8 +2464,9 @@ Horizon dashboard. Will be included from the <code class="highlighter-rouge">ser
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -2392,7 +2474,9 @@ to contain a custom banner at the top of the written file</p>
 '</span>
 
 <span class="o">**</span><span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="no">Endpoints</span><span class="o">**</span>
+
 <span class="no">The</span> <span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="n">non</span><span class="o">-</span><span class="no">SSL</span> <span class="n">endpoint</span>
+
 
 <span class="sb">``` ruby
 default['openstack']['bind_service']['dashboard_http']['host'] = '0.0.0.0'
@@ -2412,8 +2496,9 @@ default['openstack']['bind_service']['dashboard_http']['port'] = '80'
 </code></pre>
 </div>
 
-<p>Don’t cache html pages.
-NOTE: This setting requires apache 2.4 or greater is used</p>
+<p>Don’t cache html pages.</p>
+
+<p>NOTE: This setting requires apache 2.4 or greater is used</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'cache_html'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 </code></pre>
@@ -2447,8 +2532,9 @@ NOTE: This setting requires apache 2.4 or greater is used</p>
 </code></pre>
 </div>
 
-<p>List of hosts/domains the dashboard can serve. This should be changed, a ‘*’
-allows everything</p>
+<p>List of hosts/domains the dashboard can serve. This should be changed, a ‘*’</p>
+
+<p>allows everything</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'allowed_hosts'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'*'</span><span class="p">]</span>
 </code></pre>
@@ -2468,8 +2554,9 @@ allows everything</p>
 
 <p>Allow TRACE method</p>
 
-<p>Set to “extended” to also reflect the request body (only for testing and
-diagnostic purposes).</p>
+<p>Set to “extended” to also reflect the request body (only for testing and</p>
+
+<p>diagnostic purposes).</p>
 
 <table>
   <tbody>
@@ -2498,8 +2585,9 @@ diagnostic purposes).</p>
 </code></pre>
 </div>
 
-<p>Dashboard specific database packages
-Put common ones here and platform specific ones below.</p>
+<p>Dashboard specific database packages</p>
+
+<p>Put common ones here and platform specific ones below.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'db_python_packages'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
   <span class="ss">mysql: </span><span class="p">[],</span>
@@ -2509,10 +2597,13 @@ Put common ones here and platform specific ones below.</p>
 </code></pre>
 </div>
 
-<p>The hash algorithm to use for authentication tokens. This must match the hash
-algorithm that the identity (Keystone) server and the auth_token middleware
-are using. Allowed values are the algorithms supported by Python’s hashlib
-library.</p>
+<p>The hash algorithm to use for authentication tokens. This must match the hash</p>
+
+<p>algorithm that the identity (Keystone) server and the auth_token middleware</p>
+
+<p>are using. Allowed values are the algorithms supported by Python’s hashlib</p>
+
+<p>library.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'dashboard'</span><span class="p">][</span><span class="s1">'hash_algorithm'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'md5'</span>
 </code></pre>
@@ -2728,8 +2819,9 @@ installed from packages.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'database'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -3033,8 +3125,9 @@ end
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span>
   <span class="s1">'# This file autogenerated by Chef, changes will be overwritten'</span>
@@ -3088,22 +3181,31 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>Specify a location to retrieve keystone-paste.ini from
-which can either be a remote url using http:// or a
-local path to a file using file:// which would generally
-be a distribution file - if this option is left nil then
-the templated version distributed with this cookbook
-will be used (keystone-paste.ini.erb)</p>
+<p>Specify a location to retrieve keystone-paste.ini from</p>
+
+<p>which can either be a remote url using http:// or a</p>
+
+<p>local path to a file using file:// which would generally</p>
+
+<p>be a distribution file - if this option is left nil then</p>
+
+<p>the templated version distributed with this cookbook</p>
+
+<p>will be used (keystone-paste.ini.erb)</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'pastefile_url'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 </code></pre>
 </div>
 
-<p>This specify the pipeline of the keystone public API,
-all Identity public API requests will be processed by the order of the pipeline.
-this value will be used in the templated version of keystone-paste.ini
-The last item in this pipeline must be public_service or an equivalent
-application. It cannot be a filter.</p>
+<p>This specify the pipeline of the keystone public API,</p>
+
+<p>all Identity public API requests will be processed by the order of the pipeline.</p>
+
+<p>this value will be used in the templated version of keystone-paste.ini</p>
+
+<p>The last item in this pipeline must be public_service or an equivalent</p>
+
+<p>application. It cannot be a filter.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'pipeline'</span><span class="p">][</span><span class="s1">'public_api'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'sizelimit url_normalize request_id build_auth_context token_auth admin_token_auth json_body ec2_extension user_crud_extension public_service'</span>
 <span class="c1"># This specify the pipeline of the keystone admin API,</span>
@@ -3180,14 +3282,21 @@ application. It cannot be a filter.</p>
 </code></pre>
 </div>
 
-<p>Fernet keys. Note this section is only written if
-node[‘openstack’][‘auth’][‘strategy’] == ‘fernet’
-Fernet keys to read from databags/vaults. This should be changed in the
-environment when rotating keys (with the defaults below, the items
-‘fernet_key0’ and ‘fernet_key1’ will be read from the databag/vault
-‘keystone).
-For more information please read:
-http://docs.openstack.org/admin-guide-cloud/keystone_fernet_token_faq.html</p>
+<p>Fernet keys. Note this section is only written if</p>
+
+<p>node[‘openstack’][‘auth’][‘strategy’] == ‘fernet’</p>
+
+<p>Fernet keys to read from databags/vaults. This should be changed in the</p>
+
+<p>environment when rotating keys (with the defaults below, the items</p>
+
+<p>‘fernet_key0’ and ‘fernet_key1’ will be read from the databag/vault</p>
+
+<p>‘keystone).</p>
+
+<p>For more information please read:</p>
+
+<p>http://docs.openstack.org/admin-guide-cloud/keystone_fernet_token_faq.html</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'fernet'</span><span class="p">][</span><span class="s1">'keys'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </code></pre>
@@ -3223,8 +3332,9 @@ http://docs.openstack.org/admin-guide-cloud/keystone_fernet_token_faq.html</p>
 </code></pre>
 </div>
 
-<p>PKI signing. Corresponds to the [signing] section of keystone.conf
-Note this section is only written if node[‘openstack’][‘auth’][‘strategy’] == ‘pki’</p>
+<p>PKI signing. Corresponds to the [signing] section of keystone.conf</p>
+
+<p>Note this section is only written if node[‘openstack’][‘auth’][‘strategy’] == ‘pki’</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'identity'</span><span class="p">][</span><span class="s1">'signing'</span><span class="p">][</span><span class="s1">'basedir'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'/etc/keystone/ssl'</span>
 <span class="c1"># certfile used for keystone pki token signing</span>
@@ -3499,8 +3609,9 @@ Defaults of <code class="highlighter-rouge">unknown</code> will use file extensi
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'image'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -3509,8 +3620,9 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>SSL Options
-Enable SSL for glance api and registry bind endpoints.</p>
+<p>SSL Options</p>
+
+<p>Enable SSL for glance api and registry bind endpoints.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'image'</span><span class="p">][</span><span class="s1">'ssl'</span><span class="p">][</span><span class="s1">'enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># Enable SSL for glance api bind endpoint.</span>
@@ -3540,8 +3652,9 @@ Enable SSL for glance api and registry bind endpoints.</p>
 </code></pre>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
-that Glance uses</p>
+<p>The name of the Chef role that knows about the message queue server</p>
+
+<p>that Glance uses</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'image'</span><span class="p">][</span><span class="s1">'rabbit_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-ops-messaging'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'image'</span><span class="p">][</span><span class="s1">'service_tenant_name'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'service'</span>
@@ -3556,8 +3669,9 @@ that Glance uses</p>
 </code></pre>
 </div>
 
-<p>Supported values for the ‘disk_format’ image attribute
-Whether to use any of the default caching pipelines from the paste configuration file</p>
+<p>Supported values for the ‘disk_format’ image attribute</p>
+
+<p>Whether to use any of the default caching pipelines from the paste configuration file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'image'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'caching'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'image'</span><span class="p">][</span><span class="s1">'api'</span><span class="p">][</span><span class="s1">'cache_management'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
@@ -3659,8 +3773,9 @@ Whether to use any of the default caching pipelines from the paste configuration
 </code></pre>
 </div>
 
-<p><strong>OpenStack Image Endpoints</strong>
-The OpenStack Image (Glance) endpoints</p>
+<p><strong>OpenStack Image Endpoints</strong></p>
+
+<p>The OpenStack Image (Glance) endpoints</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(public internal admin)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">ep_type</span><span class="o">|</span>
   <span class="sx">%w(image_api image_registry)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">service</span><span class="o">|</span>
@@ -4003,8 +4118,9 @@ using the same template as for the neutron.conf</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set the endpoints for the network service to allow all other cookbooks to
-access and use them</p>
+<p>Set the endpoints for the network service to allow all other cookbooks to</p>
+
+<p>access and use them</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sx">%w(public internal admin)</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">ep_type</span><span class="o">|</span>
   <span class="c1"># openstack identity service endpoints (used by users and services)</span>
@@ -4020,8 +4136,9 @@ access and use them</p>
 </code></pre>
 </div>
 
-<p>trigger the usage of syslog (will include the proper recipe to create a log
-config)</p>
+<p>trigger the usage of syslog (will include the proper recipe to create a log</p>
+
+<p>config)</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'syslog'</span><span class="p">][</span><span class="s1">'use'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># Name of the plugin to load</span>
@@ -4056,8 +4173,9 @@ config)</p>
 </code></pre>
 </div>
 
-<p><strong>rootwrap Configuration</strong>
-use neutron root wrap</p>
+<p><strong>rootwrap Configuration</strong></p>
+
+<p>use neutron root wrap</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'use_rootwrap'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="c1"># rootwrap.conf</span>
@@ -4071,11 +4189,15 @@ use neutron root wrap</p>
 </code></pre>
 </div>
 
-<p><strong>dnsmasq Configuration</strong>
-TODO: (jklare) this should be refactored and probably pull in the some dnsmasq
-cookbook to do the proper configuration
-the version of dnsmasq for centos 6.5 is two revs behind where the dhcp-agent needs
-to run properly. This is a version that allows and starts the dhcp-agent correctly.</p>
+<p><strong>dnsmasq Configuration</strong></p>
+
+<p>TODO: (jklare) this should be refactored and probably pull in the some dnsmasq</p>
+
+<p>cookbook to do the proper configuration</p>
+
+<p>the version of dnsmasq for centos 6.5 is two revs behind where the dhcp-agent needs</p>
+
+<p>to run properly. This is a version that allows and starts the dhcp-agent correctly.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'dnsmasq'</span><span class="p">][</span><span class="s1">'rpm_version'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'2.65-1.el6.rfx.x86_64'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'dnsmasq'</span><span class="p">][</span><span class="s1">'rpm_source'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"http://pkgs.repoforge.org/dnsmasq/dnsmasq-</span><span class="si">#{</span><span class="n">node</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'dnsmasq'</span><span class="p">][</span><span class="s1">'rpm_version'</span><span class="p">]</span><span class="si">}</span><span class="s2">.rpm"</span>
@@ -4146,10 +4268,13 @@ to run properly. This is a version that allows and starts the dhcp-agent correct
 </code></pre>
 </div>
 
-<p><strong>VPN Agent Configuration</strong>
-vpn_device_driver_packages in platform-specific settings is used to get driver dependencies installed, default is openswan
-vpn_device_driver_services in platform-specific settings is used to enable services required by vpn drivers, default is ipsec
-Set to true to enable vpnaas</p>
+<p><strong>VPN Agent Configuration</strong></p>
+
+<p>vpn_device_driver_packages in platform-specific settings is used to get driver dependencies installed, default is openswan</p>
+
+<p>vpn_device_driver_services in platform-specific settings is used to enable services required by vpn drivers, default is ipsec</p>
+
+<p>Set to true to enable vpnaas</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_vpnaas'</span><span class="p">][</span><span class="s1">'enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># Custom the vpnaas config file path</span>
@@ -4171,8 +4296,9 @@ Set to true to enable vpnaas</p>
 </code></pre>
 </div>
 
-<p><strong>LBaaS Agent Configuration</strong>
-Set to true to enable lbaas</p>
+<p><strong>LBaaS Agent Configuration</strong></p>
+
+<p>Set to true to enable lbaas</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_lbaas'</span><span class="p">][</span><span class="s1">'enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># Custom the lbaas config file path</span>
@@ -4192,11 +4318,15 @@ Set to true to enable lbaas</p>
 </code></pre>
 </div>
 
-<p><strong>FWaaS Configuration</strong>
-TODO(jklare) : check why the package is installed and if the configuration
-works at all (if so, this needs refactoring parallel to the lbaas and vpnaas
-recipes and attributes)
-Set to True to enable firewall service</p>
+<p><strong>FWaaS Configuration</strong></p>
+
+<p>TODO(jklare) : check why the package is installed and if the configuration</p>
+
+<p>works at all (if so, this needs refactoring parallel to the lbaas and vpnaas</p>
+
+<p>recipes and attributes)</p>
+
+<p>Set to True to enable firewall service</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network_fwaas'</span><span class="p">][</span><span class="s1">'enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="c1"># Firewall service driver with linux iptables</span>
@@ -4205,6 +4335,7 @@ Set to True to enable firewall service</p>
 <span class="c1"># default['openstack']['network']['fwaas']['config_file'] = '/etc/neutron/fwaas_driver.ini'</span>
 
 <span class="o">**</span><span class="n">platform</span><span class="o">-</span><span class="n">specific</span> <span class="n">settings</span><span class="o">**</span>
+
 
 <span class="sb">``` ruby
 default['openstack']['network']['platform'].tap do |platform|
@@ -4602,8 +4733,9 @@ network on 10.0.0.0/24.</p>
 </code></pre>
 </div>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"
 # This file autogenerated by Chef
@@ -4613,8 +4745,10 @@ to contain a custom banner at the top of the written file</p>
 </div>
 
 <hr />
-<p>node/ring settings
-——————–</p>
+
+<p>node/ring settings</p>
+
+<hr />
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="c1"># Hour to run swift_auditor on storage nodes</span>
@@ -4638,11 +4772,15 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>swift_hash_path_suffix and swift_hash_path_prefix are used as part of the
-the hashing algorithm when determining data placement in the cluster.
-These values should remain secret and MUST NOT change
-once a cluster has been deployed.
-Deprecated in juno, use swift_hash_path_prefix</p>
+<p>swift_hash_path_suffix and swift_hash_path_prefix are used as part of the</p>
+
+<p>the hashing algorithm when determining data placement in the cluster.</p>
+
+<p>These values should remain secret and MUST NOT change</p>
+
+<p>once a cluster has been deployed.</p>
+
+<p>Deprecated in juno, use swift_hash_path_prefix</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'swift_hash'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 <span class="c1"># A value of nil will get the hash from the get_password library method in common</span>
@@ -4651,15 +4789,23 @@ Deprecated in juno, use swift_hash_path_prefix</p>
 </code></pre>
 </div>
 
-<p>The swift-constraints section sets the basic constraints on data
-saved in the swift cluster. These constraints are automatically
-published by the proxy server in responses to /info requests.
-max_file_size is the largest “normal” object that can be saved in
-the cluster. This is also the limit on the size of each segment of
-a “large” object when using the large object manifest support.
-This value is set in bytes. Setting it to lower than 1MiB will cause
-some tests to fail. It is STRONGLY recommended to leave this value at
-the default (5 * 2**30 + 2).</p>
+<p>The swift-constraints section sets the basic constraints on data</p>
+
+<p>saved in the swift cluster. These constraints are automatically</p>
+
+<p>published by the proxy server in responses to /info requests.</p>
+
+<p>max_file_size is the largest “normal” object that can be saved in</p>
+
+<p>the cluster. This is also the limit on the size of each segment of</p>
+
+<p>a “large” object when using the large object manifest support.</p>
+
+<p>This value is set in bytes. Setting it to lower than 1MiB will cause</p>
+
+<p>some tests to fail. It is STRONGLY recommended to leave this value at</p>
+
+<p>the default (5 * 2**30 + 2).</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'max_file_size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5368709122</span>
 <span class="c1"># max_meta_name_length is the max number of bytes in the utf8 encoding</span>
@@ -4699,32 +4845,49 @@ the default (5 * 2**30 + 2).</p>
 </code></pre>
 </div>
 
-<p>Use the openstack-common cookbook databags with the
-following keys:
-secret tokens
-“swift_hash_path_prefix”
-“swift_hash_path_suffix”
-“swift_authkey”
-“dispersion_auth_key”
-“dispersion_auth_user”
-The follow swift specific databag support is DEPRECATED.
-we support an optional secret databag where we will retrieve the
-following attributes overriding any default attributes here</p>
+<p>Use the openstack-common cookbook databags with the</p>
 
-<p>{
-“swift_hash”: “107c0568ea84”
-“swift_authkey”: “keW4all”
-“dispersion_auth_user”: “test:test”,
-“dispersion_auth_key”: “test”
-}</p>
+<p>following keys:</p>
+
+<p>secret tokens</p>
+
+<p>“swift_hash_path_prefix”</p>
+
+<p>“swift_hash_path_suffix”</p>
+
+<p>“swift_authkey”</p>
+
+<p>“dispersion_auth_key”</p>
+
+<p>“dispersion_auth_user”</p>
+
+<p>The follow swift specific databag support is DEPRECATED.</p>
+
+<p>we support an optional secret databag where we will retrieve the</p>
+
+<p>following attributes overriding any default attributes here</p>
+
+<p>{</p>
+
+<p>“swift_hash”: “107c0568ea84”</p>
+
+<p>“swift_authkey”: “keW4all”</p>
+
+<p>“dispersion_auth_user”: “test:test”,</p>
+
+<p>“dispersion_auth_key”: “test”</p>
+
+<p>}</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'swift_secret_databag_name'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 </code></pre>
 </div>
 
 <hr />
-<p>roles
-——————–</p>
+
+<p>roles</p>
+
+<hr />
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'setup_chef_role'</span><span class="p">]</span>             <span class="o">=</span> <span class="s1">'os-object-storage-setup'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'management_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-object-storage-management'</span>
@@ -4736,9 +4899,12 @@ following attributes overriding any default attributes here</p>
 </div>
 
 <hr />
-<p>authentication
-——————–
-Authenitcation mode, either keystone or swauth</p>
+
+<p>authentication</p>
+
+<hr />
+
+<p>Authenitcation mode, either keystone or swauth</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'authmode'</span><span class="p">]</span>              <span class="o">=</span> <span class="s1">'keystone'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'authkey'</span><span class="p">]</span>               <span class="o">=</span> <span class="kp">nil</span>
@@ -4753,17 +4919,21 @@ Authenitcation mode, either keystone or swauth</p>
 </div>
 
 <hr />
-<p>dispersion settings
-———————</p>
+
+<p>dispersion settings</p>
+
+<hr />
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'dispersion'</span><span class="p">][</span><span class="s1">'auth_user'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'dispersion'</span><span class="p">][</span><span class="s1">'auth_key'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 </code></pre>
 </div>
 
-<p>settings for the swift ring - these default settings are
-a safe setting for testing but part_power should be set to
-26 in production to allow a swift cluster with 50,000 spindles</p>
+<p>settings for the swift ring - these default settings are</p>
+
+<p>a safe setting for testing but part_power should be set to</p>
+
+<p>26 in production to allow a swift cluster with 50,000 spindles</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'ring'</span><span class="p">][</span><span class="s1">'part_power'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
 <span class="c1"># The minimum number of hours before swift is allowed to migrate a partition</span>
@@ -4778,23 +4948,31 @@ a safe setting for testing but part_power should be set to
 </div>
 
 <hr />
-<p>statistics
-——————
-Current statsd cookbook is not supported on rhel platforms</p>
+
+<p>statistics</p>
+
+<hr />
+
+<p>Current statsd cookbook is not supported on rhel platforms</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'enabled'</span><span class="p">]</span> <span class="o">=</span> <span class="n">platform_family?</span><span class="p">(</span><span class="s1">'debian'</span><span class="p">)</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'sample_rate'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre>
 </div>
 
-<p>there are two ways to discover your graphite server ip for
-statsd to periodically publish to.  You can directly set
-the ip below, or leave it set to nil and supply chef with
-the role name of your graphite server and the interface
-name to retrieve the appropriate internal ip address from</p>
+<p>there are two ways to discover your graphite server ip for</p>
 
-<p>if no servers with the role below can be found then
-127.0.0.1 will be used</p>
+<p>statsd to periodically publish to.  You can directly set</p>
+
+<p>the ip below, or leave it set to nil and supply chef with</p>
+
+<p>the role name of your graphite server and the interface</p>
+
+<p>name to retrieve the appropriate internal ip address from</p>
+
+<p>if no servers with the role below can be found then</p>
+
+<p>127.0.0.1 will be used</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'graphing_ip'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'graphing_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'graphite-role'</span>
@@ -4802,8 +4980,9 @@ name to retrieve the appropriate internal ip address from</p>
 </code></pre>
 </div>
 
-<p>how frequently to run chef instantiated /usr/local/bin/swift_statsd_publish.py
-which publishes dispersion and recon statistics (in minutes)</p>
+<p>how frequently to run chef instantiated /usr/local/bin/swift_statsd_publish.py</p>
+
+<p>which publishes dispersion and recon statistics (in minutes)</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'report_frequency'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span>
 </code></pre>
@@ -4817,8 +4996,9 @@ which publishes dispersion and recon statistics (in minutes)</p>
 </code></pre>
 </div>
 
-<p>settings for statsd which should be configured to use the local
-statsd daemon that chef will install if statistics are enabled</p>
+<p>settings for statsd which should be configured to use the local</p>
+
+<p>statsd daemon that chef will install if statistics are enabled</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'statsd_host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'statistics'</span><span class="p">][</span><span class="s1">'statsd_port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'8125'</span>
@@ -4835,15 +5015,24 @@ statsd daemon that chef will install if statistics are enabled</p>
 </div>
 
 <hr />
-<p>network settings
-——————
-the cidr configuration items are unimportant for a single server
-configuration, but in a multi-server setup, the cidr should match
-the interface appropriate to that service as they are used to
-resolve the appropriate addresses to use for internode
-communication
-Deprecated in Juno, use Common attributes instead
-proxy servers</p>
+
+<p>network settings</p>
+
+<hr />
+
+<p>the cidr configuration items are unimportant for a single server</p>
+
+<p>configuration, but in a multi-server setup, the cidr should match</p>
+
+<p>the interface appropriate to that service as they are used to</p>
+
+<p>resolve the appropriate addresses to use for internode</p>
+
+<p>communication</p>
+
+<p>Deprecated in Juno, use Common attributes instead</p>
+
+<p>proxy servers</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'proxy-bind-ip'</span><span class="p">]</span>            <span class="o">=</span> <span class="kp">nil</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'proxy-bind-port'</span><span class="p">]</span>          <span class="o">=</span> <span class="kp">nil</span>
@@ -4874,9 +5063,12 @@ proxy servers</p>
 </div>
 
 <hr />
-<p>sysctl
-——————
-set sysctl properties for time waits</p>
+
+<p>sysctl</p>
+
+<hr />
+
+<p>set sysctl properties for time waits</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'sysctl'</span><span class="p">][</span><span class="s1">'net.ipv4.tcp_tw_recycle'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'sysctl'</span><span class="p">][</span><span class="s1">'net.ipv4.tcp_tw_reuse'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -4884,18 +5076,29 @@ set sysctl properties for time waits</p>
 </code></pre>
 </div>
 
-<p>N.B. conntrack_max may also need to be adjusted if
-server is running a stateful firewall
-——————
-disk search
-——————
-disk_test_filter is an array of predicates to test against disks to
-determine if a disk should be formatted and configured for swift.
-Each predicate is evaluated in turn, and a false from the predicate
-will result in the disk not being considered as a candidate for
-formatting.
-Each rule gets evaluated with “candidate” set to the device name
-without the leading “/dev/”) and info set to the node hash value.</p>
+<p>N.B. conntrack_max may also need to be adjusted if</p>
+
+<p>server is running a stateful firewall</p>
+
+<hr />
+
+<p>disk search</p>
+
+<hr />
+
+<p>disk_test_filter is an array of predicates to test against disks to</p>
+
+<p>determine if a disk should be formatted and configured for swift.</p>
+
+<p>Each predicate is evaluated in turn, and a false from the predicate</p>
+
+<p>will result in the disk not being considered as a candidate for</p>
+
+<p>formatting.</p>
+
+<p>Each rule gets evaluated with “candidate” set to the device name</p>
+
+<p>without the leading “/dev/”) and info set to the node hash value.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'disk_test_filter'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
   <span class="s1">'candidate =~ /(sd|hd|xvd|vd)(?!a$)[a-z]+/'</span><span class="p">,</span>
@@ -4906,22 +5109,32 @@ without the leading “/dev/”) and info set to the node hash value.</p>
 </div>
 
 <hr />
-<p>template overrides
-——————-
-account-server
-Use an integer to override the number of pre-forked processes that will
-accept connections.  Zero means no fork. Should default to the number of
-effective cpu cores in the system.  It’s worth noting that individual
-workers will # use many eventlet co-routines to service multiple concurrent
-requests.</p>
+
+<p>template overrides</p>
+
+<hr />
+
+<p>account-server</p>
+
+<p>Use an integer to override the number of pre-forked processes that will</p>
+
+<p>accept connections.  Zero means no fork. Should default to the number of</p>
+
+<p>effective cpu cores in the system.  It’s worth noting that individual</p>
+
+<p>workers will # use many eventlet co-routines to service multiple concurrent</p>
+
+<p>requests.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'account-server'</span><span class="p">][</span><span class="s1">'workers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'auto'</span>
 </code></pre>
 </div>
 
-<p>Maximum number of clients one worker can process simultaneously (it will
-actually accept(2) N + 1). Setting this to one (1) will only handle one request
-at a time, without accepting another request concurrently.  The default is 1024.</p>
+<p>Maximum number of clients one worker can process simultaneously (it will</p>
+
+<p>actually accept(2) N + 1). Setting this to one (1) will only handle one request</p>
+
+<p>at a time, without accepting another request concurrently.  The default is 1024.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'account-server'</span><span class="p">][</span><span class="s1">'max_clients'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1024</span>
 </code></pre>
@@ -4933,27 +5146,35 @@ at a time, without accepting another request concurrently.  The default is 1024.
 </code></pre>
 </div>
 
-<p>Whether or not check if the devices are mounted to prevent accidentally writing to
-the root device. The default is set to true.</p>
+<p>Whether or not check if the devices are mounted to prevent accidentally writing to</p>
+
+<p>the root device. The default is set to true.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'account-server'</span><span class="p">][</span><span class="s1">'mount_check'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 </code></pre>
 </div>
 
-<p>proxy-server
-Use an integer to override the number of pre-forked processes that will
-accept connections.  Zero means no fork. Should default to the number of
-effective cpu cores in the system.  It’s worth noting that individual
-workers will # use many eventlet co-routines to service multiple concurrent
-requests.</p>
+<p>proxy-server</p>
+
+<p>Use an integer to override the number of pre-forked processes that will</p>
+
+<p>accept connections.  Zero means no fork. Should default to the number of</p>
+
+<p>effective cpu cores in the system.  It’s worth noting that individual</p>
+
+<p>workers will # use many eventlet co-routines to service multiple concurrent</p>
+
+<p>requests.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'proxy-server'</span><span class="p">][</span><span class="s1">'workers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'auto'</span>
 </code></pre>
 </div>
 
-<p>Maximum number of clients one worker can process simultaneously (it will
-actually accept(2) N + 1). Setting this to one (1) will only handle one request
-at a time, without accepting another request concurrently.  The default is 1024.</p>
+<p>Maximum number of clients one worker can process simultaneously (it will</p>
+
+<p>actually accept(2) N + 1). Setting this to one (1) will only handle one request</p>
+
+<p>at a time, without accepting another request concurrently.  The default is 1024.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'proxy-server'</span><span class="p">][</span><span class="s1">'max_clients'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1024</span>
 </code></pre>
@@ -4977,35 +5198,45 @@ at a time, without accepting another request concurrently.  The default is 1024.
 </code></pre>
 </div>
 
-<p>The headers to remove from incoming requests. Simply a whitespace delimited
-list of header names and names can optionally end with ‘*’ to indicate a
-prefix match. incoming_allow_headers is a list of exceptions to these
-removals.</p>
+<p>The headers to remove from incoming requests. Simply a whitespace delimited</p>
+
+<p>list of header names and names can optionally end with ‘*’ to indicate a</p>
+
+<p>prefix match. incoming_allow_headers is a list of exceptions to these</p>
+
+<p>removals.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'tempurl'</span><span class="p">][</span><span class="s1">'incoming_remove_headers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x-timestamp'</span>
 </code></pre>
 </div>
 
-<p>The headers allowed as exceptions to incoming_remove_headers. Simply a
-whitespace delimited list of header names and names can optionally end with
-‘*’ to indicate a prefix match.</p>
+<p>The headers allowed as exceptions to incoming_remove_headers. Simply a</p>
+
+<p>whitespace delimited list of header names and names can optionally end with</p>
+
+<p>‘*’ to indicate a prefix match.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'tempurl'</span><span class="p">][</span><span class="s1">'incoming_allow_headers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span>
 </code></pre>
 </div>
 
-<p>The headers to remove from outgoing responses. Simply a whitespace delimited
-list of header names and names can optionally end with ‘*’ to indicate a
-prefix match. outgoing_allow_headers is a list of exceptions to these
-removals.</p>
+<p>The headers to remove from outgoing responses. Simply a whitespace delimited</p>
+
+<p>list of header names and names can optionally end with ‘*’ to indicate a</p>
+
+<p>prefix match. outgoing_allow_headers is a list of exceptions to these</p>
+
+<p>removals.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'tempurl'</span><span class="p">][</span><span class="s1">'outgoing_remove_headers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x-object-meta-*'</span>
 </code></pre>
 </div>
 
-<p>The headers allowed as exceptions to outgoing_remove_headers. Simply a
-whitespace delimited list of header names and names can optionally end with
-‘*’ to indicate a prefix match.</p>
+<p>The headers allowed as exceptions to outgoing_remove_headers. Simply a</p>
+
+<p>whitespace delimited list of header names and names can optionally end with</p>
+
+<p>‘*’ to indicate a prefix match.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'tempurl'</span><span class="p">][</span><span class="s1">'outgoing_allow_headers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'x-object-meta-public-*'</span>
 </code></pre>
@@ -5082,20 +5313,27 @@ whitespace delimited list of header names and names can optionally end with
 </code></pre>
 </div>
 
-<p>container-server
-Use an integer to override the number of pre-forked processes that will
-accept connections.  Zero means no fork. Should default to the number of
-effective cpu cores in the system.  It’s worth noting that individual
-workers will # use many eventlet co-routines to service multiple concurrent
-requests.</p>
+<p>container-server</p>
+
+<p>Use an integer to override the number of pre-forked processes that will</p>
+
+<p>accept connections.  Zero means no fork. Should default to the number of</p>
+
+<p>effective cpu cores in the system.  It’s worth noting that individual</p>
+
+<p>workers will # use many eventlet co-routines to service multiple concurrent</p>
+
+<p>requests.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'container-server'</span><span class="p">][</span><span class="s1">'workers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'auto'</span>
 </code></pre>
 </div>
 
-<p>Maximum number of clients one worker can process simultaneously (it will
-actually accept(2) N + 1). Setting this to one (1) will only handle one request
-at a time, without accepting another request concurrently.  The default is 1024.</p>
+<p>Maximum number of clients one worker can process simultaneously (it will</p>
+
+<p>actually accept(2) N + 1). Setting this to one (1) will only handle one request</p>
+
+<p>at a time, without accepting another request concurrently.  The default is 1024.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'container-server'</span><span class="p">][</span><span class="s1">'max_clients'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1024</span>
 </code></pre>
@@ -5107,17 +5345,21 @@ at a time, without accepting another request concurrently.  The default is 1024.
 </code></pre>
 </div>
 
-<p>Whether or not check if the devices are mounted to prevent accidentally writing to
-the root device. The default is set to true.</p>
+<p>Whether or not check if the devices are mounted to prevent accidentally writing to</p>
+
+<p>the root device. The default is set to true.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'container-server'</span><span class="p">][</span><span class="s1">'mount_check'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 </code></pre>
 </div>
 
-<p>Override this with an allowed list of your various swift clusters if you wish
-to enable container sync for your end-users between clusters.  This should
-be an array of fqdn hostnames for the cluster end-points that your end-users
-would access in the format of [‘host1’, ‘host2’, ‘host3’]</p>
+<p>Override this with an allowed list of your various swift clusters if you wish</p>
+
+<p>to enable container sync for your end-users between clusters.  This should</p>
+
+<p>be an array of fqdn hostnames for the cluster end-points that your end-users</p>
+
+<p>would access in the format of [‘host1’, ‘host2’, ‘host3’]</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'container-server'</span><span class="p">][</span><span class="s1">'allowed_sync_hosts'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre>
@@ -5149,20 +5391,27 @@ would access in the format of [‘host1’, ‘host2’, ‘host3’]</p>
 </code></pre>
 </div>
 
-<p>object-server
-Use an integer to override the number of pre-forked processes that will
-accept connections.  Zero means no fork. Should default to the number of
-effective cpu cores in the system.  It’s worth noting that individual
-workers will # use many eventlet co-routines to service multiple concurrent
-requests.</p>
+<p>object-server</p>
+
+<p>Use an integer to override the number of pre-forked processes that will</p>
+
+<p>accept connections.  Zero means no fork. Should default to the number of</p>
+
+<p>effective cpu cores in the system.  It’s worth noting that individual</p>
+
+<p>workers will # use many eventlet co-routines to service multiple concurrent</p>
+
+<p>requests.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'object-server'</span><span class="p">][</span><span class="s1">'workers'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'auto'</span>
 </code></pre>
 </div>
 
-<p>Maximum number of clients one worker can process simultaneously (it will
-actually accept(2) N + 1). Setting this to one (1) will only handle one request
-at a time, without accepting another request concurrently.  The default is 1024.</p>
+<p>Maximum number of clients one worker can process simultaneously (it will</p>
+
+<p>actually accept(2) N + 1). Setting this to one (1) will only handle one request</p>
+
+<p>at a time, without accepting another request concurrently.  The default is 1024.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'object-server'</span><span class="p">][</span><span class="s1">'max_clients'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1024</span>
 </code></pre>
@@ -5174,8 +5423,9 @@ at a time, without accepting another request concurrently.  The default is 1024.
 </code></pre>
 </div>
 
-<p>Whether or not check if the devices are mounted to prevent accidentally writing to
-the root device. The default is set to true.</p>
+<p>Whether or not check if the devices are mounted to prevent accidentally writing to</p>
+
+<p>the root device. The default is set to true.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'object-server'</span><span class="p">][</span><span class="s1">'mount_check'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 </code></pre>
@@ -5187,20 +5437,27 @@ the root device. The default is set to true.</p>
 </code></pre>
 </div>
 
-<p>Time elapsed in seconds before an object can be reclaimed. The default is
-604800 seconds.</p>
+<p>Time elapsed in seconds before an object can be reclaimed. The default is</p>
+
+<p>604800 seconds.</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'object-server'</span><span class="p">][</span><span class="s1">'replicator'</span><span class="p">][</span><span class="s1">'reclaim_age'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">604800</span>
 </code></pre>
 </div>
 
 <hr />
-<p>swauth source
-—————–
-Versions of swauth in Ubuntu Cloud Archive PPA can be outdated. This
-allows us to chose to install directly from a tagged branch of
-gholt’s repository.
-values:  package, git</p>
+
+<p>swauth source</p>
+
+<hr />
+
+<p>Versions of swauth in Ubuntu Cloud Archive PPA can be outdated. This</p>
+
+<p>allows us to chose to install directly from a tagged branch of</p>
+
+<p>gholt’s repository.</p>
+
+<p>values:  package, git</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'swauth_source'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'package'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'object-storage'</span><span class="p">][</span><span class="s1">'swauth_repository'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'https://github.com/gholt/swauth.git'</span>
@@ -5209,9 +5466,12 @@ values:  package, git</p>
 </div>
 
 <hr />
-<p>packages
-——————
-Leveling between distros</p>
+
+<p>packages</p>
+
+<hr />
+
+<p>Leveling between distros</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">case</span> <span class="n">platform_family</span>
 <span class="k">when</span> <span class="s1">'rhel'</span>
@@ -5382,8 +5642,9 @@ name of the key containing the password value within the data-bag item. This is 
 
 <p><a href="#contents">back to top</a></p>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'db'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file autogenerated by Chef
@@ -5398,15 +5659,17 @@ to contain a custom banner at the top of the written file</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>MySql attributes that we use the mysql cookbook defaults:
-Data directory</p>
+<p>MySql attributes that we use the mysql cookbook defaults:</p>
+
+<p>Data directory</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mysql'</span><span class="p">][</span><span class="s1">'data_dir'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
 </code></pre>
 </div>
 
-<p>MySql attributes that we select defaults for:
-Version, support 5.5 and above</p>
+<p>MySql attributes that we select defaults for:</p>
+
+<p>Version, support 5.5 and above</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mysql'</span><span class="p">][</span><span class="s1">'version'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'5.5'</span>
 <span class="c1"># Service name</span>
@@ -5530,9 +5793,11 @@ Version, support 5.5 and above</p>
 </code></pre>
 </div>
 
-<p>Allow cluster_disk_nodes to be optionally set based upon a node role search.
-If set to false, mq cluster nodes can be added on-the-fly using the cluster command.
-see https://www.rabbitmq.com/clustering.html</p>
+<p>Allow cluster_disk_nodes to be optionally set based upon a node role search.</p>
+
+<p>If set to false, mq cluster nodes can be added on-the-fly using the cluster command.</p>
+
+<p>see https://www.rabbitmq.com/clustering.html</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'mq'</span><span class="p">][</span><span class="s1">'search_for_cluster_disk_nodes'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 </code></pre>
@@ -5665,8 +5930,9 @@ openstack-common cookbook.</p>
 </code></pre>
 </div>
 
-<p>Set to some text value if you want templated config files
-to contain a custom banner at the top of the written file</p>
+<p>Set to some text value if you want templated config files</p>
+
+<p>to contain a custom banner at the top of the written file</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'custom_template_banner'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'
 # This file was autogenerated by Chef
@@ -5685,8 +5951,9 @@ to contain a custom banner at the top of the written file</p>
 </code></pre>
 </div>
 
-<p>The name of the Chef role that knows about the message queue server
-that Heat uses</p>
+<p>The name of the Chef role that knows about the message queue server</p>
+
+<p>that Heat uses</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'orchestration'</span><span class="p">][</span><span class="s1">'rabbit_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-ops-messaging'</span>
 </code></pre>
@@ -5873,8 +6140,9 @@ from packages.</p>
 
 <p><a href="#contents">back to top</a></p>
 
-<p>The name of the Chef role that knows about the message queue server
-that Nova uses</p>
+<p>The name of the Chef role that knows about the message queue server</p>
+
+<p>that Nova uses</p>
 
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'telemetry'</span><span class="p">][</span><span class="s1">'rabbit_server_chef_role'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'os-ops-messaging'</span>
 </code></pre>
