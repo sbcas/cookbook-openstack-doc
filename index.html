@@ -1652,6 +1652,7 @@ The OpenStack Volume (Cinder) API endpoint</p>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'host'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'bind_service'</span><span class="p">][</span><span class="s1">'all'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'port'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'8776'</span>
 <span class="o">**</span><span class="n">rootwrap</span> <span class="no">Configuration</span><span class="o">**</span>
+
 <span class="c1"># use cinder root wrap</span>
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'block-storage'</span><span class="p">][</span><span class="s1">'use_rootwrap'</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="c1"># rootwrap.conf</span>
@@ -2392,6 +2393,7 @@ to contain a custom banner at the top of the written file</p>
 # Do not edit, changes will be overwritten
 '</span>
 <span class="o">**</span><span class="no">OpenStack</span> <span class="no">Dashboard</span> <span class="no">Endpoints</span><span class="o">**</span>
+
 </code></pre>
 </div>
 
@@ -4206,6 +4208,7 @@ Set to True to enable firewall service</p>
 <span class="c1"># Custom the fwaas config file path</span>
 <span class="c1"># default['openstack']['network']['fwaas']['config_file'] = '/etc/neutron/fwaas_driver.ini'</span>
 <span class="o">**</span><span class="n">platform</span><span class="o">-</span><span class="n">specific</span> <span class="n">settings</span><span class="o">**</span>
+
 <span class="n">default</span><span class="p">[</span><span class="s1">'openstack'</span><span class="p">][</span><span class="s1">'network'</span><span class="p">][</span><span class="s1">'platform'</span><span class="p">].</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">platform</span><span class="o">|</span>
   <span class="n">platform</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'neutron'</span>
   <span class="n">platform</span><span class="p">[</span><span class="s1">'group'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'neutron'</span>
