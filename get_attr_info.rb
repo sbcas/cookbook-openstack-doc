@@ -62,8 +62,12 @@ def convert_attr_to_md(filename)
       end
     when comment?(line)
       if comment_header?(line)
-        puts "cmt hdr b4: #{line}"
-        line = '**' + line[/([*=]+\s)(.*)(\s[*=]+)/,2] + '**'
+        hdr = line[/([*=]+\s)(.*)(\s[*=]+)/,2]
+        if hdr.nil?
+          puts "cmt hdr: #{line}"
+          next
+        end
+        line = '**' + hdr + '**'
       end  
       if comment_header?(line) && code_block
         output << "\n"
