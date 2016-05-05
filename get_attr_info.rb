@@ -61,6 +61,9 @@ def convert_attr_to_md(filename)
         code_block = false
       end
     when comment?(line)
+      if comment_header?(line)
+        line = line[/=+<.*>=+/]
+      end  
       if comment_header?(line) && code_block
         output << "\n####"
         code_block = false
