@@ -13,9 +13,9 @@ end
 # rubocop:disable LineLength
 
 def cookbooks
-  %w(common bare-metal block-storage client compute dashboard
-     database data-processing identity image network object-storage
-     ops-database ops-messaging orchestration telemetry)
+  %w(common identity compute network image block-storage dashboard
+     ops-database ops-messaging orchestration telemetry database
+     data-processing object-storage bare-metal client)
 end
 
 def get_cookbooks(dir)
